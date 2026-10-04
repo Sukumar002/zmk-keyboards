@@ -50,4 +50,4 @@ include:
     shield: hana_peripheral_right
     cmake-args: -DCONFIG_HANA_CHARGE_STATUS=y
 
-# build run for Hana ZMK
+# build run for Hana ZMK ext
