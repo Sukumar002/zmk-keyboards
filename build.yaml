@@ -44,8 +44,8 @@ include:
 
   - board: xiao_ble//zmk
     shield: hana_peripheral_left
-
-  # Rebuild after charging telemetry module update
+    cmake-args: -DCONFIG_HANA_CHARGE_STATUS=y
 
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
+    cmake-args: -DCONFIG_HANA_CHARGE_STATUS=y
