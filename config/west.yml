@@ -8,7 +8,7 @@ manifest:
 
   projects:
     - name: zmk
-      remote: zmkfirmware
+      remote: sukumar
       revision: main
       import: app/west.yml
 
