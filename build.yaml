@@ -45,5 +45,7 @@ include:
   - board: xiao_ble//zmk
     shield: hana_peripheral_left
 
+  # Rebuild after charging telemetry module update
+
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
