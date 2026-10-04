@@ -38,7 +38,7 @@ include:
 
   # Hana dongle - 128x32 OLED
   - board: nice_nano//zmk
-    shield: hana_central_dongle_128x32
+    shield: hana_central_dongle_128x32 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
 
