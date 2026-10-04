@@ -24,8 +24,15 @@ include:
   # Hana dongle mode
   # -------------------------
 
+  # Hana dongle - no display
   - board: nice_nano//zmk
     shield: hana_central_dongle
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+
+  # Hana dongle - 128x64 OLED
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x64
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
 
