@@ -1,12 +1,36 @@
 ---
 include:
+  # XIAO nRF52840 settings reset
   - board: xiao_ble//zmk
     shield: settings_reset
+
+  # nice!nano / Pro Micro nRF52840 settings reset
+  - board: nice_nano//zmk
+    shield: settings_reset
+
+  # -------------------------
+  # Regular Hana split
+  # -------------------------
 
   - board: xiao_ble//zmk
     shield: hana_central_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
+
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_right
+
+  # -------------------------
+  # Hana dongle mode
+  # -------------------------
+
+  - board: nice_nano//zmk
+    shield: hana_central_dongle
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_left
 
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
