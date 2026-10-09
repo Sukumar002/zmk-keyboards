@@ -46,6 +46,7 @@
             bindings = <&bt_clear_profile>, <&bt_select_profile>;
         };
     };
+};
 
 / {
     keymap {
