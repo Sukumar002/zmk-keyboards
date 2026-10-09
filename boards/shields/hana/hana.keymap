@@ -42,7 +42,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <700>;
+            tapping-term-ms = <3000>;
             bindings = <&bt_clear_profile>, <&bt_select_profile>;
         };
     };
