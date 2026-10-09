@@ -6,13 +6,10 @@ manifest:
     - name: sukumar
       url-base: https://github.com/Sukumar002
 
-    - name: danielsvane
-      url-base: https://github.com/danielsvane
-
   projects:
     - name: zmk
-      remote: danielsvane
-      revision: customkeyboards
+      remote: sukumar
+      revision: hana-customkeyboards
       import: app/west.yml
 
     - name: zmk-dongle-display
