@@ -9,6 +9,13 @@
 #define NAV        3
 #define CONNECTION 4
 
+// Tune all Hana mod-tap keys for easier rolling/typing.
+// Keep the 200 ms tapping term, but avoid hold-preferred's aggressive modifier activation.
+&mt {
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+};
+
 / {
     keymap {
         compatible = "zmk,keymap";
