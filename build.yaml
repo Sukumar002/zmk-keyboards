@@ -41,12 +41,11 @@ include:
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
 
+  # Clean peripheral baseline while split pairing is being verified
   - board: xiao_ble//zmk
     shield: hana_peripheral_left
-    cmake-args: -DCONFIG_HANA_CHARGE_STATUS=y
 
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
-    cmake-args: -DCONFIG_HANA_CHARGE_STATUS=y
 
 # build run for Hana ZMK ext
