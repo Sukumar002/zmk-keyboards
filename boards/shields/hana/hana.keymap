@@ -17,6 +17,37 @@
 };
 
 / {
+    macros {
+        bt_select_profile: bt_select_profile {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings =
+                <&macro_param_1to2>,
+                <&bt BT_SEL MACRO_PLACEHOLDER>;
+        };
+
+        bt_clear_profile: bt_clear_profile {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            wait-ms = <20>;
+            bindings =
+                <&macro_param_1to2>,
+                <&bt BT_SEL MACRO_PLACEHOLDER>,
+                <&bt BT_CLR>;
+        };
+    };
+
+    behaviors {
+        bt_profile: bt_profile {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <700>;
+            bindings = <&bt_clear_profile>, <&bt_select_profile>;
+        };
+    };
+
+/ {
     keymap {
         compatible = "zmk,keymap";
 
@@ -68,9 +99,9 @@
             display-name = "Connection";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
-                &none     &bt BT_SEL 0        &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                   &bootloader  &none  &none  &none  &none  &none
+                &none     &bt_profile 0 0      &bt_profile 1 1  &bt_profile 2 2  &bt_profile 3 3  &bt_profile 4 4       &bootloader  &none  &none  &none  &none  &none
                 &none     &none               &none          &none          &none          &none                          &none        &none  &none  &none  &none  &none
-                &none     &out OUT_TOG        &none          &none          &bt BT_CLR_ALL &bt BT_CLR   &none    &none   &none        &none  &none  &none  &none  &none
+                &none     &out OUT_TOG        &none          &none          &bt BT_CLR_ALL &none        &none    &none   &none        &none  &none  &none  &none  &none
                            &none               &none          &none          &none                                      &none        &none  &none  &none
             >;
         };
