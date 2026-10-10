@@ -2,12 +2,14 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
 
 #define MAC_BASE   0
 #define WIN_BASE   1
 #define NUM        2
 #define NAV        3
 #define SET        4
+#define MOUSE      5
 
 // Tune all Hana mod-tap keys for easier rolling/typing.
 // Keep the 200 ms tapping term, but avoid hold-preferred's aggressive modifier activation.
@@ -104,6 +106,18 @@
                 &none     &none               &none          &none          &none          &none                          &none        &none  &none  &none  &none  &none
                 &none     &out OUT_TOG        &none          &none          &bt BT_CLR_ALL &none        &none    &none   &none        &none  &none  &none  &none  &none
                            &none               &none          &none          &none                                      &none        &none  &none  &none
+            >;
+        };
+
+
+        mouse_layer {
+            display-name = "MOUSE";
+            sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+            bindings = <
+                &trans    &trans             &trans        &trans        &trans        &trans                         &msc SCRL_LEFT  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans
+                &trans    &mkp LCLK          &mkp MCLK     &mkp RCLK     &trans        &trans                         &trans          &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans            &trans
+                &trans    &trans             &trans        &trans        &trans        &trans       &trans    &trans  &trans          &trans          &trans          &trans          &trans            &trans
+                           &trans             &trans        &trans        &trans                                  &trans          &trans          &trans          &trans
             >;
         };
     };
