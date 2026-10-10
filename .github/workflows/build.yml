@@ -3,12 +3,11 @@ on:
   push:
     branches:
       - main
+      - mouse-test
   pull_request:
     branches:
       - main
   workflow_dispatch:
-    branches:
-      - main
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
