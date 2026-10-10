@@ -9,7 +9,7 @@ manifest:
   projects:
     - name: zmk
       remote: sukumar
-      revision: hana-customkeyboards
+      revision: hana-combo-names
       import: app/west.yml
 
     - name: zmk-dongle-display
