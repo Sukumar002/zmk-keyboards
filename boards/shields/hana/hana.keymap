@@ -18,8 +18,7 @@
 // Keep the existing WIN/MAC base layers intact during validation; test on WIN Base first.
 // Because the module overrides &kp, stock mod-tap (&mt) also routes its hold/tap
 // keycodes through the layout-shift key-press behavior.
-/
-{
+/ {
     layout_shift_map_gui_alt: layout_shift_map_gui_alt {
         compatible = "zmk,layout-shift-map";
         mappings = <
