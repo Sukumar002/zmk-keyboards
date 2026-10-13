@@ -7,18 +7,15 @@
 #include <dt-bindings/zmk/layout_shift.h>
 
 #define BASE       0
-#define RESERVED   1
-#define NUM        2
-#define NAV        3
-#define SET        4
-#define MOUSE      5
+#define NUM        1
+#define NAV        2
+#define SET        3
+#define MOUSE      4
 
 
 // Global GUI <-> Alt layout shift.
-// BASE uses the macOS physical modifier arrangement.
+// BASE is the former working MAC Base.
 // Layout shift OFF = macOS; layout shift ON = Windows.
-// Because the module overrides &kp, stock mod-tap (&mt) also routes its hold/tap
-// keycodes through the layout-shift key-press behavior.
 / {
     layout_shift_map_gui_alt: layout_shift_map_gui_alt {
         compatible = "zmk,layout-shift-map";
@@ -87,17 +84,6 @@
                 &mt LSHIFT GRAVE    &mt LSHIFT A       &kp S      &kp D      &kp F      &kp G                         &kp H      &kp J      &kp K      &kp L      &mt RSHIFT SEMI    &mt RSHIFT SQT
                 &mt LCTRL ESC       &kp Z              &kp X      &kp C      &kp V      &kp B      &kp C_MUTE  &kp C_PP &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH           &mt RCTRL DEL
                                       &mt LCTRL CAPS     &mt LALT BSPC        &mt LGUI RET &lt NUM SPACE                   &lt NAV RET &mt LGUI SPACE &mt LALT DEL &studio_unlock
-            >;
-        };
-
-        reserved_layer {
-            display-name = "RESERVED";
-            sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
-            bindings = <
-                &trans    &trans             &trans      &trans      &trans      &trans                         &trans      &trans      &trans      &trans      &trans             &trans
-                &trans    &trans             &trans      &trans      &trans      &trans                         &trans      &trans      &trans      &trans      &trans             &trans
-                &trans    &trans             &trans      &trans      &trans      &trans      &trans    &trans  &trans      &trans      &trans      &trans      &trans             &trans
-                           &trans             &trans      &trans      &trans                                 &trans      &trans      &trans      &trans
             >;
         };
 
