@@ -14,8 +14,8 @@
 
 
 // Global GUI <-> Alt layout shift.
-// BASE uses the Windows physical modifier arrangement.
-// Layout shift OFF = Windows; layout shift ON = macOS.
+// BASE uses the macOS physical modifier arrangement.
+// Layout shift OFF = macOS; layout shift ON = Windows.
 // Because the module overrides &kp, stock mod-tap (&mt) also routes its hold/tap
 // keycodes through the layout-shift key-press behavior.
 / {
@@ -85,7 +85,7 @@
                 &lt SET TAB  &kp Q              &kp W      &kp E      &kp R      &kp T                         &kp Y      &kp U      &kp I      &kp O      &kp P              &kp BSPC
                 &mt LSHIFT GRAVE    &mt LSHIFT A       &kp S      &kp D      &kp F      &kp G                         &kp H      &kp J      &kp K      &kp L      &mt RSHIFT SEMI    &mt RSHIFT SQT
                 &mt LCTRL ESC       &kp Z              &kp X      &kp C      &kp V      &kp B      &kp C_MUTE  &kp C_PP &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH           &mt RCTRL DEL
-                                      &mt LCTRL CAPS     &mt LGUI BSPC        &mt LALT RET &lt NUM SPACE                   &lt NAV RET &mt LALT SPACE &mt LGUI DEL &studio_unlock
+                                      &mt LCTRL CAPS     &mt LALT BSPC        &mt LGUI RET &lt NUM SPACE                   &lt NAV RET &mt LGUI SPACE &mt LALT DEL &studio_unlock
             >;
         };
 
