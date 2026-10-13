@@ -6,16 +6,16 @@
 #include <layout_shift_kp_override.dtsi>
 #include <dt-bindings/zmk/layout_shift.h>
 
-#define MAC_BASE   0
-#define WIN_BASE   1
-#define NUM        2
-#define NAV        3
-#define SET        4
-#define MOUSE      5
+#define BASE       0
+#define NUM        1
+#define NAV        2
+#define SET        3
+#define MOUSE      4
 
 
-// Experimental global GUI <-> Alt layout shift.
-// Keep the existing WIN/MAC base layers intact during validation; test on WIN Base first.
+// Global GUI <-> Alt layout shift.
+// BASE uses the Windows physical modifier arrangement.
+// Layout shift OFF = Windows; layout shift ON = macOS.
 // Because the module overrides &kp, stock mod-tap (&mt) also routes its hold/tap
 // keycodes through the layout-shift key-press behavior.
 / {
@@ -78,19 +78,8 @@
     keymap {
         compatible = "zmk,keymap";
 
-        mac_base {
-            display-name = "MAC Base";
-            sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
-            bindings = <
-                &lt SET TAB  &kp Q              &kp W      &kp E      &kp R      &kp T                         &kp Y      &kp U      &kp I      &kp O      &kp P              &kp BSPC
-                &mt LSHIFT GRAVE    &mt LSHIFT A       &kp S      &kp D      &kp F      &kp G                         &kp H      &kp J      &kp K      &kp L      &mt RSHIFT SEMI    &mt RSHIFT SQT
-                &mt LCTRL ESC       &kp Z              &kp X      &kp C      &kp V      &kp B      &kp C_MUTE  &kp C_PP &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH           &mt RCTRL DEL
-                                      &mt LCTRL CAPS     &mt LALT BSPC        &mt LGUI RET &lt NUM SPACE                   &lt NAV RET &mt LGUI SPACE &mt LALT DEL &studio_unlock
-            >;
-        };
-
-        win_base {
-            display-name = "WIN Base";
+        base_layer {
+            display-name = "BASE";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
                 &lt SET TAB  &kp Q              &kp W      &kp E      &kp R      &kp T                         &kp Y      &kp U      &kp I      &kp O      &kp P              &kp BSPC
@@ -118,7 +107,7 @@
                 &trans    &trans             &trans       &trans       &trans       &trans                        &kp C_VOL_UP  &kp HOME    &kp UP       &kp END      &kp PG_UP    &kp BSPC
                 &trans    &trans             &kp EQUAL    &kp LBRC     &kp RBRC     &kp C_VOL_UP                  &kp C_VOL_DN  &kp LEFT    &kp DOWN     &kp RIGHT    &kp RSHIFT   &trans
                 &trans    &trans             &kp C_BRI_DN &kp C_BRI_UP &kp C_MUTE  &kp CAPS    &trans    &trans &kp C_MUTE   &kp EQUAL   &kp LBRC     &kp RBRC     &trans       &kp DEL
-                           &trans             &trans       &trans       &trans                                 &trans         &trans       &trans        &tog WIN_BASE
+                           &trans             &trans       &trans       &trans                                 &trans         &trans       &trans        &tog_ls
             >;
         };
 
