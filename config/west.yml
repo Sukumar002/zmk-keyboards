@@ -6,9 +6,6 @@ manifest:
     - name: sukumar
       url-base: https://github.com/Sukumar002
 
-    - name: kot149
-      url-base: https://github.com/kot149
-
   projects:
     - name: zmk
       remote: sukumar
@@ -18,10 +15,6 @@ manifest:
     - name: zmk-dongle-display
       remote: sukumar
       revision: b48c427469ab0a829a6e0297ceae7d4d07a98128
-
-    - name: zmk-layout-shift
-      remote: kot149
-      revision: v2
 
   self:
     path: config
