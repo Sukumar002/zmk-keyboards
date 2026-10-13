@@ -17,7 +17,7 @@ manifest:
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: main
+      revision: layout-shift-os-modifiers-test
 
     - name: zmk-layout-shift
       remote: kot149
