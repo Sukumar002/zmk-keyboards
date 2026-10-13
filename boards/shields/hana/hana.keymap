@@ -127,7 +127,7 @@
             display-name = "SET";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
-                &tog_ls   &bt_profile 0 0      &bt_profile 1 1  &bt_profile 2 2  &bt_profile 3 3  &bt_profile 4 4       &bootloader  &none  &none  &none  &none  &none
+                &none     &bt_profile 0 0      &bt_profile 1 1  &bt_profile 2 2  &bt_profile 3 3  &bt_profile 4 4       &bootloader  &none  &none  &none  &none  &none
                 &none     &none               &none          &none          &none          &none                          &none        &none  &none  &none  &none  &none
                 &none     &out OUT_TOG        &none          &none          &bt BT_CLR_ALL &none        &none    &none   &none        &none  &none  &none  &none  &none
                            &none               &none          &none          &none                                      &none        &none  &none  &none
