@@ -9,12 +9,12 @@ manifest:
   projects:
     - name: zmk
       remote: sukumar
-      revision: 544e97356ead9c7683c20aff2253060f11372594
+      revision: 01f24bf9742a52012990ae346d011f2cd21fbdcd
       import: app/west.yml
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: 619f8fea2a270a6ea9895bdcd6b768895b2cd741
+      revision: b828de9f384b484c52c78044b5f1e5446bcc0cb5
 
   self:
     path: config
