@@ -27,6 +27,9 @@ static int on_base_view_toggle_released(struct zmk_behavior_binding *binding,
 
 static const struct behavior_driver_api behavior_base_view_toggle_driver_api = {
     .binding_pressed = on_base_view_toggle_pressed,
+#if IS_ENABLED(CONFIG_ZMK_BEHAVIOR_METADATA)
+    .get_parameter_metadata = zmk_behavior_get_empty_param_metadata,
+#endif
     .binding_released = on_base_view_toggle_released,
     .locality = BEHAVIOR_LOCALITY_CENTRAL,
 };
