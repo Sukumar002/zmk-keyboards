@@ -75,6 +75,12 @@
             #binding-cells = <0>;
             display-name = "OLED Toggle";
         };
+
+        timeout_cycle: timeout_cycle {
+            compatible = "zmk,behavior-timeout-cycle";
+            #binding-cells = <1>;
+            display-name = "Timeout Cycle";
+        };
     };
 };
 
@@ -119,7 +125,7 @@
             display-name = "SET";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
-                &none     &bt_profile 0 0      &bt_profile 1 1  &bt_profile 2 2  &bt_profile 3 3  &bt_profile 4 4       &bootloader  &none  &none  &none  &none  &oled_tog
+                &none     &bt_profile 0 0      &bt_profile 1 1  &bt_profile 2 2  &bt_profile 3 3  &bt_profile 4 4       &bootloader  &none  &none  &timeout_cycle 1  &timeout_cycle 0  &oled_tog
                 &none     &none               &none          &none          &none          &none                          &none        &none  &none  &none  &none  &none
                 &none     &out OUT_TOG        &none          &none          &bt BT_CLR_ALL &none        &none    &none   &none        &none  &none  &none  &none  &none
                            &none               &none          &none          &none                                      &none        &none  &none  &none
