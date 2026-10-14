@@ -22,6 +22,32 @@ enum timeout_kind {
 
 #define TIMEOUT_HOLD_MS 600
 
+#if IS_ENABLED(CONFIG_ZMK_BEHAVIOR_METADATA)
+static const struct behavior_parameter_value_metadata timeout_param_values[] = {
+    {
+        .display_name = "Display Timeout",
+        .type = BEHAVIOR_PARAMETER_VALUE_TYPE_VALUE,
+        .value = TIMEOUT_KIND_DISPLAY,
+    },
+    {
+        .display_name = "Half Sleep Timeout",
+        .type = BEHAVIOR_PARAMETER_VALUE_TYPE_VALUE,
+        .value = TIMEOUT_KIND_HALVES_SLEEP,
+    },
+};
+
+static const struct behavior_parameter_metadata_set timeout_param_set = {
+    .param1_values = timeout_param_values,
+    .param1_values_len = ARRAY_SIZE(timeout_param_values),
+};
+
+static const struct behavior_parameter_metadata timeout_metadata = {
+    .sets_len = 1,
+    .sets = &timeout_param_set,
+};
+#endif
+
+
 static const uint32_t display_timeouts[] = {30000, 60000, 300000, 0};
 static const uint32_t halves_sleep_timeouts[] = {300000, 600000, 900000, 1800000, 0};
 
@@ -261,6 +287,9 @@ static const struct behavior_driver_api timeout_cycle_driver_api = {
     .binding_pressed = timeout_cycle_pressed,
     .binding_released = timeout_cycle_released,
     .locality = BEHAVIOR_LOCALITY_GLOBAL,
+#if IS_ENABLED(CONFIG_ZMK_BEHAVIOR_METADATA)
+    .parameter_metadata = &timeout_metadata,
+#endif
 };
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
