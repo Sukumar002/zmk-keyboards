@@ -23,11 +23,11 @@ enum timeout_kind {
 #define TIMEOUT_HOLD_MS 600
 
 static const uint32_t display_timeouts[] = {30000, 60000, 300000, 0};
-static const uint32_t halves_sleep_timeouts[] = {300000, 900000, 1800000, 0};
+static const uint32_t halves_sleep_timeouts[] = {300000, 600000, 900000, 1800000, 0};
 
 /* Defaults match the current Hana configuration: display 60 s, halves sleep 15 min. */
 static uint8_t display_timeout_index = 1;
-static uint8_t halves_sleep_timeout_index = 1;
+static uint8_t halves_sleep_timeout_index = 2;
 
 static bool timeout_pressed[TIMEOUT_KIND_COUNT];
 static int64_t timeout_pressed_at[TIMEOUT_KIND_COUNT];
@@ -93,18 +93,18 @@ static void apply_halves_sleep_timeout(void) {
 #if IS_ENABLED(CONFIG_SETTINGS)
 static int timeout_settings_set(const char *name, size_t len,
                                 settings_read_cb read_cb, void *cb_arg) {
-    uint8_t value;
-
-    if (len != sizeof(value)) {
-        return -EINVAL;
-    }
-
-    int rc = read_cb(cb_arg, &value, sizeof(value));
-    if (rc < 0) {
-        return rc;
-    }
-
     if (strcmp(name, "display") == 0) {
+        uint8_t value;
+
+        if (len != sizeof(value)) {
+            return -EINVAL;
+        }
+
+        int rc = read_cb(cb_arg, &value, sizeof(value));
+        if (rc < 0) {
+            return rc;
+        }
+
         if (value >= ARRAY_SIZE(display_timeouts)) {
             return -EINVAL;
         }
@@ -114,12 +114,46 @@ static int timeout_settings_set(const char *name, size_t len,
     }
 
     if (strcmp(name, "halves") == 0) {
-        if (value >= ARRAY_SIZE(halves_sleep_timeouts)) {
+        uint32_t timeout_ms;
+
+        if (len == sizeof(uint8_t)) {
+            /*
+             * Legacy format stored the array index for:
+             * 0=5m, 1=15m, 2=30m, 3=Never.
+             * Translate it so adding the new 10m slot never changes an
+             * already-saved timeout after a firmware update.
+             */
+            static const uint32_t legacy_halves_timeouts[] = {
+                300000, 900000, 1800000, 0
+            };
+
+            uint8_t legacy_index;
+            int legacy_rc = read_cb(cb_arg, &legacy_index, sizeof(legacy_index));
+            if (legacy_rc < 0) {
+                return legacy_rc;
+            }
+            if (legacy_index >= ARRAY_SIZE(legacy_halves_timeouts)) {
+                return -EINVAL;
+            }
+            timeout_ms = legacy_halves_timeouts[legacy_index];
+        } else if (len == sizeof(uint32_t)) {
+            int timeout_rc = read_cb(cb_arg, &timeout_ms, sizeof(timeout_ms));
+            if (timeout_rc < 0) {
+                return timeout_rc;
+            }
+        } else {
             return -EINVAL;
         }
-        halves_sleep_timeout_index = value;
-        apply_halves_sleep_timeout();
-        return 0;
+
+        for (uint8_t i = 0; i < ARRAY_SIZE(halves_sleep_timeouts); i++) {
+            if (halves_sleep_timeouts[i] == timeout_ms) {
+                halves_sleep_timeout_index = i;
+                apply_halves_sleep_timeout();
+                return 0;
+            }
+        }
+
+        return -EINVAL;
     }
 
     return -ENOENT;
@@ -136,11 +170,11 @@ static void persist_timeout(enum timeout_kind kind) {
 #endif
     } else if (kind == TIMEOUT_KIND_HALVES_SLEEP) {
         /*
-         * Store this on the dongle as the authoritative UI selection and on
-         * each half as its local deep-sleep setting.
+         * Store the actual timeout value, not the array index. This keeps
+         * persisted settings stable if options are added/reordered later.
          */
-        settings_save_one("hana_timeout/halves", &halves_sleep_timeout_index,
-                          sizeof(halves_sleep_timeout_index));
+        uint32_t timeout_ms = halves_sleep_timeouts[halves_sleep_timeout_index];
+        settings_save_one("hana_timeout/halves", &timeout_ms, sizeof(timeout_ms));
     }
 }
 #else
