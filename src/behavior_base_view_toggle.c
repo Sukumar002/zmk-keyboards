@@ -13,7 +13,7 @@ static int on_base_view_toggle_pressed(struct zmk_behavior_binding *binding,
     ARG_UNUSED(binding);
     ARG_UNUSED(event);
 #if IS_ENABLED(CONFIG_ZMK_DISPLAY)
-    hana_base_view_toggle();
+    hana_base_view_cycle();
 #endif
     return ZMK_BEHAVIOR_OPAQUE;
 }
