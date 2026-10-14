@@ -79,7 +79,7 @@
         base_view_tog: base_view_toggle {
             compatible = "zmk,behavior-base-view-toggle";
             #binding-cells = <0>;
-            display-name = "BASE View Toggle";
+            display-name = "BASE View Cycle";
         };
 
         timeout_cycle: timeout_cycle {
