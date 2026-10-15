@@ -12,3 +12,14 @@ endif()
 target_sources(app PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/src/behavior_oled_toggle.c
 )
+
+# Runtime OLED and split-half sleep timeout controls.
+target_sources(app PRIVATE
+  ${CMAKE_CURRENT_LIST_DIR}/src/behavior_timeout_cycle.c
+)
+
+
+# Persistent BASE display mode toggle (Bongo Cat/WPM <-> bordered BASE label).
+target_sources(app PRIVATE
+  ${CMAKE_CURRENT_LIST_DIR}/src/behavior_base_view_toggle.c
+)
