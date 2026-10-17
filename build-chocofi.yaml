@@ -1,0 +1,33 @@
+---
+include:
+  - board: nice_nano//zmk
+    shield: settings_reset
+  - board: nice_nano//zmk
+    shield: chocofi_central_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: chocofi_ble_left
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_right
+    artifact-name: chocofi_ble_right
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_left
+    artifact-name: chocofi_dongle_left
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_right
+    artifact-name: chocofi_dongle_right
+  - board: nice_nano//zmk
+    shield: chocofi_central_dongle
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: chocofi_dongle_no_display
+  - board: nice_nano//zmk
+    shield: chocofi_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: chocofi_dongle_128x64
+  - board: nice_nano//zmk
+    shield: chocofi_central_dongle_128x32 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: chocofi_dongle_128x32
