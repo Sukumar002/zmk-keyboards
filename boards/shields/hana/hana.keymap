@@ -152,5 +152,6 @@
         };
 
 
-        ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4    };
+        ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4
+    };
 };
