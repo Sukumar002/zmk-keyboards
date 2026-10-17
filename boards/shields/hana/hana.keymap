@@ -5,6 +5,7 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <layout_shift_kp_override.dtsi>
 #include <dt-bindings/zmk/layout_shift.h>
+#include "../common/studio_runtime_layers.dtsi"
 
 #define BASE       0
 #define NUM        1
@@ -149,5 +150,7 @@
                            &trans             &trans        &trans        &trans                                  &trans          &trans          &trans          &trans
             >;
         };
-    };
+
+
+        ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4    };
 };
