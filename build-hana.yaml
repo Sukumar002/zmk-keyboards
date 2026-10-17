@@ -1,0 +1,28 @@
+---
+include:
+  - board: xiao_ble//zmk
+    shield: settings_reset
+  - board: nice_nano//zmk
+    shield: settings_reset
+  - board: xiao_ble//zmk
+    shield: hana_central_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_right
+  - board: nice_nano//zmk
+    shield: hana_central_dongle
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x32 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_left
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_right
