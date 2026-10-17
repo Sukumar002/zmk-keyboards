@@ -1,18 +1,44 @@
-name: "Build ZMK Firmware"
+name: "Build Hana Firmware"
+
 on:
   push:
     branches:
       - main
-      - mouse-test
+      - chocofi-setup
+    paths:
+      - "boards/shields/hana/**"
+      - "build-hana.yaml"
+      - ".github/workflows/build.yml"
+      - "config/**"
+      - "snippets/**"
+      - "src/**"
+      - "dts/**"
+      - "zephyr/**"
+      - "CMakeLists.txt"
+      - "Kconfig"
   pull_request:
     branches:
       - main
+    paths:
+      - "boards/shields/hana/**"
+      - "build-hana.yaml"
+      - ".github/workflows/build.yml"
+      - "config/**"
+      - "snippets/**"
+      - "src/**"
+      - "dts/**"
+      - "zephyr/**"
+      - "CMakeLists.txt"
+      - "Kconfig"
   workflow_dispatch:
 
 concurrency:
-  group: "${{ github.workflow }}-${{ github.ref }}"
+  group: "hana-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-hana.yaml
+      archive_name: hana-firmware
