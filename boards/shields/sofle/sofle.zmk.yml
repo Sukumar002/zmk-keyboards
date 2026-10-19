@@ -1,0 +1,18 @@
+file_format: "1"
+id: sofle
+name: Sofle
+type: shield
+requires: [pro_micro]
+exposes: [i2c_oled]
+features:
+  - keys
+  - display
+  - encoder
+  - studio
+siblings:
+  - sofle_central_left
+  - sofle_peripheral_left
+  - sofle_peripheral_right
+  - sofle_central_dongle
+  - sofle_central_dongle_128x32
+  - sofle_central_dongle_128x64
