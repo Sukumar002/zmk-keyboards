@@ -103,9 +103,13 @@
         <input id="label" maxlength="60" placeholder="e.g. corne-client-01" />
       </div>
 
+      <div>
+        <label for="accessCode">Builder access code</label>
+        <input id="accessCode" type="password" autocomplete="off" placeholder="Enter builder access code" />
+      </div>
       <div class="actions">
         <button class="primary" id="run" type="button">Run firmware build</button>
-        <a class="btn secondary" id="manual" target="_blank" rel="noopener">Open Actions manually</a>
+        <a class="btn secondary" id="download" style="display:none">Download firmware ZIP</a>
       </div>
       <div id="status" class="status"></div>
     </div>
@@ -124,6 +128,9 @@ const displayEl=document.querySelector("#display");
 const displayWrap=document.querySelector("#displayWrap");
 const labelEl=document.querySelector("#label");
 const statusEl=document.querySelector("#status");
+const accessCodeEl=document.querySelector("#accessCode");
+const runEl=document.querySelector("#run");
+const downloadEl=document.querySelector("#download");
 
 function title(v){return v.charAt(0).toUpperCase()+v.slice(1);}
 function refresh(){
@@ -144,9 +151,76 @@ function refresh(){
 [boardEl,connEl,splitMcuEl,dongleMcuEl,displayEl].forEach(x=>x.addEventListener("change",refresh));
 refresh();
 
-document.querySelector("#manual").href=`https://github.com/${REPO}/actions/workflows/${WORKFLOW}`;
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 
-document.querySelector("#run").onclick=async()=>{
+async function api(path, options={}){
+  const headers={
+    "Content-Type":"application/json",
+    "X-Builder-Key":accessCodeEl.value.trim(),
+    ...(options.headers||{})
+  };
+  return fetch(path,{...options,headers});
+}
+
+async function waitForBuild(requestId){
+  for(let attempt=0; attempt<180; attempt++){
+    await sleep(5000);
+    const res=await api(`/api/build/${requestId}/status`);
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.error||`Status check failed (${res.status})`);
+
+    if(data.state==="ready"){
+      statusEl.className="status ok";
+      statusEl.textContent=`Firmware ready: ${data.artifact_name}`;
+      downloadEl.href=data.download_url;
+      downloadEl.style.display="inline-flex";
+      downloadEl.onclick=async(e)=>{
+        e.preventDefault();
+        statusEl.className="status";
+        statusEl.textContent="Preparing download…";
+        const dl=await api(data.download_url,{headers:{}});
+        if(!dl.ok){
+          const err=await dl.json().catch(()=>({}));
+          statusEl.className="status err";
+          statusEl.textContent=err.error||`Download failed (${dl.status})`;
+          return;
+        }
+        const blob=await dl.blob();
+        const disposition=dl.headers.get("content-disposition")||"";
+        const match=disposition.match(/filename="([^"]+)"/);
+        const filename=match?match[1]:`${data.artifact_name}.zip`;
+        const a=document.createElement("a");
+        a.href=URL.createObjectURL(blob);
+        a.download=filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+        statusEl.className="status ok";
+        statusEl.textContent="Firmware package downloaded.";
+      };
+      runEl.disabled=false;
+      return;
+    }
+
+    if(data.state==="failed"){
+      throw new Error(`Build failed${data.conclusion?": "+data.conclusion:""}.`);
+    }
+
+    const labels={queued:"Waiting for GitHub runner…",in_progress:"Building firmware…",packaging:"Packaging firmware…"};
+    statusEl.textContent=labels[data.state]||"Build in progress…";
+  }
+  throw new Error("Build is taking longer than expected. Please try again later.");
+}
+
+runEl.onclick=async()=>{
+  const accessCode=accessCodeEl.value.trim();
+  if(!accessCode){
+    statusEl.className="status err";
+    statusEl.textContent="Enter the builder access code.";
+    return;
+  }
+
   const inputs={
     board:boardEl.value,
     connectivity:connEl.value,
@@ -155,30 +229,24 @@ document.querySelector("#run").onclick=async()=>{
     dongle_display:connEl.value==="dongle"?displayEl.value:"none",
     build_label:labelEl.value.trim()
   };
-  const started=Date.now();
+
+  runEl.disabled=true;
+  downloadEl.style.display="none";
   statusEl.className="status";
-  statusEl.textContent="Dispatching build…";
+  statusEl.textContent="Starting firmware build…";
+
   try{
-    const res=await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,{
-      method:"POST",
-      headers:{
-        "Accept":"application/vnd.github+json",
-        "X-GitHub-Api-Version":"2022-11-28"
-      },
-      body:JSON.stringify({ref:"main",inputs})
-    });
-    if(!res.ok){
-      const body=await res.text();
-      throw new Error(`GitHub returned ${res.status}: ${body.slice(0,240)}`);
-    }
-    statusEl.className="status ok";
-    statusEl.innerHTML="Build dispatched successfully. <a style='color:inherit' target='_blank' rel='noopener' href='"+document.querySelector("#manual").href+"'>Open the workflow runs</a> to follow it and download the artifact.";
+    const res=await api("/api/build",{method:"POST",body:JSON.stringify(inputs)});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.error||`Build request failed (${res.status})`);
+    statusEl.textContent="Build dispatched. Waiting for GitHub runner…";
+    await waitForBuild(data.request_id);
   }catch(err){
+    runEl.disabled=false;
     statusEl.className="status err";
     statusEl.textContent=err.message;
   }
-};
-</script>
+};</script>
 <!-- deploy-marker: 2026-10-19 -->
 </body>
 </html>
