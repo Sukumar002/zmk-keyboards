@@ -1,4 +1,5 @@
 name: "Firmware Build Console"
+run-name: "Builder ${{ inputs.build_label || inputs.board }} · ${{ inputs.request_id }}"
 
 on:
   workflow_dispatch:
@@ -46,6 +47,10 @@ on:
           - 128x64
       build_label:
         description: "Optional customer/job label"
+        required: false
+        type: string
+      request_id:
+        description: "Builder service request ID"
         required: false
         type: string
 
