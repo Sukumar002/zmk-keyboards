@@ -155,9 +155,9 @@ const server = http.createServer(async (req, res) => {
       return send(res, 202, { request_id: requestId });
     }
 
-    const statusMatch = url.pathname.match(/^\/api\/build\/([0-9a-f-]+)\/status$/i);
+    const statusMatch = url.pathname.match(/^\/api\/build\/([^/]+)\/status\/?$/i);
     if (req.method === "GET" && statusMatch) {
-      const requestId = statusMatch[1];
+      const requestId = decodeURIComponent(statusMatch[1]).trim();
       const run = await findRun(requestId);
       if (!run) return send(res, 200, { state: "queued" });
 
@@ -179,9 +179,9 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
-    const dlMatch = url.pathname.match(/^\/api\/build\/([0-9a-f-]+)\/download$/i);
+    const dlMatch = url.pathname.match(/^\/api\/build\/([^/]+)\/download\/?$/i);
     if (req.method === "GET" && dlMatch) {
-      const requestId = dlMatch[1];
+      const requestId = decodeURIComponent(dlMatch[1]).trim();
       const run = await findRun(requestId);
       if (!run || run.status !== "completed" || run.conclusion !== "success") {
         return send(res, 409, { error: "Firmware is not ready yet." });
@@ -202,7 +202,7 @@ const server = http.createServer(async (req, res) => {
       return res.end(bytes);
     }
 
-    send(res, 404, { error: "Not found." });
+    send(res, 404, { error: "Not found.", method: req.method, path: url.pathname });
   } catch (err) {
     console.error(err);
     send(res, 500, { error: "Internal server error." });
