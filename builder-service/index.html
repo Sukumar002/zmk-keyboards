@@ -132,10 +132,42 @@ const accessCodeEl=document.querySelector("#accessCode");
 const runEl=document.querySelector("#run");
 const downloadEl=document.querySelector("#download");
 
+const supportedProfiles={
+  hana:{
+    ble:{split:["xiao_ble"],dongle:["nice_nano"]},
+    dongle:{split:["xiao_ble"],dongle:["nice_nano"]}
+  },
+  chocofi:{
+    ble:{split:["nice_nano"],dongle:["nice_nano"]},
+    dongle:{split:["nice_nano"],dongle:["nice_nano"]}
+  },
+  sofle:{
+    ble:{split:["nice_nano"],dongle:["nice_nano"]},
+    dongle:{split:["nice_nano"],dongle:["nice_nano"]}
+  },
+  corne:{
+    ble:{split:["nice_nano"],dongle:["nice_nano"]},
+    dongle:{split:["nice_nano"],dongle:["nice_nano"]}
+  }
+};
+
+function applyAllowed(selectEl, allowed){
+  for(const option of selectEl.options){
+    option.disabled=!allowed.includes(option.value);
+    option.hidden=option.disabled;
+  }
+  if(!allowed.includes(selectEl.value)){
+    selectEl.value=allowed[0];
+  }
+}
+
 function title(v){return v.charAt(0).toUpperCase()+v.slice(1);}
 function refresh(){
   const b=boardEl.value,c=connEl.value;
   const dongleMode=c==="dongle";
+  const profile=supportedProfiles[b][c];
+  applyAllowed(splitMcuEl,profile.split);
+  applyAllowed(dongleMcuEl,profile.dongle);
   dongleMcuWrap.style.display=dongleMode?"block":"none";
   displayWrap.style.display=dongleMode?"block":"none";
   document.querySelector("#sBoard").textContent=title(b);
