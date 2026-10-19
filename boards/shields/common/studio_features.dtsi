@@ -49,12 +49,6 @@
             display-name = "OLED Toggle";
         };
 
-        base_view_tog_shared: base_view_toggle_shared {
-            compatible = "zmk,behavior-base-view-toggle";
-            #binding-cells = <0>;
-            display-name = "BASE View Cycle";
-        };
-
         timeout_cycle_shared: timeout_cycle_shared {
             compatible = "zmk,behavior-timeout-cycle";
             #binding-cells = <1>;
