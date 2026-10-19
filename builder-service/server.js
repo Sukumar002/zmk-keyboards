@@ -106,7 +106,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "GET" && url.pathname === "/api/health") {
-      return send(res, 200, { ok: true, githubConfigured: Boolean(TOKEN), accessKeyConfigured: Boolean(BUILDER_KEY) });
+      return send(res, 200, { ok: true, githubConfigured: Boolean(TOKEN), accessKeyConfigured: Boolean(BUILDER_KEY || BUILDER_KEYS.length) });
     }
 
     if (url.pathname.startsWith("/api/")) {
