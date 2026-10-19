@@ -58,6 +58,8 @@ jobs:
     outputs:
       matrix_path: ${{ steps.select.outputs.matrix_path }}
       archive_name: ${{ steps.select.outputs.archive_name }}
+      raw_archive_name: ${{ steps.select.outputs.raw_archive_name }}
+      file_prefix: ${{ steps.select.outputs.file_prefix }}
     steps:
       - name: Validate selection
         id: select
@@ -125,8 +127,17 @@ jobs:
             archive="$archive-$stamp"
           fi
 
+          if [[ -n "$label" ]]; then
+            file_prefix="$label"
+          else
+            file_prefix="$archive"
+          fi
+          raw_archive="raw-$archive"
+
           echo "matrix_path=$matrix" >> "$GITHUB_OUTPUT"
           echo "archive_name=$archive" >> "$GITHUB_OUTPUT"
+          echo "raw_archive_name=$raw_archive" >> "$GITHUB_OUTPUT"
+          echo "file_prefix=$file_prefix" >> "$GITHUB_OUTPUT"
 
           {
             echo "### Firmware build selection"
@@ -139,7 +150,8 @@ jobs:
               echo "- Dongle display: **$DISPLAY**"
             fi
             echo "- Matrix: `$matrix`"
-            echo "- Artifact archive: **$archive**"
+            echo "- Final artifact archive: **$archive**"
+            echo "- Firmware filename prefix: **$file_prefix**"
             echo ""
             echo "This workflow uploads an Actions artifact only. It does not create a release or tag."
           } >> "$GITHUB_STEP_SUMMARY"
@@ -149,4 +161,46 @@ jobs:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       build_matrix_path: ${{ needs.prepare.outputs.matrix_path }}
-      archive_name: ${{ needs.prepare.outputs.archive_name }}
+      archive_name: ${{ needs.prepare.outputs.raw_archive_name }}
+
+  package:
+    runs-on: ubuntu-latest
+    needs: [prepare, build]
+    steps:
+      - name: Download raw firmware artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.prepare.outputs.raw_archive_name }}
+          path: raw-firmware
+
+      - name: Add client/job tag to firmware filenames
+        shell: bash
+        env:
+          PREFIX: ${{ needs.prepare.outputs.file_prefix }}
+        run: |
+          set -euo pipefail
+          mkdir -p final-firmware
+          shopt -s nullglob
+          files=(raw-firmware/*)
+          if (( ${#files[@]} == 0 )); then
+            echo "::error::No firmware files were found in the raw build artifact."
+            exit 1
+          fi
+          for src in "${files[@]}"; do
+            name="$(basename "$src")"
+            cp "$src" "final-firmware/${PREFIX}-${name}"
+          done
+          echo "### Final firmware package" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Files:" >> "$GITHUB_STEP_SUMMARY"
+          for file in final-firmware/*; do
+            echo "- `$(basename "$file")`" >> "$GITHUB_STEP_SUMMARY"
+          done
+
+      - name: Upload client-ready firmware package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ needs.prepare.outputs.archive_name }}
+          path: final-firmware
+          if-no-files-found: error
+          retention-days: 30
