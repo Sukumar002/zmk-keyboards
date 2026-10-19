@@ -80,44 +80,28 @@ jobs:
           set -euo pipefail
 
           case "$BOARD" in
-            hana)
-              [[ "$SPLIT_MCU" == "xiao_ble" ]] || {
-                echo "::error::Hana currently has validated build definitions only for XIAO nRF52840 split halves."
-                exit 1
-              }
-              if [[ "$CONNECTIVITY" == "dongle" ]]; then
-                [[ "$DONGLE_MCU" == "nice_nano" ]] || {
-                  echo "::error::Hana currently has a validated dongle definition only for nice!nano v2 / Pro Micro nRF52840."
-                  exit 1
-                }
-              fi
-              ;;
-            chocofi|corne|sofle)
-              [[ "$SPLIT_MCU" == "nice_nano" ]] || {
-                echo "::error::$BOARD currently has validated build definitions only for nice!nano v2 / Pro Micro nRF52840 split halves."
-                exit 1
-              }
-              if [[ "$CONNECTIVITY" == "dongle" ]]; then
-                [[ "$DONGLE_MCU" == "nice_nano" ]] || {
-                  echo "::error::$BOARD currently has a validated dongle definition only for nice!nano v2 / Pro Micro nRF52840."
-                  exit 1
-                }
-              fi
-              ;;
-            *)
-              echo "::error::Unsupported board: $BOARD"
-              exit 1
-              ;;
+            hana|chocofi|corne|sofle) ;;
+            *) echo "::error::Unsupported board: $BOARD"; exit 1 ;;
+          esac
+
+          case "$SPLIT_MCU" in
+            nice_nano|xiao_ble) ;;
+            *) echo "::error::Unsupported split MCU: $SPLIT_MCU"; exit 1 ;;
+          esac
+
+          case "$DONGLE_MCU" in
+            nice_nano|xiao_ble) ;;
+            *) echo "::error::Unsupported dongle MCU: $DONGLE_MCU"; exit 1 ;;
           esac
 
           if [[ "$CONNECTIVITY" == "ble" ]]; then
-            matrix="build-console/$BOARD-ble.yaml"
+            matrix="build-console/generated/$BOARD-ble-split-$SPLIT_MCU.yaml"
           else
             case "$DISPLAY" in
               none|128x32|128x64) ;;
               *) echo "::error::Unsupported display selection: $DISPLAY"; exit 1 ;;
             esac
-            matrix="build-console/$BOARD-dongle-$DISPLAY.yaml"
+            matrix="build-console/generated/$BOARD-dongle-$DISPLAY-split-$SPLIT_MCU-dongle-$DONGLE_MCU.yaml"
           fi
 
           label="$(printf '%s' "$BUILD_LABEL" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"

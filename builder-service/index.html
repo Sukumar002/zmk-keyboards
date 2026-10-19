@@ -133,22 +133,10 @@ const runEl=document.querySelector("#run");
 const downloadEl=document.querySelector("#download");
 
 const supportedProfiles={
-  hana:{
-    ble:{split:["xiao_ble"],dongle:["nice_nano"]},
-    dongle:{split:["xiao_ble"],dongle:["nice_nano"]}
-  },
-  chocofi:{
-    ble:{split:["nice_nano"],dongle:["nice_nano"]},
-    dongle:{split:["nice_nano"],dongle:["nice_nano"]}
-  },
-  sofle:{
-    ble:{split:["nice_nano"],dongle:["nice_nano"]},
-    dongle:{split:["nice_nano"],dongle:["nice_nano"]}
-  },
-  corne:{
-    ble:{split:["nice_nano"],dongle:["nice_nano"]},
-    dongle:{split:["nice_nano"],dongle:["nice_nano"]}
-  }
+  hana:{ble:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]},dongle:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]}},
+  chocofi:{ble:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]},dongle:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]}},
+  sofle:{ble:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]},dongle:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]}},
+  corne:{ble:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]},dongle:{split:["nice_nano","xiao_ble"],dongle:["nice_nano","xiao_ble"]}}
 };
 
 function applyAllowed(selectEl, allowed){
