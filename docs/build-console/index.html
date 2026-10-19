@@ -102,15 +102,7 @@
         <label for="label">Customer / job label <span style="opacity:.65">(optional)</span></label>
         <input id="label" maxlength="60" placeholder="e.g. corne-client-01" />
       </div>
-      <div class="tokenRow">
-        <div>
-          <label for="token">GitHub fine-grained token for one-click build</label>
-          <input id="token" type="password" autocomplete="off" placeholder="Actions: write permission on zmk-keyboards" />
-        </div>
-        <button class="secondary" id="clearToken" type="button">Clear</button>
-      </div>
-      <div class="notice">The token is never committed, uploaded to this site, or written to localStorage. If you choose “remember for this tab”, it is kept only in <code>sessionStorage</code> and sent directly by your browser to <code>api.github.com</code>.</div>
-      <label style="display:flex;gap:8px;align-items:center;margin:0"><input id="remember" type="checkbox" style="width:auto"> Remember token for this tab</label>
+
       <div class="actions">
         <button class="primary" id="run" type="button">Run firmware build</button>
         <a class="btn secondary" id="manual" target="_blank" rel="noopener">Open Actions manually</a>
@@ -131,8 +123,6 @@ const dongleMcuWrap=document.querySelector("#dongleMcuWrap");
 const displayEl=document.querySelector("#display");
 const displayWrap=document.querySelector("#displayWrap");
 const labelEl=document.querySelector("#label");
-const tokenEl=document.querySelector("#token");
-const rememberEl=document.querySelector("#remember");
 const statusEl=document.querySelector("#status");
 
 function title(v){return v.charAt(0).toUpperCase()+v.slice(1);}
@@ -154,20 +144,9 @@ function refresh(){
 [boardEl,connEl,splitMcuEl,dongleMcuEl,displayEl].forEach(x=>x.addEventListener("change",refresh));
 refresh();
 
-const saved=sessionStorage.getItem("zmkBuildToken");
-if(saved){tokenEl.value=saved;rememberEl.checked=true;}
-document.querySelector("#clearToken").onclick=()=>{tokenEl.value="";rememberEl.checked=false;sessionStorage.removeItem("zmkBuildToken");};
 document.querySelector("#manual").href=`https://github.com/${REPO}/actions/workflows/${WORKFLOW}`;
 
 document.querySelector("#run").onclick=async()=>{
-  const token=tokenEl.value.trim();
-  if(!token){
-    statusEl.className="status err";
-    statusEl.textContent="Enter a GitHub token for one-click dispatch, or use “Open Actions manually”.";
-    return;
-  }
-  if(rememberEl.checked) sessionStorage.setItem("zmkBuildToken",token); else sessionStorage.removeItem("zmkBuildToken");
-
   const inputs={
     board:boardEl.value,
     connectivity:connEl.value,
@@ -184,7 +163,6 @@ document.querySelector("#run").onclick=async()=>{
       method:"POST",
       headers:{
         "Accept":"application/vnd.github+json",
-        "Authorization":`Bearer ${token}`,
         "X-GitHub-Api-Version":"2022-11-28"
       },
       body:JSON.stringify({ref:"main",inputs})
