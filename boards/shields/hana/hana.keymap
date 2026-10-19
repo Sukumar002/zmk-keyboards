@@ -39,6 +39,35 @@
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
+    hold-trigger-key-positions = <
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+    >;
+    runtime-editable;
+    runtime-default-active;
+    display-name = "Mod-Tap";
+};
+
+&lt {
+    hold-trigger-key-positions = <
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+    >;
+    runtime-editable;
+    runtime-default-active;
+    display-name = "Layer-Tap";
 };
 
 / {
@@ -69,6 +98,19 @@
             flavor = "tap-preferred";
             tapping-term-ms = <3000>;
             bindings = <&bt_clear_profile>, <&bt_select_profile>;
+            hold-trigger-key-positions = <
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+                0xffffffff 0xffffffff 0xffffffff 0xffffffff
+            >;
+            runtime-editable;
+            runtime-default-active;
+            display-name = "Bluetooth Profile";
         };
 
         oled_tog: oled_toggle {
