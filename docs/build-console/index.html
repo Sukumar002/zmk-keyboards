@@ -64,8 +64,18 @@
 
     <div class="card stack">
       <div>
-        <label for="mcu">MCU profile</label>
-        <select id="mcu"></select>
+        <label for="splitMcu">Split halves MCU</label>
+        <select id="splitMcu">
+          <option value="nice_nano">nice!nano v2 / Pro Micro nRF52840</option>
+          <option value="xiao_ble">XIAO nRF52840</option>
+        </select>
+      </div>
+      <div id="dongleMcuWrap">
+        <label for="dongleMcu">Dongle MCU</label>
+        <select id="dongleMcu">
+          <option value="nice_nano">nice!nano v2 / Pro Micro nRF52840</option>
+          <option value="xiao_ble">XIAO nRF52840</option>
+        </select>
       </div>
       <div id="displayWrap">
         <label for="display">Dongle display</label>
@@ -115,7 +125,9 @@ const REPO="Sukumar002/zmk-keyboards";
 const WORKFLOW="custom-build.yml";
 const boardEl=document.querySelector("#board");
 const connEl=document.querySelector("#connectivity");
-const mcuEl=document.querySelector("#mcu");
+const splitMcuEl=document.querySelector("#splitMcu");
+const dongleMcuEl=document.querySelector("#dongleMcu");
+const dongleMcuWrap=document.querySelector("#dongleMcuWrap");
 const displayEl=document.querySelector("#display");
 const displayWrap=document.querySelector("#displayWrap");
 const labelEl=document.querySelector("#label");
@@ -123,42 +135,23 @@ const tokenEl=document.querySelector("#token");
 const rememberEl=document.querySelector("#remember");
 const statusEl=document.querySelector("#status");
 
-const profiles={
-  hana:{
-    ble:[{value:"xiao_ble",label:"XIAO nRF52840 halves"}],
-    dongle:[{value:"native",label:"Native mixed: XIAO halves + nice!nano dongle"}]
-  },
-  chocofi:{
-    ble:[{value:"nice_nano",label:"nice!nano / Pro Micro nRF52840"}],
-    dongle:[{value:"nice_nano",label:"nice!nano halves + nice!nano dongle"}]
-  },
-  corne:{
-    ble:[{value:"nice_nano",label:"nice!nano / Pro Micro nRF52840"}],
-    dongle:[{value:"nice_nano",label:"nice!nano halves + nice!nano dongle"}]
-  },
-  sofle:{
-    ble:[{value:"nice_nano",label:"nice!nano / Pro Micro nRF52840"}],
-    dongle:[{value:"nice_nano",label:"nice!nano halves + nice!nano dongle"}]
-  }
-};
-
 function title(v){return v.charAt(0).toUpperCase()+v.slice(1);}
 function refresh(){
   const b=boardEl.value,c=connEl.value;
-  mcuEl.innerHTML="";
-  for(const p of profiles[b][c]){
-    const o=document.createElement("option"); o.value=p.value; o.textContent=p.label; mcuEl.appendChild(o);
-  }
-  displayWrap.style.display=c==="dongle"?"block":"none";
+  const dongleMode=c==="dongle";
+  dongleMcuWrap.style.display=dongleMode?"block":"none";
+  displayWrap.style.display=dongleMode?"block":"none";
   document.querySelector("#sBoard").textContent=title(b);
-  document.querySelector("#sConnectivity").textContent=c==="ble"?"BLE split":"Standalone dongle";
-  document.querySelector("#sMcu").textContent=mcuEl.selectedOptions[0]?.textContent||"";
-  document.querySelector("#sPackage").textContent=c==="ble"?"Left central + right peripheral":"Left peripheral + right peripheral + selected dongle";
-  document.querySelector("#flashInfo").innerHTML=c==="ble"
-    ? "<strong>Flash set:</strong> left central + right peripheral. The left half connects to the host."
-    : "<strong>Flash set:</strong> left peripheral + right peripheral + "+displayEl.selectedOptions[0].textContent+" central dongle. Both keyboard halves connect to the dongle.";
+  document.querySelector("#sConnectivity").textContent=dongleMode?"Standalone dongle":"BLE split";
+  document.querySelector("#sMcu").textContent=dongleMode
+    ? "Halves: "+splitMcuEl.selectedOptions[0].textContent+" · Dongle: "+dongleMcuEl.selectedOptions[0].textContent
+    : splitMcuEl.selectedOptions[0].textContent;
+  document.querySelector("#sPackage").textContent=dongleMode?"Left peripheral + right peripheral + selected dongle":"Left central + right peripheral";
+  document.querySelector("#flashInfo").innerHTML=dongleMode
+    ? "<strong>Flash set:</strong> left peripheral + right peripheral + "+displayEl.selectedOptions[0].textContent+" central dongle. Both keyboard halves connect to the dongle."
+    : "<strong>Flash set:</strong> left central + right peripheral. The left half connects to the host.";
 }
-[boardEl,connEl,mcuEl,displayEl].forEach(x=>x.addEventListener("change",refresh));
+[boardEl,connEl,splitMcuEl,dongleMcuEl,displayEl].forEach(x=>x.addEventListener("change",refresh));
 refresh();
 
 const saved=sessionStorage.getItem("zmkBuildToken");
@@ -178,7 +171,8 @@ document.querySelector("#run").onclick=async()=>{
   const inputs={
     board:boardEl.value,
     connectivity:connEl.value,
-    mcu_profile:mcuEl.value,
+    split_mcu:splitMcuEl.value,
+    dongle_mcu:connEl.value==="dongle"?dongleMcuEl.value:"nice_nano",
     dongle_display:connEl.value==="dongle"?displayEl.value:"none",
     build_label:labelEl.value.trim()
   };
