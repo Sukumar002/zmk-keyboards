@@ -9,7 +9,11 @@ const REPO = process.env.GITHUB_REPO || "zmk-keyboards";
 const WORKFLOW = process.env.GITHUB_WORKFLOW || "custom-build.yml";
 const BRANCH = process.env.GITHUB_BRANCH || "main";
 const TOKEN = process.env.GITHUB_TOKEN;
-const BUILDER_KEY = process.env.BUILDER_ACCESS_KEY;
+const BUILDER_KEY = process.env.BUILDER_ACCESS_KEY || "";
+const BUILDER_KEYS = (process.env.BUILDER_ACCESS_KEYS || "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
 
 const INDEX = path.resolve(__dirname, "index.html");
 const API = "https://api.github.com";
@@ -33,19 +37,24 @@ function requireConfig(res) {
     send(res, 503, { error: "Server is missing GITHUB_TOKEN." });
     return false;
   }
-  if (!BUILDER_KEY) {
-    send(res, 503, { error: "Server is missing BUILDER_ACCESS_KEY." });
+  if (!BUILDER_KEY && BUILDER_KEYS.length === 0) {
+    send(res, 503, { error: "Server is missing builder access keys." });
     return false;
   }
   return true;
 }
 
+function safeEqual(a, b) {
+  if (typeof a !== "string" || typeof b !== "string") return false;
+  const aBuf = Buffer.from(a);
+  const bBuf = Buffer.from(b);
+  return aBuf.length === bBuf.length && crypto.timingSafeEqual(aBuf, bBuf);
+}
+
 function authorized(req) {
   const supplied = req.headers["x-builder-key"] || "";
-  if (!BUILDER_KEY || typeof supplied !== "string") return false;
-  const a = Buffer.from(supplied);
-  const b = Buffer.from(BUILDER_KEY);
-  return a.length === b.length && crypto.timingSafeEqual(a, b);
+  if (BUILDER_KEY && safeEqual(supplied, BUILDER_KEY)) return true;
+  return BUILDER_KEYS.some((key) => safeEqual(supplied, key));
 }
 
 async function github(url, options = {}) {
