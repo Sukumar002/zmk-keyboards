@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ZMK Firmware Build Console</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b0d12; --panel:#131722; --panel2:#191e2c; --line:#2b3345; --text:#f3f6fb; --muted:#9aa6bb; --accent:#8fb4ff; --good:#70d6a5; --bad:#ff8d8d; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:radial-gradient(circle at 20% 0%,#182039 0,transparent 35%),var(--bg); color:var(--text); }
+    main { width:min(980px,calc(100% - 32px)); margin:48px auto; }
+    .eyebrow { color:var(--accent); font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { margin:8px 0 10px; font-size:clamp(28px,5vw,48px); line-height:1.05; }
+    .lead { color:var(--muted); max-width:760px; line-height:1.6; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:28px; }
+    .card { background:linear-gradient(180deg,rgba(25,30,44,.94),rgba(19,23,34,.94)); border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow:0 18px 50px rgba(0,0,0,.22); }
+    .wide { grid-column:1/-1; }
+    label { display:block; font-size:13px; color:var(--muted); margin-bottom:7px; }
+    select,input { width:100%; background:#0e121b; border:1px solid var(--line); border-radius:12px; color:var(--text); padding:12px 13px; outline:none; }
+    select:focus,input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(143,180,255,.12); }
+    .stack { display:grid; gap:16px; }
+    .summary { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .stat { background:#0e121b; border:1px solid var(--line); border-radius:12px; padding:12px; min-height:72px; }
+    .stat small { display:block; color:var(--muted); margin-bottom:7px; }
+    .stat strong { font-size:14px; overflow-wrap:anywhere; }
+    .notice { margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; color:var(--muted); line-height:1.5; }
+    .tokenRow { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:end; }
+    button,a.btn { appearance:none; border:0; border-radius:12px; padding:12px 16px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+    .primary { background:var(--text); color:#0b0d12; }
+    .secondary { background:#20283a; color:var(--text); border:1px solid var(--line)!important; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+    .status { min-height:24px; margin-top:12px; color:var(--muted); }
+    .status.ok { color:var(--good); }
+    .status.err { color:var(--bad); }
+    code { color:#cbd8f2; }
+    @media (max-width:760px) { .grid,.summary { grid-template-columns:1fr; } .wide { grid-column:auto; } .tokenRow { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Sukumar002 / zmk-keyboards</div>
+  <h1>Firmware Build Console</h1>
+  <p class="lead">Prepare a customer-specific ZMK firmware artifact without publishing a release. Choose the keyboard and deployment profile, run the workflow, then download the ZIP from that GitHub Actions run.</p>
+
+  <section class="grid">
+    <div class="card stack">
+      <div>
+        <label for="board">Board</label>
+        <select id="board">
+          <option value="hana">Hana</option>
+          <option value="chocofi">Chocofi</option>
+          <option value="sofle">Sofle</option>
+          <option value="corne">Corne</option>
+        </select>
+      </div>
+      <div>
+        <label for="connectivity">Connectivity</label>
+        <select id="connectivity">
+          <option value="ble">BLE split</option>
+          <option value="dongle">Standalone dongle</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div>
+        <label for="splitMcu">Split halves MCU</label>
+        <select id="splitMcu">
+          <option value="nice_nano">nice!nano v2 / Pro Micro nRF52840</option>
+          <option value="xiao_ble">XIAO nRF52840</option>
+        </select>
+      </div>
+      <div id="dongleMcuWrap">
+        <label for="dongleMcu">Dongle MCU</label>
+        <select id="dongleMcu">
+          <option value="nice_nano">nice!nano v2 / Pro Micro nRF52840</option>
+          <option value="xiao_ble">XIAO nRF52840</option>
+        </select>
+      </div>
+      <div id="displayWrap">
+        <label for="display">Dongle display</label>
+        <select id="display">
+          <option value="none">No display</option>
+          <option value="128x32">128 × 32 OLED</option>
+          <option value="128x64" selected>128 × 64 OLED</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card wide">
+      <div class="summary">
+        <div class="stat"><small>Board</small><strong id="sBoard"></strong></div>
+        <div class="stat"><small>Connectivity</small><strong id="sConnectivity"></strong></div>
+        <div class="stat"><small>Hardware profile</small><strong id="sMcu"></strong></div>
+        <div class="stat"><small>Expected package</small><strong id="sPackage"></strong></div>
+      </div>
+      <div class="notice" id="flashInfo"></div>
+    </div>
+
+    <div class="card wide stack">
+      <div>
+        <label for="label">Customer / job label <span style="opacity:.65">(optional)</span></label>
+        <input id="label" maxlength="60" placeholder="e.g. corne-client-01" />
+      </div>
+
+      <div>
+        <label for="accessCode">Builder access code</label>
+        <input id="accessCode" type="password" autocomplete="off" placeholder="Enter builder access code" />
+      </div>
+      <div class="actions">
+        <button class="primary" id="run" type="button">Run firmware build</button>
+        <a class="btn secondary" id="download" style="display:none">Download firmware ZIP</a>
+      </div>
+      <div id="status" class="status"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const REPO="Sukumar002/zmk-keyboards";
+const WORKFLOW="custom-build.yml";
+const boardEl=document.querySelector("#board");
+const connEl=document.querySelector("#connectivity");
+const splitMcuEl=document.querySelector("#splitMcu");
+const dongleMcuEl=document.querySelector("#dongleMcu");
+const dongleMcuWrap=document.querySelector("#dongleMcuWrap");
+const displayEl=document.querySelector("#display");
+const displayWrap=document.querySelector("#displayWrap");
+const labelEl=document.querySelector("#label");
+const statusEl=document.querySelector("#status");
+const accessCodeEl=document.querySelector("#accessCode");
+const runEl=document.querySelector("#run");
+const downloadEl=document.querySelector("#download");
+
+function title(v){return v.charAt(0).toUpperCase()+v.slice(1);}
+function refresh(){
+  const b=boardEl.value,c=connEl.value;
+  const dongleMode=c==="dongle";
+  dongleMcuWrap.style.display=dongleMode?"block":"none";
+  displayWrap.style.display=dongleMode?"block":"none";
+  document.querySelector("#sBoard").textContent=title(b);
+  document.querySelector("#sConnectivity").textContent=dongleMode?"Standalone dongle":"BLE split";
+  document.querySelector("#sMcu").textContent=dongleMode
+    ? "Halves: "+splitMcuEl.selectedOptions[0].textContent+" · Dongle: "+dongleMcuEl.selectedOptions[0].textContent
+    : splitMcuEl.selectedOptions[0].textContent;
+  document.querySelector("#sPackage").textContent=dongleMode?"Left peripheral + right peripheral + selected dongle":"Left central + right peripheral";
+  document.querySelector("#flashInfo").innerHTML=dongleMode
+    ? "<strong>Flash set:</strong> left peripheral + right peripheral + "+displayEl.selectedOptions[0].textContent+" central dongle. Both keyboard halves connect to the dongle."
+    : "<strong>Flash set:</strong> left central + right peripheral. The left half connects to the host.";
+}
+[boardEl,connEl,splitMcuEl,dongleMcuEl,displayEl].forEach(x=>x.addEventListener("change",refresh));
+refresh();
+
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+async function api(path, options={}){
+  const headers={
+    "Content-Type":"application/json",
+    "X-Builder-Key":accessCodeEl.value.trim(),
+    ...(options.headers||{})
+  };
+  return fetch(path,{...options,headers});
+}
+
+async function waitForBuild(requestId){
+  for(let attempt=0; attempt<180; attempt++){
+    await sleep(5000);
+    const res=await api(`/api/build/${requestId}/status`);
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.error||`Status check failed (${res.status})`);
+
+    if(data.state==="ready"){
+      statusEl.className="status ok";
+      statusEl.textContent=`Firmware ready: ${data.artifact_name}`;
+      downloadEl.href=data.download_url;
+      downloadEl.style.display="inline-flex";
+      downloadEl.onclick=async(e)=>{
+        e.preventDefault();
+        statusEl.className="status";
+        statusEl.textContent="Preparing download…";
+        const dl=await api(data.download_url,{headers:{}});
+        if(!dl.ok){
+          const err=await dl.json().catch(()=>({}));
+          statusEl.className="status err";
+          statusEl.textContent=err.error||`Download failed (${dl.status})`;
+          return;
+        }
+        const blob=await dl.blob();
+        const disposition=dl.headers.get("content-disposition")||"";
+        const match=disposition.match(/filename="([^"]+)"/);
+        const filename=match?match[1]:`${data.artifact_name}.zip`;
+        const a=document.createElement("a");
+        a.href=URL.createObjectURL(blob);
+        a.download=filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+        statusEl.className="status ok";
+        statusEl.textContent="Firmware package downloaded.";
+      };
+      runEl.disabled=false;
+      return;
+    }
+
+    if(data.state==="failed"){
+      throw new Error(`Build failed${data.conclusion?": "+data.conclusion:""}.`);
+    }
+
+    const labels={queued:"Waiting for GitHub runner…",in_progress:"Building firmware…",packaging:"Packaging firmware…"};
+    statusEl.textContent=labels[data.state]||"Build in progress…";
+  }
+  throw new Error("Build is taking longer than expected. Please try again later.");
+}
+
+runEl.onclick=async()=>{
+  const accessCode=accessCodeEl.value.trim();
+  if(!accessCode){
+    statusEl.className="status err";
+    statusEl.textContent="Enter the builder access code.";
+    return;
+  }
+
+  const inputs={
+    board:boardEl.value,
+    connectivity:connEl.value,
+    split_mcu:splitMcuEl.value,
+    dongle_mcu:connEl.value==="dongle"?dongleMcuEl.value:"nice_nano",
+    dongle_display:connEl.value==="dongle"?displayEl.value:"none",
+    build_label:labelEl.value.trim()
+  };
+
+  runEl.disabled=true;
+  downloadEl.style.display="none";
+  statusEl.className="status";
+  statusEl.textContent="Starting firmware build…";
+
+  try{
+    const res=await api("/api/build",{method:"POST",body:JSON.stringify(inputs)});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.error||`Build request failed (${res.status})`);
+    statusEl.textContent="Build dispatched. Waiting for GitHub runner…";
+    await waitForBuild(data.request_id);
+  }catch(err){
+    runEl.disabled=false;
+    statusEl.className="status err";
+    statusEl.textContent=err.message;
+  }
+};</script>
+<!-- deploy-marker: 2026-10-19 -->
+</body>
+</html>
