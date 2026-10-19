@@ -11,7 +11,7 @@ const BRANCH = process.env.GITHUB_BRANCH || "main";
 const TOKEN = process.env.GITHUB_TOKEN;
 const BUILDER_KEY = process.env.BUILDER_ACCESS_KEY;
 
-const INDEX = path.resolve(__dirname, "../docs/build-console/index.html");
+const INDEX = path.resolve(__dirname, "index.html");
 const API = "https://api.github.com";
 const allowedBoards = new Set(["hana","chocofi","sofle","corne"]);
 const allowedConnectivity = new Set(["ble","dongle"]);
