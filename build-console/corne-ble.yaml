@@ -1,0 +1,15 @@
+---
+include:
+  - board: nice_nano//zmk
+    shield: corne_central_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: corne_ble_left_central
+
+  - board: nice_nano//zmk
+    shield: corne_peripheral_right
+    artifact-name: corne_ble_right_peripheral
+
+  - board: nice_nano//zmk
+    shield: settings_reset
+    artifact-name: corne_ble_settings_reset

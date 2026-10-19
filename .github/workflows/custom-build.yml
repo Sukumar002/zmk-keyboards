@@ -1,0 +1,138 @@
+name: "Firmware Build Console"
+
+on:
+  workflow_dispatch:
+    inputs:
+      board:
+        description: "Keyboard"
+        required: true
+        type: choice
+        options:
+          - hana
+          - chocofi
+          - sofle
+          - corne
+      connectivity:
+        description: "Connectivity"
+        required: true
+        type: choice
+        options:
+          - ble
+          - dongle
+      mcu_profile:
+        description: "MCU profile"
+        required: true
+        type: choice
+        default: native
+        options:
+          - native
+          - nice_nano
+          - xiao_ble
+      dongle_display:
+        description: "Dongle display (ignored for BLE)"
+        required: true
+        type: choice
+        default: 128x64
+        options:
+          - none
+          - 128x32
+          - 128x64
+      build_label:
+        description: "Optional customer/job label"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix_path: ${{ steps.select.outputs.matrix_path }}
+      archive_name: ${{ steps.select.outputs.archive_name }}
+    steps:
+      - name: Validate selection
+        id: select
+        shell: bash
+        env:
+          BOARD: ${{ inputs.board }}
+          CONNECTIVITY: ${{ inputs.connectivity }}
+          MCU: ${{ inputs.mcu_profile }}
+          DISPLAY: ${{ inputs.dongle_display }}
+          BUILD_LABEL: ${{ inputs.build_label }}
+        run: |
+          set -euo pipefail
+
+          case "$BOARD" in
+            hana)
+              if [[ "$CONNECTIVITY" == "ble" ]]; then
+                [[ "$MCU" == "native" || "$MCU" == "xiao_ble" ]] || {
+                  echo "::error::Hana BLE uses XIAO nRF52840 halves. Select Native or xiao_ble."
+                  exit 1
+                }
+              else
+                [[ "$MCU" == "native" ]] || {
+                  echo "::error::Hana dongle mode is a mixed native profile: XIAO halves + nice!nano dongle."
+                  exit 1
+                }
+              fi
+              ;;
+            chocofi|corne|sofle)
+              [[ "$MCU" == "native" || "$MCU" == "nice_nano" ]] || {
+                echo "::error::$BOARD currently uses the Pro Micro/nice!nano footprint. XIAO is not a validated target."
+                exit 1
+              }
+              ;;
+            *)
+              echo "::error::Unsupported board: $BOARD"
+              exit 1
+              ;;
+          esac
+
+          if [[ "$CONNECTIVITY" == "ble" ]]; then
+            matrix="build-console/$BOARD-ble.yaml"
+          else
+            case "$DISPLAY" in
+              none|128x32|128x64) ;;
+              *) echo "::error::Unsupported display selection: $DISPLAY"; exit 1 ;;
+            esac
+            matrix="build-console/$BOARD-dongle-$DISPLAY.yaml"
+          fi
+
+          label="$(printf '%s' "$BUILD_LABEL" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
+          stamp="$(date -u +%Y%m%d-%H%M%S)"
+          archive="$BOARD-$CONNECTIVITY"
+          if [[ "$CONNECTIVITY" == "dongle" ]]; then
+            archive="$archive-$DISPLAY"
+          fi
+          if [[ -n "$label" ]]; then
+            archive="$archive-$label"
+          else
+            archive="$archive-$stamp"
+          fi
+
+          echo "matrix_path=$matrix" >> "$GITHUB_OUTPUT"
+          echo "archive_name=$archive" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### Firmware build selection"
+            echo ""
+            echo "- Board: **$BOARD**"
+            echo "- Connectivity: **$CONNECTIVITY**"
+            echo "- MCU profile: **$MCU**"
+            if [[ "$CONNECTIVITY" == "dongle" ]]; then
+              echo "- Dongle display: **$DISPLAY**"
+            fi
+            echo "- Matrix: `$matrix`"
+            echo "- Artifact archive: **$archive**"
+            echo ""
+            echo "This workflow uploads an Actions artifact only. It does not create a release or tag."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  build:
+    needs: prepare
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: ${{ needs.prepare.outputs.matrix_path }}
+      archive_name: ${{ needs.prepare.outputs.archive_name }}

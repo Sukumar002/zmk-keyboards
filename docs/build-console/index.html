@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ZMK Firmware Build Console</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b0d12; --panel:#131722; --panel2:#191e2c; --line:#2b3345; --text:#f3f6fb; --muted:#9aa6bb; --accent:#8fb4ff; --good:#70d6a5; --bad:#ff8d8d; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:radial-gradient(circle at 20% 0%,#182039 0,transparent 35%),var(--bg); color:var(--text); }
+    main { width:min(980px,calc(100% - 32px)); margin:48px auto; }
+    .eyebrow { color:var(--accent); font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { margin:8px 0 10px; font-size:clamp(28px,5vw,48px); line-height:1.05; }
+    .lead { color:var(--muted); max-width:760px; line-height:1.6; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:28px; }
+    .card { background:linear-gradient(180deg,rgba(25,30,44,.94),rgba(19,23,34,.94)); border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow:0 18px 50px rgba(0,0,0,.22); }
+    .wide { grid-column:1/-1; }
+    label { display:block; font-size:13px; color:var(--muted); margin-bottom:7px; }
+    select,input { width:100%; background:#0e121b; border:1px solid var(--line); border-radius:12px; color:var(--text); padding:12px 13px; outline:none; }
+    select:focus,input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(143,180,255,.12); }
+    .stack { display:grid; gap:16px; }
+    .summary { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .stat { background:#0e121b; border:1px solid var(--line); border-radius:12px; padding:12px; min-height:72px; }
+    .stat small { display:block; color:var(--muted); margin-bottom:7px; }
+    .stat strong { font-size:14px; overflow-wrap:anywhere; }
+    .notice { margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; color:var(--muted); line-height:1.5; }
+    .tokenRow { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:end; }
+    button,a.btn { appearance:none; border:0; border-radius:12px; padding:12px 16px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+    .primary { background:var(--text); color:#0b0d12; }
+    .secondary { background:#20283a; color:var(--text); border:1px solid var(--line)!important; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+    .status { min-height:24px; margin-top:12px; color:var(--muted); }
+    .status.ok { color:var(--good); }
+    .status.err { color:var(--bad); }
+    code { color:#cbd8f2; }
+    @media (max-width:760px) { .grid,.summary { grid-template-columns:1fr; } .wide { grid-column:auto; } .tokenRow { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Sukumar002 / zmk-keyboards</div>
+  <h1>Firmware Build Console</h1>
+  <p class="lead">Prepare a customer-specific ZMK firmware artifact without publishing a release. Choose the keyboard and deployment profile, run the workflow, then download the ZIP from that GitHub Actions run.</p>
+
+  <section class="grid">
+    <div class="card stack">
+      <div>
+        <label for="board">Board</label>
+        <select id="board">
+          <option value="hana">Hana</option>
+          <option value="chocofi">Chocofi</option>
+          <option value="sofle">Sofle</option>
+          <option value="corne">Corne</option>
+        </select>
+      </div>
+      <div>
+        <label for="connectivity">Connectivity</label>
+        <select id="connectivity">
+          <option value="ble">BLE split</option>
+          <option value="dongle">Standalone dongle</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div>
+        <label for="mcu">MCU profile</label>
+        <select id="mcu"></select>
+      </div>
+      <div id="displayWrap">
+        <label for="display">Dongle display</label>
+        <select id="display">
+          <option value="none">No display</option>
+          <option value="128x32">128 × 32 OLED</option>
+          <option value="128x64" selected>128 × 64 OLED</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card wide">
+      <div class="summary">
+        <div class="stat"><small>Board</small><strong id="sBoard"></strong></div>
+        <div class="stat"><small>Connectivity</small><strong id="sConnectivity"></strong></div>
+        <div class="stat"><small>Hardware profile</small><strong id="sMcu"></strong></div>
+        <div class="stat"><small>Expected package</small><strong id="sPackage"></strong></div>
+      </div>
+      <div class="notice" id="flashInfo"></div>
+    </div>
+
+    <div class="card wide stack">
+      <div>
+        <label for="label">Customer / job label <span style="opacity:.65">(optional)</span></label>
+        <input id="label" maxlength="60" placeholder="e.g. mayank-corne-client-07" />
+      </div>
+      <div class="tokenRow">
+        <div>
+          <label for="token">GitHub fine-grained token for one-click build</label>
+          <input id="token" type="password" autocomplete="off" placeholder="Actions: write permission on zmk-keyboards" />
+        </div>
+        <button class="secondary" id="clearToken" type="button">Clear</button>
+      </div>
+      <div class="notice">The token is never committed, uploaded to this site, or written to localStorage. If you choose “remember for this tab”, it is kept only in <code>sessionStorage</code> and sent directly by your browser to <code>api.github.com</code>.</div>
+      <label style="display:flex;gap:8px;align-items:center;margin:0"><input id="remember" type="checkbox" style="width:auto"> Remember token for this tab</label>
+      <div class="actions">
+        <button class="primary" id="run" type="button">Run firmware build</button>
+        <a class="btn secondary" id="manual" target="_blank" rel="noopener">Open Actions manually</a>
+      </div>
+      <div id="status" class="status"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const REPO="Sukumar002/zmk-keyboards";
+const WORKFLOW="custom-build.yml";
+const boardEl=document.querySelector("#board");
+const connEl=document.querySelector("#connectivity");
+const mcuEl=document.querySelector("#mcu");
+const displayEl=document.querySelector("#display");
+const displayWrap=document.querySelector("#displayWrap");
+const labelEl=document.querySelector("#label");
+const tokenEl=document.querySelector("#token");
+const rememberEl=document.querySelector("#remember");
+const statusEl=document.querySelector("#status");
+
+const profiles={
+  hana:{
+    ble:[{value:"xiao_ble",label:"XIAO nRF52840 halves"}],
+    dongle:[{value:"native",label:"Native mixed: XIAO halves + nice!nano dongle"}]
+  },
+  chocofi:{
+    ble:[{value:"nice_nano",label:"nice!nano / Pro Micro nRF52840"}],
+    dongle:[{value:"nice_nano",label:"nice!nano halves + nice!nano dongle"}]
+  },
+  corne:{
+    ble:[{value:"nice_nano",label:"nice!nano / Pro Micro nRF52840"}],
+    dongle:[{value:"nice_nano",label:"nice!nano halves + nice!nano dongle"}]
+  },
+  sofle:{
+    ble:[{value:"nice_nano",label:"nice!nano / Pro Micro nRF52840"}],
+    dongle:[{value:"nice_nano",label:"nice!nano halves + nice!nano dongle"}]
+  }
+};
+
+function title(v){return v.charAt(0).toUpperCase()+v.slice(1);}
+function refresh(){
+  const b=boardEl.value,c=connEl.value;
+  mcuEl.innerHTML="";
+  for(const p of profiles[b][c]){
+    const o=document.createElement("option"); o.value=p.value; o.textContent=p.label; mcuEl.appendChild(o);
+  }
+  displayWrap.style.display=c==="dongle"?"block":"none";
+  document.querySelector("#sBoard").textContent=title(b);
+  document.querySelector("#sConnectivity").textContent=c==="ble"?"BLE split":"Standalone dongle";
+  document.querySelector("#sMcu").textContent=mcuEl.selectedOptions[0]?.textContent||"";
+  document.querySelector("#sPackage").textContent=c==="ble"?"Left central + right peripheral":"Left peripheral + right peripheral + selected dongle";
+  document.querySelector("#flashInfo").innerHTML=c==="ble"
+    ? "<strong>Flash set:</strong> left central + right peripheral. The left half connects to the host."
+    : "<strong>Flash set:</strong> left peripheral + right peripheral + "+displayEl.selectedOptions[0].textContent+" central dongle. Both keyboard halves connect to the dongle.";
+}
+[boardEl,connEl,mcuEl,displayEl].forEach(x=>x.addEventListener("change",refresh));
+refresh();
+
+const saved=sessionStorage.getItem("zmkBuildToken");
+if(saved){tokenEl.value=saved;rememberEl.checked=true;}
+document.querySelector("#clearToken").onclick=()=>{tokenEl.value="";rememberEl.checked=false;sessionStorage.removeItem("zmkBuildToken");};
+document.querySelector("#manual").href=`https://github.com/${REPO}/actions/workflows/${WORKFLOW}`;
+
+document.querySelector("#run").onclick=async()=>{
+  const token=tokenEl.value.trim();
+  if(!token){
+    statusEl.className="status err";
+    statusEl.textContent="Enter a GitHub token for one-click dispatch, or use “Open Actions manually”.";
+    return;
+  }
+  if(rememberEl.checked) sessionStorage.setItem("zmkBuildToken",token); else sessionStorage.removeItem("zmkBuildToken");
+
+  const inputs={
+    board:boardEl.value,
+    connectivity:connEl.value,
+    mcu_profile:mcuEl.value,
+    dongle_display:connEl.value==="dongle"?displayEl.value:"none",
+    build_label:labelEl.value.trim()
+  };
+  const started=Date.now();
+  statusEl.className="status";
+  statusEl.textContent="Dispatching build…";
+  try{
+    const res=await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,{
+      method:"POST",
+      headers:{
+        "Accept":"application/vnd.github+json",
+        "Authorization":`Bearer ${token}`,
+        "X-GitHub-Api-Version":"2022-11-28"
+      },
+      body:JSON.stringify({ref:"main",inputs})
+    });
+    if(!res.ok){
+      const body=await res.text();
+      throw new Error(`GitHub returned ${res.status}: ${body.slice(0,240)}`);
+    }
+    statusEl.className="status ok";
+    statusEl.innerHTML="Build dispatched successfully. <a style='color:inherit' target='_blank' rel='noopener' href='"+document.querySelector("#manual").href+"'>Open the workflow runs</a> to follow it and download the artifact.";
+  }catch(err){
+    statusEl.className="status err";
+    statusEl.textContent=err.message;
+  }
+};
+</script>
+</body>
+</html>
