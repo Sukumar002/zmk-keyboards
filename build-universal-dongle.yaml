@@ -30,16 +30,17 @@ include:
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_CENTRAL_IDENTITY=y -DCONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS=4 -DCONFIG_BT_MAX_CONN=7 -DCONFIG_BT_MAX_PAIRED=7
     artifact-name: universal_identity_central_compilecheck_128x64
-  # Compile-check all supported peripheral identity combinations.
-  - board: xiao_ble
+  # Peripheral MCU targets must match each shield's wiring and current ZMK board variants:
+  # Hana halves use XIAO nRF52840; Chocofi's Pro Micro footprint uses nice!nano-compatible wiring.
+  - board: xiao_ble//zmk
     shield: hana_peripheral_left
     artifact-name: universal_identity_hana_left_compilecheck
-  - board: xiao_ble
+  - board: xiao_ble//zmk
     shield: hana_peripheral_right
     artifact-name: universal_identity_hana_right_compilecheck
-  - board: xiao_ble
+  - board: nice_nano//zmk
     shield: chocofi_peripheral_left
     artifact-name: universal_identity_chocofi_left_compilecheck
-  - board: xiao_ble
+  - board: nice_nano//zmk
     shield: chocofi_peripheral_right
     artifact-name: universal_identity_chocofi_right_compilecheck
