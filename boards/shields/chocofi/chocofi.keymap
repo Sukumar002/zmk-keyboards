@@ -7,11 +7,14 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Match Hana's runtime-editable hold-tap tuning, including tap-then-hold
- * key repeat and the all-position hold-trigger mask. */
+/* Chocofi-only responsiveness trial: resolve home-row Shift/modifiers at
+ * the next key press, rather than waiting for that key to be released.
+ * Keep quick-tap for tap-then-hold repeated letters/Backspace.
+ * Studio runtime settings may override these compiled defaults.
+ */
 &mt {
-    flavor = "balanced";
-    tapping-term-ms = <200>;
+    flavor = "hold-preferred";
+    tapping-term-ms = <180>;
     quick-tap-ms = <175>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -26,6 +29,9 @@
 };
 
 &lt {
+    flavor = "balanced";
+    tapping-term-ms = <180>;
+    quick-tap-ms = <175>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
