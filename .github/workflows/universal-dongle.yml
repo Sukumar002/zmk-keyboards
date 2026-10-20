@@ -10,6 +10,9 @@ on:
       - "config/west.yml"
       - "boards/shields/chocofi/**"
       - "boards/shields/hana/**"
+      - "src/universal_keymap_catalog.c"
+      - "CMakeLists.txt"
+      - "Kconfig"
   workflow_dispatch:
 
 concurrency:
