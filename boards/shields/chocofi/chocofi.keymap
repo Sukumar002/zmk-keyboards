@@ -52,6 +52,16 @@
 };
 
 / {
+    behaviors {
+        base_view_tog_chocofi: base_view_toggle_chocofi {
+            compatible = "zmk,behavior-base-view-toggle";
+            #binding-cells = <0>;
+            display-name = "BASE View Cycle";
+        };
+    };
+};
+
+/ {
     combos {
         compatible = "zmk,combos";
         combo_studio_unlock {
