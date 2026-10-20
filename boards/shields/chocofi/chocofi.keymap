@@ -1,4 +1,4 @@
-/* Initial Chocofi keymap imported from the supplied repository. SPDX-License-Identifier: MIT */
+/* Chocofi 5-column keymap with six thumbs. SPDX-License-Identifier: MIT */
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
@@ -12,7 +12,7 @@
         compatible = "zmk,combos";
         combo_studio_unlock {
             timeout-ms = <50>;
-            key-positions = <36 41>;
+            key-positions = <30 35>;
             bindings = <&studio_unlock>;
         };
     };
@@ -24,26 +24,26 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp Q         &kp Q         &kp W       &kp E       &kp R        &kp T        &kp Y      &kp U        &kp I       &kp O           &kp P            &kp P
-&mt LSHIFT A  &mt LSHIFT A  &mt LALT S  &mt LGUI D  &mt LCTRL F  &kp G        &kp H      &mt RCTRL J  &mt RGUI K  &mt LEFT_ALT L  &mt RSHIFT SEMI  &mt RSHIFT SEMI
-&kp Z         &kp Z         &kp X       &kp C       &kp V        &kp B        &kp N      &kp M        &kp COMMA   &kp DOT         &kp FSLH         &kp FSLH
+                &kp Q               &kp W               &kp E               &kp R               &kp T               &kp Y               &kp U               &kp I               &kp O               &kp P
+                &mt LSHIFT A        &mt LALT S          &mt LGUI D          &mt LCTRL F         &kp G               &kp H               &mt RCTRL J         &mt RGUI K          &mt LEFT_ALT L      &mt RSHIFT SEMI
+                &kp Z               &kp X               &kp C               &kp V               &kp B               &kp N               &kp M               &kp COMMA           &kp DOT             &kp FSLH
                                         &kp LGUI    &lt 1 RET    &kp SPACE    &lt 4 DEL  &lt 2 SPACE  &lt 3 BSPC
             >;
         };
         lower_layer {
             display-name = "Lower";
             bindings = <
-&kp N1          &kp NUMBER_1    &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5    &kp NUMBER_6  &kp N7    &kp N8        &kp N9     &kp N0         &kp N0
-&bt BT_SEL 2    &bt BT_SEL 0    &bt BT_SEL 1  &kp LEFT      &kp DOWN      &kp UP    &kp RIGHT     &kp HOME  &kp UP_ARROW  &kp END    &kp PAGE_UP    &trans
-&bt BT_CLR_ALL  &bt BT_CLR_ALL  &trans        &trans        &trans        &trans    &kp LGUI      &kp LEFT  &kp DOWN      &kp RIGHT  &kp PAGE_DOWN  &kp RALT
+                &kp NUMBER_1        &kp NUMBER_2        &kp NUMBER_3        &kp NUMBER_4        &kp N5              &kp NUMBER_6        &kp N7              &kp N8              &kp N9              &kp N0
+                &bt BT_SEL 0        &bt BT_SEL 1        &kp LEFT            &kp DOWN            &kp UP              &kp RIGHT           &kp HOME            &kp UP_ARROW        &kp END             &kp PAGE_UP
+                &bt BT_CLR_ALL      &trans              &trans              &trans              &trans              &kp LGUI            &kp LEFT            &kp DOWN            &kp RIGHT           &kp PAGE_DOWN
             >;
         };
         raise_layer {
             display-name = "Raise";
             bindings = <
-&kp EXCL  &kp F9  &kp F10  &kp F11  &kp F12  &kp F5      &kp F6    &kp F7    &kp LPAR   &kp RPAR  &trans  &trans
-&trans    &kp F5  &kp F6   &kp F7   &kp F8   &kp LBKT    &kp RBKT  &kp BSLH  &trans     &trans    &trans  &trans
-&trans    &kp F1  &kp F2   &kp F3   &kp F4   &kp PIPE    &kp LGUI  &trans    &kp SPACE  &kp RET   &trans  &kp RALT
+                &kp F9              &kp F10             &kp F11             &kp F12             &kp F5              &kp F6              &kp F7              &kp LPAR            &kp RPAR            &trans
+                &kp F5              &kp F6              &kp F7              &kp F8              &kp LBKT            &kp RBKT            &kp BSLH            &trans              &trans              &trans
+                &kp F1              &kp F2              &kp F3              &kp F4              &kp PIPE            &kp LGUI            &trans              &kp SPACE           &kp RET             &trans
             >;
         };
         ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4
