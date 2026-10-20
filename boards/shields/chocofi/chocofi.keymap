@@ -90,6 +90,28 @@
                 &kp F1              &kp F2              &kp F3              &kp F4              &kp PIPE            &kp LGUI            &trans              &kp SPACE           &kp RET             &trans
             >;
         };
+        /* Match Hana's SET and MOUSE capabilities while preserving Chocofi's
+         * 5-column physical layout and existing BASE/LOWER/RAISE bindings.
+         * Existing thumb layer-taps 3 and 4 now point at real layers.
+         */
+        set_layer {
+            display-name = "SET";
+            bindings = <
+                &bt_profile_shared 0 0  &bt_profile_shared 1 1  &bt_profile_shared 2 2  &bt_profile_shared 3 3  &bt_profile_shared 4 4   &bootloader  &base_view_tog_chocofi  &timeout_cycle_shared 1  &timeout_cycle_shared 0  &oled_tog_shared
+                &none                   &none                   &none                   &none                   &none                   &none        &none                   &none                    &none                    &none
+                &out OUT_TOG            &bt BT_CLR_ALL          &none                   &none                   &none                   &none        &none                   &none                    &none                    &tog_ls
+                                        &trans                  &trans                  &trans                  &trans                  &trans                  &trans
+            >;
+        };
+        mouse_layer {
+            display-name = "MOUSE";
+            bindings = <
+                &trans  &trans     &trans     &trans     &trans   &msc SCRL_LEFT  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN  &msc SCRL_RIGHT
+                &mkp LCLK  &mkp MCLK  &mkp RCLK  &trans  &trans   &trans          &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans
+                &trans  &trans     &trans     &trans     &trans   &trans          &trans          &trans          &trans          &trans
+                         &trans     &trans     &trans     &trans     &trans     &trans
+            >;
+        };
         ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4
     };
 };
