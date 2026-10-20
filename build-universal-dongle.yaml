@@ -1,0 +1,14 @@
+---
+# Baseline ONLY: two independent central builds on the SAME nRF52840 target.
+# These do not switch keyboards yet; compare memory usage before combining them.
+include:
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: universal_baseline_hana_128x64
+  - board: nice_nano//zmk
+    shield: chocofi_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: universal_baseline_chocofi_128x64
