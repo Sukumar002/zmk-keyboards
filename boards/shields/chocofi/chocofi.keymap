@@ -69,28 +69,7 @@
             key-positions = <30 35>;
             bindings = <&studio_unlock>;
         };
-        /* Hana 6-column -> Chocofi 5-column position translations.
-         * Hana [7,19] -> Chocofi [6,16] (U + J).
-         * Hana [9,21] -> Chocofi [8,18] (O + L).
-         * Hana [1,2]  -> Chocofi [0,1] (Q + W).
-         * Other Hana combos overlap the user's Studio-defined Chocofi combos;
-         * those are deliberately left untouched.
-         */
-        combo_hana_backspace {
-            timeout-ms = <50>;
-            key-positions = <6 16>;
-            bindings = <&mt LALT BSPC>;
-        };
-        combo_hana_delete {
-            timeout-ms = <50>;
-            key-positions = <8 18>;
-            bindings = <&mt RGUI DEL>;
-        };
-        combo_hana_escape {
-            timeout-ms = <50>;
-            key-positions = <0 1>;
-            bindings = <&kp ESC>;
-        };
+
     };
 };
 
