@@ -19,3 +19,10 @@ config LAYOUT_SHIFT_PERSISTENT_STATE
     select SETTINGS
 
 endif
+
+config UNIVERSAL_DONGLE_CATALOG
+    bool "Compile experimental dual keyboard configuration catalogue"
+    default n
+    help
+      Data-only Hana/Chocofi Studio snapshot catalogue for memory sizing.
+      Does not change BLE routing or ZMK's active keymap.
