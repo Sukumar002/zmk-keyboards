@@ -1,0 +1,24 @@
+name: "Universal Dongle - Baseline"
+
+on:
+  push:
+    branches:
+      - experiment/universal-dongle
+    paths:
+      - "build-universal-dongle.yaml"
+      - ".github/workflows/universal-dongle.yml"
+      - "config/west.yml"
+      - "boards/shields/chocofi/**"
+      - "boards/shields/hana/**"
+  workflow_dispatch:
+
+concurrency:
+  group: universal-dongle-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  baseline:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-universal-dongle.yaml
+      archive_name: universal-dongle-baselines
