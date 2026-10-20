@@ -23,3 +23,8 @@ target_sources(app PRIVATE
 target_sources(app PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/src/behavior_base_view_toggle.c
 )
+
+# Experimental data-only dual-keymap memory proof; disabled in normal builds.
+target_sources_ifdef(CONFIG_UNIVERSAL_DONGLE_CATALOG app PRIVATE
+  ${CMAKE_CURRENT_LIST_DIR}/src/universal_keymap_catalog.c
+)
