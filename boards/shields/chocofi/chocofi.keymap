@@ -13,8 +13,9 @@
  * Studio runtime settings may override these compiled defaults.
  */
 &mt {
-    flavor = "hold-preferred";
-    tapping-term-ms = <180>;
+    flavor = "balanced";
+    tapping-term-ms = <240>;
+    require-prior-idle-ms = <80>;
     quick-tap-ms = <175>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -30,7 +31,7 @@
 
 &lt {
     flavor = "balanced";
-    tapping-term-ms = <180>;
+    tapping-term-ms = <200>;
     quick-tap-ms = <175>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -59,6 +60,34 @@
 
 / {
     behaviors {
+        /* Shift keys get positional opposite-hand triggering; other mod-taps
+         * retain the Studio-editable &mt behaviour for combos and home row.
+         * Retain 175ms quick tap for tap-then-hold repeat.
+         */
+        chocofi_shift_left: chocofi_shift_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <240>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <80>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 33 34 35>;
+            hold-trigger-on-release;
+        };
+
+        chocofi_shift_right: chocofi_shift_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <240>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <80>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
+            hold-trigger-on-release;
+        };
+
         base_view_tog_chocofi: base_view_toggle_chocofi {
             compatible = "zmk,behavior-base-view-toggle";
             #binding-cells = <0>;
@@ -86,7 +115,7 @@
             display-name = "Base";
             bindings = <
                 &kp Q               &kp W               &kp E               &kp R               &kp T               &kp Y               &kp U               &kp I               &kp O               &kp P
-                &mt LSHIFT A        &mt LALT S          &mt LGUI D          &mt LCTRL F         &kp G               &kp H               &mt RCTRL J         &mt RGUI K          &mt LEFT_ALT L      &mt RSHIFT SEMI
+                &chocofi_shift_left LSHIFT A  &mt LALT S          &mt LGUI D          &mt LCTRL F         &kp G               &kp H               &mt RCTRL J         &mt RGUI K          &mt LEFT_ALT L      &chocofi_shift_right RSHIFT SEMI
                 &kp Z               &kp X               &kp C               &kp V               &kp B               &kp N               &kp M               &kp COMMA           &kp DOT             &kp FSLH
                                         &kp LGUI    &lt 1 RET    &kp SPACE    &lt 4 DEL  &lt 2 SPACE  &lt 3 BSPC
             >;
