@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: MIT
  */
 #include <zephyr/init.h>
-#include <zephyr/logging/log.h>
+#include <zephyr/sys/printk.h>
 #include <stdint.h>
-LOG_MODULE_REGISTER(universal_catalog, LOG_LEVEL_INF);
+
 struct ud_catalog_binding { uint8_t behavior; uint32_t p1; uint32_t p2; };
 struct ud_catalog_combo { uint8_t behavior; uint32_t p1; uint32_t p2; uint8_t count; uint8_t key1; uint8_t key2; uint16_t timeout; };
 static const char *const ud_behavior_names[] = {"Layer-Tap","Key Press","Mod-Tap","Studio Unlock","Transparent","Toggle Layer","None","bt_profile","Bootloader","Output Selection","Bluetooth","Mouse Scroll","Mouse Move","Mouse Key Press",""};
@@ -49,7 +49,7 @@ static uint32_t ud_catalog_checksum(void) {
  return s;
 }
 static int ud_catalog_probe(void) {
- LOG_INF("Universal keymap CATALOG ONLY: Hana 6x46 + %u combos, Chocofi 4x40 + %u combos; checksum %08x",9,6,ud_catalog_checksum());
+ printk("Universal keymap CATALOG ONLY: Hana 6x46 + %u combos, Chocofi 4x40 + %u combos; checksum %08x\\n",9,6,ud_catalog_checksum());
  return 0;
 }
 SYS_INIT(ud_catalog_probe, APPLICATION, 95);
