@@ -1,5 +1,5 @@
 ---
-# Isolated reference/identity/onboarding compile checks only. These are NOT universal firmware.
+# Isolated reference/identity/onboarding/router-event compile checks only. These are NOT universal firmware.
 include:
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x64 dongle_display
