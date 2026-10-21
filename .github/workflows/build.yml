@@ -1,39 +1,6 @@
 name: "Build Hana Firmware"
 
 on:
-  push:
-    branches:
-      - main
-      - multi-board-baseline
-    paths:
-      - "boards/shields/hana/**"
-      - "boards/shields/common/**"
-      - "build-hana.yaml"
-      - ".github/workflows/hana.yml"
-      - "config/**"
-      - "snippets/**"
-      - "src/**"
-      - "dts/**"
-      - "layout_shift/**"
-      - "zephyr/**"
-      - "CMakeLists.txt"
-      - "Kconfig"
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "boards/shields/hana/**"
-      - "boards/shields/common/**"
-      - "build-hana.yaml"
-      - ".github/workflows/hana.yml"
-      - "config/**"
-      - "snippets/**"
-      - "src/**"
-      - "dts/**"
-      - "layout_shift/**"
-      - "zephyr/**"
-      - "CMakeLists.txt"
-      - "Kconfig"
   workflow_dispatch:
 
 concurrency:
