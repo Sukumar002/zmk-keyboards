@@ -35,8 +35,5 @@ jobs:
           python-version: "3.x"
       - name: Fetch integration source branch
         run: git clone --depth 1 --branch project/universal-dongle-routing https://github.com/Sukumar002/zmk.git zmk-source
-      - name: Record exact integration source revision
-        run: |
-          echo "Integration source commit: $(git -C zmk-source rev-parse HEAD)"
       - name: Run configuration and source audit
         run: python scripts/validate_universal_dongle_config.py
