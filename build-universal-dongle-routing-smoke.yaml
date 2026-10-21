@@ -23,3 +23,9 @@ include:
     shield: chocofi_peripheral_right
     cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=2 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=2
     artifact-name: chocofi_right_identity
+  - board: nice_nano//zmk
+    shield: settings_reset
+    artifact-name: settings_reset_nice_nano
+  - board: xiao_ble//zmk
+    shield: settings_reset
+    artifact-name: settings_reset_xiao_ble
