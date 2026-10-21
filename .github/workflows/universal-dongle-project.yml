@@ -6,10 +6,8 @@ on:
       - project/universal-dongle-isolated
     paths:
       - "build-universal-dongle-project.yaml"
-      - ".github/workflows/universal-dongle-project.yml"
       - "config/west.yml"
       - "docs/universal-dongle/**"
-      - "boards/shields/universal_dongle/**"
   workflow_dispatch:
 
 concurrency:

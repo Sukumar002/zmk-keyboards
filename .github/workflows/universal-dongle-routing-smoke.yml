@@ -1,0 +1,23 @@
+name: "Universal Dongle Routing Smoke Build"
+
+on:
+  push:
+    branches:
+      - project/universal-dongle-isolated
+    paths:
+      - "build-universal-dongle-routing-smoke.yaml"
+      - ".github/workflows/universal-dongle-routing-smoke.yml"
+      - "config/west.yml"
+      - "boards/shields/universal_dongle/**"
+  workflow_dispatch:
+
+concurrency:
+  group: universal-dongle-routing-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke-build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-universal-dongle-routing-smoke.yaml
+      archive_name: universal-dongle-routing-smoke-not-for-flashing
