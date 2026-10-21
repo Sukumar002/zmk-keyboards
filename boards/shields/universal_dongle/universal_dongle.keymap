@@ -3,6 +3,32 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    behaviors {
+        universal_switch: universal_switch {
+            compatible = "zmk,behavior-universal-dongle-switch";
+            #binding-cells = <1>;
+            display-name = "Switch Keyboard Profile";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        switch_to_chocofi {
+            timeout-ms = <50>;
+            key-positions = <0 11>;
+            layers = <0>;
+            bindings = <&universal_switch 2>;
+        };
+
+        switch_to_hana {
+            timeout-ms = <50>;
+            key-positions = <39 43>;
+            layers = <1>;
+            bindings = <&universal_switch 1>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 

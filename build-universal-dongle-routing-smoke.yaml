@@ -4,5 +4,5 @@ include:
   - board: nice_nano//zmk
     shield: universal_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_CENTRAL_IDENTITY=y -DCONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS=4 -DCONFIG_BT_MAX_CONN=7 -DCONFIG_BT_MAX_PAIRED=7
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_CENTRAL_IDENTITY=y -DCONFIG_ZMK_BEHAVIOR_UNIVERSAL_DONGLE_SWITCH=y -DCONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS=4 -DCONFIG_BT_MAX_CONN=7 -DCONFIG_BT_MAX_PAIRED=7
     artifact-name: universal_dongle_routing_smoke_not_for_flashing
