@@ -1,0 +1,34 @@
+---
+# Isolated project reference/identity builds only. These are NOT universal firmware.
+include:
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: project_reference_hana_128x64
+  - board: nice_nano//zmk
+    shield: chocofi_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: project_reference_chocofi_128x64
+  - board: nice_nano//zmk
+    shield: chocofi_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_CENTRAL_IDENTITY=y -DCONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS=4 -DCONFIG_BT_MAX_CONN=7 -DCONFIG_BT_MAX_PAIRED=7
+    artifact-name: project_identity_central_diagnostic
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_left
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=1 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=1
+    artifact-name: project_identity_hana_left_diagnostic
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_right
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=1 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=2
+    artifact-name: project_identity_hana_right_diagnostic
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_left
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=2 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=1
+    artifact-name: project_identity_chocofi_left_diagnostic
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_right
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=2 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=2
+    artifact-name: project_identity_chocofi_right_diagnostic
