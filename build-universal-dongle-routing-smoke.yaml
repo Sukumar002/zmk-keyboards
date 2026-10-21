@@ -1,5 +1,6 @@
 ---
 # Integration compile matrix only. All five artifacts are diagnostic and NOT for flashing.
+# Rebuild after changes to the universal-dongle integration source; artifacts are source-revision specific.
 include:
   - board: nice_nano//zmk
     shield: universal_dongle_128x64 dongle_display
