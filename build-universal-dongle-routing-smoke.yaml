@@ -1,5 +1,5 @@
 ---
-# Routing integration smoke build only. Diagnostic artifact; never flash as final firmware.
+# Routing integration smoke build only, including the custom switch behavior. Diagnostic artifact; never flash as final firmware.
 include:
   - board: nice_nano//zmk
     shield: universal_dongle_128x64 dongle_display
