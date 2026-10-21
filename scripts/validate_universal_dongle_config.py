@@ -28,7 +28,7 @@ router_tests = read(zmk / "tests/universal_dongle/router_test.c")
 
 artifacts = re.findall(r"^\s*artifact-name:\s*(\S+)\s*$", matrix, re.M)
 check("exactly five firmware images", len(artifacts) == 5, f"found {len(artifacts)}")
-check("artifact labels remain non-flashable", len(artifacts) == 5 and all("NOT_FOR_FLASHING" in a for a in artifacts), ", ".join(artifacts))
+check("five hardware-test candidate labels are present", len(artifacts) == 5 and all("NOT_FOR_FLASHING" not in a for a in artifacts), ", ".join(artifacts))
 check("artifact names are unique", len(set(artifacts)) == len(artifacts), ", ".join(artifacts))
 
 for token, label in [
