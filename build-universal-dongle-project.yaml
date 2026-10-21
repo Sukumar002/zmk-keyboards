@@ -1,5 +1,5 @@
 ---
-# Isolated project reference/identity builds only. These are NOT universal firmware.
+# Isolated reference/identity/onboarding compile checks only. These are NOT universal firmware.
 include:
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x64 dongle_display
@@ -15,7 +15,7 @@ include:
     shield: chocofi_central_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_CENTRAL_IDENTITY=y -DCONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS=4 -DCONFIG_BT_MAX_CONN=7 -DCONFIG_BT_MAX_PAIRED=7
-    artifact-name: project_identity_central_diagnostic
+    artifact-name: project_identity_central_onboarding_diagnostic
   - board: xiao_ble//zmk
     shield: hana_peripheral_left
     cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=1 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=1
