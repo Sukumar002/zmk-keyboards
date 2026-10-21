@@ -247,7 +247,7 @@
                 &trans    &kp Q    &kp W    &kp E    &kp R    &kp T    &kp Y    &kp U    &kp I    &kp O    &kp P    &trans
                 &trans    &mt LSHIFT A    &mt LALT S    &mt LGUI D    &mt LCTRL F    &kp G    &kp H    &mt RCTRL J    &mt RGUI K    &mt LEFT_ALT L    &mt RSHIFT SEMI    &trans
                 &trans    &kp Z    &kp X    &kp C    &kp V    &kp B    &trans    &trans    &kp N    &kp M    &kp COMMA    &kp DOT    &kp FSLH    &trans
-                &trans    &kp LGUI    &lt 6 RET    &kp SPACE    &trans    &lt 13 DEL    &lt 7 SPACE    &lt 12 BSPC
+                &trans    &kp LGUI    &lt 6 RET    &kp SPACE    &trans    &lt 9 DEL    &lt 7 SPACE    &lt 8 BSPC
             >;
         };
 
