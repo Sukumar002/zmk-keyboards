@@ -1,0 +1,24 @@
+name: "Universal Dongle Project - Isolated Diagnostics"
+
+on:
+  push:
+    branches:
+      - project/universal-dongle-isolated
+    paths:
+      - "build-universal-dongle-project.yaml"
+      - ".github/workflows/universal-dongle-project.yml"
+      - "config/west.yml"
+      - "docs/universal-dongle/**"
+      - "boards/shields/universal_dongle/**"
+  workflow_dispatch:
+
+concurrency:
+  group: universal-dongle-project-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  diagnostics:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-universal-dongle-project.yaml
+      archive_name: universal-dongle-project-diagnostics
