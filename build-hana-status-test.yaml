@@ -1,0 +1,6 @@
+include:
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: hana_dongle_128x64_status_test

@@ -1,0 +1,14 @@
+name: "Build Hana Live Status RPC Test"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-hana-status-test.yaml
+      archive_name: hana-status-test-firmware
