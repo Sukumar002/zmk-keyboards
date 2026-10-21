@@ -21,8 +21,8 @@
             display-name = "CHOCOFI_BASE";
             bindings = <
                 &trans     &kp Q      &kp W      &kp E      &kp R      &kp T      &kp Y      &kp U      &kp I      &kp O      &kp P      &trans
-                &trans     &trans     &kp A      &kp S      &kp D      &kp F      &kp G      &kp H      &kp J      &kp K      &kp L      &trans
-                &trans     &trans     &kp Z      &kp X      &kp C      &kp V      &kp B      &trans     &trans     &kp N      &kp M      &kp COMMA
+                &trans     &kp A      &kp S      &kp D      &kp F      &kp G      &kp H      &kp J      &kp K      &kp L      &kp SEMI   &trans
+                &trans     &kp Z      &kp X      &kp C      &kp V      &kp B      &trans     &trans     &kp N      &kp M      &kp COMMA  &kp DOT
                                            &kp FSLH   &trans     &trans     &kp LGUI   &kp RET
                                            &kp SPACE  &trans     &kp DEL    &kp SPACE  &kp BSPC
             >;
