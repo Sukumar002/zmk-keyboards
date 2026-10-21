@@ -1,4 +1,4 @@
-name: "Universal Dongle Five-Image Integration Build (Not for Flashing)"
+name: "Universal Dongle Five-Image Hardware-Test Candidate Build"
 
 on:
   push:
@@ -23,4 +23,4 @@ jobs:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       build_matrix_path: build-universal-dongle-routing-smoke.yaml
-      archive_name: universal-dongle-five-image-integration-NOT-FOR-FLASHING
+      archive_name: universal-dongle-five-image-hardware-test-candidate
