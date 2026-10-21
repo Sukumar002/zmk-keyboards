@@ -42,6 +42,12 @@ include:
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
 
+  # TEMPORARY OLED DIAGNOSTIC - flash only to dongle; not a release build
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x32_test dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+
   # Clean peripheral baseline while split pairing is being verified
   - board: xiao_ble//zmk
     shield: hana_peripheral_left
