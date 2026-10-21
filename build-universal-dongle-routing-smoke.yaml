@@ -1,8 +1,24 @@
 ---
-# Routing integration smoke build only, including the custom switch behavior. Diagnostic artifact; never flash as final firmware. Compile retry after central work-item ordering fix.
+# Integration compile matrix only. All five artifacts are diagnostic and NOT for flashing.
 include:
   - board: nice_nano//zmk
     shield: universal_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_CENTRAL_IDENTITY=y -DCONFIG_ZMK_BEHAVIOR_UNIVERSAL_DONGLE_SWITCH=y -DCONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS=4 -DCONFIG_BT_MAX_CONN=7 -DCONFIG_BT_MAX_PAIRED=7
-    artifact-name: universal_dongle_routing_smoke_not_for_flashing
+    artifact-name: universal_dongle_128x64_NOT_FOR_FLASHING
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_left
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=1 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=1
+    artifact-name: hana_left_identity_NOT_FOR_FLASHING
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_right
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=1 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=2
+    artifact-name: hana_right_identity_NOT_FOR_FLASHING
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_left
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=2 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=1
+    artifact-name: chocofi_left_identity_NOT_FOR_FLASHING
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_right
+    cmake-args: -DCONFIG_ZMK_UNIVERSAL_DONGLE_PERIPHERAL_IDENTITY=y -DCONFIG_ZMK_UNIVERSAL_DONGLE_BOARD_ID=2 -DCONFIG_ZMK_UNIVERSAL_DONGLE_SIDE_ID=2
+    artifact-name: chocofi_right_identity_NOT_FOR_FLASHING

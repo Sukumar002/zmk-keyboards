@@ -1,4 +1,4 @@
-name: "Universal Dongle Routing Smoke Build"
+name: "Universal Dongle Five-Image Integration Build (Not for Flashing)"
 
 on:
   push:
@@ -9,15 +9,18 @@ on:
       - ".github/workflows/universal-dongle-routing-smoke.yml"
       - "config/west.yml"
       - "boards/shields/universal_dongle/**"
+      - "boards/shields/hana/**"
+      - "boards/shields/chocofi/**"
+      - "boards/shields/common/**"
   workflow_dispatch:
 
 concurrency:
-  group: universal-dongle-routing-smoke-${{ github.ref }}
+  group: universal-dongle-integration-\${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  smoke-build:
+  integration-build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       build_matrix_path: build-universal-dongle-routing-smoke.yaml
-      archive_name: universal-dongle-routing-smoke-not-for-flashing
+      archive_name: universal-dongle-five-image-integration-NOT-FOR-FLASHING
