@@ -9,6 +9,14 @@ Status: implementation acceptance contract; not evidence that these behaviors ar
 - Switching the active board must atomically select the corresponding base layer while preserving the shared layer definitions and runtime settings.
 - Native key positions must be translated through the board-specific position map before events reach the common keymap. The two matrices must not be treated as interchangeable row-major arrays.
 
+## Shared combos
+
+- Use one common combo catalogue for both boards, alongside the shared non-base layers.
+- Combo intent and bindings should be shared where the same action is meaningful on both boards.
+- Because Hana and Chocofi have different physical matrix sizes and native position numbering, each combo must declare or resolve board-specific physical positions that map to the same intended logical keys. Never copy raw position numbers between boards without translating and verifying them.
+- Combos that depend on a key or thumb position absent on one board must be adapted to an equivalent position or explicitly marked unsupported for that board; they must not silently trigger on unrelated keys.
+- Verify common combos on HBASE and CBASE and on shared layers, including simultaneous key presses near a profile switch. Pending combo state from the old active board must be cancelled/drained during handover so it cannot trigger after the new board becomes active.
+
 ## Switching safety
 
 - A switch request may originate from either keyboard, including when that keyboard is currently inactive.
@@ -32,9 +40,10 @@ Do not label a build as a flash candidate until all of the following are demonst
 1. The central firmware compiles with the board-specific base-layer selection integrated into the live routing path.
 2. The inactive keyboard can request activation without first becoming the active input source.
 3. A switch releases held keyboard and mouse usages before the new board is admitted.
-4. HBASE/CBASE changes correctly while shared layers remain available on both boards.
-5. The OLED identity label follows the active board.
-6. OLED battery readings include only the active keyboard's connected halves.
-7. Automated routing tests and the complete firmware build pass.
+4. HBASE/CBASE changes correctly while shared layers and the common combo catalogue remain available on both boards.
+5. Common combos map to the correct physical positions on both boards and do not leak pending state across switches.
+6. The OLED identity label follows the active board.
+7. OLED battery readings include only the active keyboard's connected halves.
+8. Automated routing tests and the complete firmware build pass.
 
 The existing policy-model tests and identity diagnostic builds alone do not satisfy these hardware acceptance criteria. Do not flash a diagnostic/reference artifact as universal firmware.
