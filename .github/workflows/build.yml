@@ -11,5 +11,5 @@ jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
-      build_matrix_path: build-hana.yaml
-      archive_name: hana-firmware
+      build_matrix_path: build-hana-status-test.yaml
+      archive_name: hana-status-test-firmware
