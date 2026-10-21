@@ -1,13 +1,9 @@
-name: "Universal Dongle Project - Isolated Diagnostics"
+name: "Universal Dongle Project - Manual Diagnostics Only"
 
 on:
-  push:
-    branches:
-      - project/universal-dongle-isolated
-    paths:
-      - "build-universal-dongle-project.yaml"
-      - "config/west.yml"
-      - "docs/universal-dongle/**"
+  # These reference builds are not flashable universal-dongle firmware.
+  # Keep them opt-in so normal project/docs changes generate only the
+  # seven-image hardware candidate from universal-dongle-routing-smoke.yml.
   workflow_dispatch:
 
 concurrency:
