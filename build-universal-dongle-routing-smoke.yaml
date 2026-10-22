@@ -1,6 +1,7 @@
 ---
-# Five-image candidate for controlled first hardware validation, not a production release.
+# Seven-image candidate for controlled first hardware validation, not a production release.
 # Rebuild after changes to the universal-dongle integration source; artifacts are source-revision specific.
+# Includes the Q+P inactive-profile switch detector from the pinned universal-routing firmware branch.
 # Includes settings_reset builds for both MCU families; reset each controller before flashing its normal image.
 include:
   - board: nice_nano//zmk
