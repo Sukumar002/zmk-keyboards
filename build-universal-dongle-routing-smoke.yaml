@@ -3,6 +3,7 @@
 # Rebuild after changes to the universal-dongle integration source; artifacts are source-revision specific.
 # Rebuild requested 2026-10-22 to include OLED icon fixes from zmk commit daa24e82.
 # OLED font build fix is in zmk-dongle-display commit e1035575.
+# Rebuild requested 2026-10-22 for the keyboard icon, uppercase compact identity flash, six-character layer boxes, and dedicated battery glyph fixes.
 # Includes the Q+P inactive-profile switch detector from the pinned universal-routing firmware branch.
 # Includes settings_reset builds for both MCU families; reset each controller before flashing its normal image.
 include:
