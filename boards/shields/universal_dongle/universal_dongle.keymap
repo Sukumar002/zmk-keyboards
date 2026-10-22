@@ -146,14 +146,14 @@
 
         switch_to_chocofi {
             timeout-ms = <50>;
-            key-positions = <0 11>;
+            key-positions = <1 10>;
             layers = <0 1 2 3 4 8 9 10 11>;
             bindings = <&universal_switch 2>;
         };
 
         switch_to_hana {
             timeout-ms = <50>;
-            key-positions = <40 44>;
+            key-positions = <1 10>;
             layers = <5 6 7 12 13 14 15>;
             bindings = <&universal_switch 1>;
         };
