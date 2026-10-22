@@ -1,5 +1,5 @@
 manifest:
-  # Active keyboard OLED status includes startup-safe 2.5-second name timeout.
+  # Active keyboard OLED layout keeps KB identity clear of the two battery readings.
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
