@@ -1,5 +1,5 @@
 manifest:
-  # Active keyboard OLED layout keeps KB identity clear of the two battery readings.
+  # OLED shows keyboard identity plus persistent vertically stacked split battery rows.
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
