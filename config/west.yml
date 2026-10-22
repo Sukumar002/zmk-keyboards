@@ -1,5 +1,5 @@
 manifest:
-  # OLED uses the timeout keyboard glyph and retains four stacked half-battery rows.
+  # OLED uses timeout keyboard glyph and retains four stacked half-battery rows (audit fix).
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
