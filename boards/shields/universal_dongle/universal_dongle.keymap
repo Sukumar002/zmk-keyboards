@@ -165,6 +165,17 @@
             layers = <5 6 7 12 13 14 15>;
             bindings = <&studio_unlock>;
         };
+
+        /* Chocofi BASE_C view cycle: Z + / in the shared Hana-aligned
+         * position map (positions 25 and 36). Keep this combo scoped to
+         * BASE_C so it doesn't shadow Hana's existing SET-layer control.
+         */
+        combo_base_view_cycle_chocofi {
+            timeout-ms = <50>;
+            key-positions = <25 36>;
+            layers = <1>;
+            bindings = <&base_view_tog>;
+        };
     };
 };
 
