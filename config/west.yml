@@ -1,3 +1,4 @@
+# Rebuild candidate when pinned universal-dongle display branch receives UI alignment fixes.
 manifest:
   # OLED uses timeout keyboard glyph and retains four stacked half-battery rows (audit fix).
   remotes:
