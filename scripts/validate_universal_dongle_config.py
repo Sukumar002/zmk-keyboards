@@ -52,8 +52,8 @@ for token, label in [
 ]:
     check(f"correct {label}", token in matrix, token)
 
-check("keymap has Hana profile layer", 'display-name = "HANA_BASE"' in keymap)
-check("keymap has Chocofi profile layer", 'display-name = "CHOCOFI_BASE"' in keymap)
+check("keymap has Hana profile layer", 'display-name = "Base_H"' in keymap)
+check("keymap has Chocofi profile layer", 'display-name = "Base_C"' in keymap)
 check("Hana-to-Chocofi Q+P fallback combo uses Q/P positions", "key-positions = <1 10>;" in keymap and "bindings = <&universal_switch 2>;" in keymap)
 check("Chocofi-to-Hana Q+P fallback combo uses Q/P positions", "key-positions = <1 10>;" in keymap and "bindings = <&universal_switch 1>;" in keymap)
 check("west manifest tracks the isolated OLED implementation branch", "revision: project/universal-dongle-oled-status" in west)
@@ -70,7 +70,7 @@ check("central requests BLE encryption", "bt_conn_set_security(conn, BT_SECURITY
 check("identity reads wait for encrypted link", "bt_conn_get_security(conn) < BT_SECURITY_L2" in central and "split_central_start_identity_read" in central)
 check("OLED keyboard name uses 2.5-second visibility", "UD_OLED_NAME_MS 2500" in oled)
 check("OLED keyboard indicator includes active keyboard identity", "keyboard_icon_buffer" in oled and "active_board_id" in oled)
-check("OLED renders four vertically stacked per-half battery labels", "battery_rows[4]" in oled and "battery_levels[1][1], battery_levels[1][2], battery_levels[2][1], battery_levels[2][2]" in oled)
+check("OLED renders two active-board battery rows", "battery_rows[2]" in oled and "battery_levels[board][1], battery_levels[board][2]" in oled and "i < 2" in oled)
 check("battery updates are routed by validated board and side identity", "zmk_universal_oled_status_set_battery(slot->identity[1], slot->identity[2], battery_level)" in central)
 
 check("identity read is resumed on security change", "Failed to start universal peripheral identity read after encryption" in central)
