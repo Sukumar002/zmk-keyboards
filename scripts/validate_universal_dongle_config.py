@@ -53,8 +53,8 @@ for token, label in [
 
 check("keymap has Hana profile layer", 'display-name = "HANA_BASE"' in keymap)
 check("keymap has Chocofi profile layer", 'display-name = "CHOCOFI_BASE"' in keymap)
-check("Hana-to-Chocofi switch combo exists", "key-positions = <0 11>;" in keymap and "bindings = <&universal_switch 2>;" in keymap)
-check("Chocofi-to-Hana switch combo exists", "key-positions = <40 44>;" in keymap and "bindings = <&universal_switch 1>;" in keymap)
+check("Hana-to-Chocofi Q+P fallback combo uses Q/P positions", "key-positions = <1 10>;" in keymap and "bindings = <&universal_switch 2>;" in keymap)
+check("Chocofi-to-Hana Q+P fallback combo uses Q/P positions", "key-positions = <1 10>;" in keymap and "bindings = <&universal_switch 1>;" in keymap)
 check("west manifest tracks the audited integration branch", "revision: project/universal-dongle-routing" in west)
 
 match = re.search(r"static const uint8_t chocofi_to_universal\[UD_CHOCOFI_POSITION_COUNT\]\s*=\s*\{(.*?)\};", router, re.S)
