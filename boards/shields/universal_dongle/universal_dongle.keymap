@@ -185,6 +185,7 @@
     keymap {
         compatible = "zmk,keymap";
 
+        // Shared layers follow the two profile-specific bases; keep IDs stable for routing.
         base_layer {
             display-name = "Base_H";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
