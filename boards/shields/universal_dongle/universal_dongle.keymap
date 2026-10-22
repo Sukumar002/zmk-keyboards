@@ -148,14 +148,14 @@
         switch_to_chocofi {
             timeout-ms = <50>;
             key-positions = <1 10>;
-            layers = <0 1 2 3 4 8 9 10 11>;
+            layers = <0 1 2 3 4 5 6 7 8 9 10 11 12 13>;
             bindings = <&universal_switch 2>;
         };
 
         switch_to_hana {
             timeout-ms = <50>;
             key-positions = <1 10>;
-            layers = <5 6 7 12 13 14 15>;
+            layers = <0 1 2 3 4 5 6 7 8 9 10 11 12 13>;
             bindings = <&universal_switch 1>;
         };
 
@@ -196,13 +196,13 @@
             >;
         };
 
-                chocofi_base_layer {
+        chocofi_base_layer {
             display-name = "Base_C";
             bindings = <
                 &none     &kp Q    &kp W    &kp E    &kp R    &kp T    &kp Y    &kp U    &kp I    &kp O    &kp P    &none
                 &none     &mt LSHIFT A    &mt LALT S    &mt LGUI D    &mt LCTRL F    &kp G    &kp H    &mt RCTRL J    &mt RGUI K    &mt LEFT_ALT L    &mt RSHIFT SEMI    &none
-                &none     &kp Z    &kp X    &kp C    &kp V    &kp B    &trans    &trans    &kp N    &kp M    &kp COMMA    &kp DOT    &kp FSLH    &none
-                &trans    &kp LGUI    &lt NUM RET    &kp SPACE    &trans    &lt MOUSE DEL    &lt NAV SPACE    &none
+                &none     &kp Z    &kp X    &kp C    &kp V    &kp B    &none     &none     &kp N    &kp M    &kp COMMA    &kp DOT    &kp FSLH    &none
+                &none     &kp LGUI    &lt NUM RET    &kp SPACE    &none     &lt MOUSE DEL    &lt NAV SPACE    &lt SET BSPC
             >;
         };
 
