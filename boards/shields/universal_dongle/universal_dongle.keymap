@@ -203,7 +203,7 @@
                 &none     &kp Q    &kp W    &kp E    &kp R    &kp T    &kp Y    &kp U    &kp I    &kp O    &kp P    &none
                 &none     &mt LSHIFT A    &mt LALT S    &mt LGUI D    &mt LCTRL F    &kp G    &kp H    &mt RCTRL J    &mt RGUI K    &mt LEFT_ALT L    &mt RSHIFT SEMI    &none
                 &none     &kp Z    &kp X    &kp C    &kp V    &kp B    &none     &none     &kp N    &kp M    &kp COMMA    &kp DOT    &kp FSLH    &none
-                &none     &kp LGUI    &lt NUM RET    &kp SPACE    &none     &lt MOUSE DEL    &lt NAV SPACE    &lt SET BSPC
+                &none     &mt LALT BSPC    &mt LGUI RET    &lt NUM SPACE    &none    &lt NAV RET    &mt LGUI SPACE    &mt LALT DEL
             >;
         };
 
@@ -251,6 +251,7 @@
                            &trans             &trans        &trans        &trans                                  &trans          &trans          &trans          &trans
             >;
         };
+
 
 
 
