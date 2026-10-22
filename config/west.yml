@@ -1,5 +1,5 @@
 manifest:
-  # The universal dongle OLED status implementation is isolated in its own ZMK branch.
+  # Active keyboard OLED status includes startup-safe 2.5-second name timeout.
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
