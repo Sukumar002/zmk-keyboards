@@ -70,7 +70,7 @@ check("central requests BLE encryption", "bt_conn_set_security(conn, BT_SECURITY
 check("identity reads wait for encrypted link", "bt_conn_get_security(conn) < BT_SECURITY_L2" in central and "split_central_start_identity_read" in central)
 check("OLED keyboard name uses 2.5-second visibility", "UD_OLED_NAME_MS 2500" in oled)
 check("OLED keyboard indicator includes active keyboard identity", "keyboard_icon_buffer" in oled and "active_board_id" in oled)
-check("OLED renders exactly two active-side battery labels", "battery_left" in oled and "battery_right" in oled and "battery_levels[1][1], battery_levels[1][2], battery_levels[2][1], battery_levels[2][2]" in oled and "battery_rows[4]" in oled and "battery_levels[1][1], battery_levels[1][2], battery_levels[2][1], battery_levels[2][2]" in oled)
+check("OLED renders four vertically stacked per-half battery labels", "battery_rows[4]" in oled and "battery_levels[1][1], battery_levels[1][2], battery_levels[2][1], battery_levels[2][2]" in oled)
 check("battery updates are routed by validated board and side identity", "zmk_universal_oled_status_set_battery(slot->identity[1], slot->identity[2], battery_level)" in central)
 
 check("identity read is resumed on security change", "Failed to start universal peripheral identity read after encryption" in central)
