@@ -1,5 +1,5 @@
 manifest:
-  # OLED shows keyboard identity plus persistent vertically stacked split battery rows.
+  # OLED uses the timeout keyboard glyph and retains four stacked half-battery rows.
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
