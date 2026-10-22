@@ -52,12 +52,28 @@
 };
 
 / {
+    behaviors {
+        base_view_tog: base_view_toggle {
+            compatible = "zmk,behavior-base-view-toggle";
+            #binding-cells = <0>;
+            display-name = "BASE View Cycle";
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
         combo_studio_unlock {
             timeout-ms = <50>;
             key-positions = <30 35>;
             bindings = <&studio_unlock>;
+        };
+        /* Cycle BASE OLED view without sacrificing a normal typing key.
+         * Positions 20 and 29 are the bottom-row outer keys (Z and /).
+         */
+        combo_base_view_cycle {
+            timeout-ms = <50>;
+            key-positions = <20 29>;
+            bindings = <&base_view_tog>;
         };
     };
 };
