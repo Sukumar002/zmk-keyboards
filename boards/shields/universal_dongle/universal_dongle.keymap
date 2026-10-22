@@ -161,7 +161,7 @@
 
         combo_studio_unlock_chocofi {
             timeout-ms = <50>;
-            key-positions = <39 45>;
+            key-positions = <39 44>;
             layers = <5 6 7 12 13 14 15>;
             bindings = <&studio_unlock>;
         };
@@ -203,7 +203,7 @@
                 &none     &kp Q    &kp W    &kp E    &kp R    &kp T    &kp Y    &kp U    &kp I    &kp O    &kp P    &none
                 &none     &mt LSHIFT A    &mt LALT S    &mt LGUI D    &mt LCTRL F    &kp G    &kp H    &mt RCTRL J    &mt RGUI K    &mt LEFT_ALT L    &mt RSHIFT SEMI    &none
                 &none     &kp Z    &kp X    &kp C    &kp V    &kp B    &none     &none     &kp N    &kp M    &kp COMMA    &kp DOT    &kp FSLH    &none
-                &none     &mt LALT BSPC    &mt LGUI RET    &lt NUM SPACE    &none    &lt NAV RET    &mt LGUI SPACE    &mt LALT DEL
+                &none     &mt LALT BSPC    &mt LGUI RET    &lt NUM SPACE    &lt NAV RET    &mt LGUI SPACE    &mt LALT DEL    &none
             >;
         };
 
