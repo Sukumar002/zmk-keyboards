@@ -1,4 +1,5 @@
 manifest:
+  # The universal dongle OLED status implementation is isolated in its own ZMK branch.
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
