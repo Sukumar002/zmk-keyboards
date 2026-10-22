@@ -1,4 +1,6 @@
+# Rebuild candidate when pinned universal-dongle display branch receives UI alignment fixes.
 manifest:
+  # OLED uses timeout keyboard glyph and retains four stacked half-battery rows (audit fix).
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
@@ -9,12 +11,12 @@ manifest:
   projects:
     - name: zmk
       remote: sukumar
-      revision: b19edf953498bf9d0a4598eb39d04e7e43339b08
+      revision: project/universal-dongle-oled-status
       import: app/west.yml
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: 798868b9bc7e371e83c0b803f084c67ab437f9b7
+      revision: project/universal-dongle-oled-status
 
   self:
     path: config
