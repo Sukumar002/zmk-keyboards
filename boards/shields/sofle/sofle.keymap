@@ -20,6 +20,22 @@
 #define ADJUST 3
 
 / {
+    behaviors {
+        base_view_tog: base_view_toggle {
+            compatible = "zmk,behavior-base-view-toggle";
+            #binding-cells = <0>;
+            display-name = "BASE View Cycle";
+        };
+
+        oled_brightness: oled_brightness {
+            compatible = "zmk,behavior-oled-brightness";
+            #binding-cells = <1>;
+            display-name = "OLED Brightness";
+        };
+    };
+};
+
+/ {
     combos {
         compatible = "zmk,combos";
         combo_studio_unlock {
@@ -111,8 +127,8 @@
 //                    |         |         |         |         |         | |      |      |      |       |      |
             display-name = "adjust";
             bindings = <
-&bt BT_CLR        &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4                            &none &none &none &none &none &none
-&ext_power EP_TOG &rgb_ug RGB_HUD &rgb_ug RGB_HUI &rgb_ug RGB_SAD &rgb_ug RGB_SAI &rgb_ug RGB_EFF                         &none &none &none &none &none &none
+&bt_profile_shared 0 0 &bt_profile_shared 1 1 &bt_profile_shared 2 2 &bt_profile_shared 3 3 &bt_profile_shared 4 4 &bt BT_CLR_ALL    &oled_brightness 0 &oled_brightness 1 &oled_tog_shared &base_view_tog &timeout_cycle_shared 1 &timeout_cycle_shared 0
+&ext_power EP_TOG &rgb_ug RGB_HUD &rgb_ug RGB_HUI &rgb_ug RGB_SAD &rgb_ug RGB_SAI &rgb_ug RGB_EFF                         &tog_ls &none &none &none &none &none
 &none             &rgb_ug RGB_BRD &rgb_ug RGB_BRI &none           &none           &none                                   &none &none &none &none &none &none
 &none             &none           &none           &none           &none           &none            &rgb_ug RGB_TOG &none  &none &none &none &none &none &none
                                   &none           &none           &none           &none            &none           &none  &none &none &none &none
