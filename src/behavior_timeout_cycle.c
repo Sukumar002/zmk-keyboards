@@ -185,13 +185,13 @@ static int timeout_settings_set(const char *name, size_t len,
     return -ENOENT;
 }
 
-SETTINGS_STATIC_HANDLER_DEFINE(hana_timeout, "hana_timeout", NULL,
+SETTINGS_STATIC_HANDLER_DEFINE(zmk_timeout, "zmk_timeout", NULL,
                                timeout_settings_set, NULL, NULL);
 
 static void persist_timeout(enum timeout_kind kind) {
     if (kind == TIMEOUT_KIND_DISPLAY) {
 #if !IS_ENABLED(CONFIG_ZMK_SPLIT) || IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
-        settings_save_one("hana_timeout/display", &display_timeout_index,
+        settings_save_one("zmk_timeout/display", &display_timeout_index,
                           sizeof(display_timeout_index));
 #endif
     } else if (kind == TIMEOUT_KIND_HALVES_SLEEP) {
@@ -200,7 +200,7 @@ static void persist_timeout(enum timeout_kind kind) {
          * persisted settings stable if options are added/reordered later.
          */
         uint32_t timeout_ms = halves_sleep_timeouts[halves_sleep_timeout_index];
-        settings_save_one("hana_timeout/halves", &timeout_ms, sizeof(timeout_ms));
+        settings_save_one("zmk_timeout/halves", &timeout_ms, sizeof(timeout_ms));
     }
 }
 #else

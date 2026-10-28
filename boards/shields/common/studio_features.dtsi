@@ -1,5 +1,5 @@
 /*
- * Shared Hana-derived Studio/runtime feature layer.
+ * Shared Studio/runtime feature layer.
  * Board-specific keymaps remain independent; this only exposes common behaviors.
  */
 #include <layout_shift_kp_override.dtsi>
