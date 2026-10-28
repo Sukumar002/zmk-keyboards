@@ -1,3 +1,4 @@
+# The left half, right half, and dongle controller all use nice!nano.
 ---
 include:
   - board: nice_nano//zmk
