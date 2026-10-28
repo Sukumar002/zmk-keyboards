@@ -51,9 +51,9 @@ static const struct behavior_parameter_metadata timeout_metadata = {
 static const uint32_t display_timeouts[] = {30000, 60000, 300000, 0};
 static const uint32_t halves_sleep_timeouts[] = {300000, 600000, 900000, 1800000, 0};
 
-/* Defaults match the current Hana configuration: display 60 s, halves sleep 15 min. */
+/* Sofle defaults: display 60 s, halves sleep 10 min. */
 static uint8_t display_timeout_index = 1;
-static uint8_t halves_sleep_timeout_index = 2;
+static uint8_t halves_sleep_timeout_index = 1;
 
 static bool timeout_pressed[TIMEOUT_KIND_COUNT];
 static int64_t timeout_pressed_at[TIMEOUT_KIND_COUNT];
