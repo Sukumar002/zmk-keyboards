@@ -150,11 +150,13 @@ static int oled_brightness_pressed(struct zmk_behavior_binding *binding,
     ARG_UNUSED(saved_brightness);
 #endif
 
+#if IS_ENABLED(CONFIG_ZMK_DISPLAY)
     if (zmk_display_is_initialized()) {
         k_work_submit_to_queue(zmk_display_work_q(), &apply_oled_brightness_work);
     } else {
         (void)apply_oled_brightness();
     }
+#endif
 
     return ZMK_BEHAVIOR_OPAQUE;
 }
