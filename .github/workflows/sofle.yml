@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - multi-board-baseline
+      - sofle-hana-port-baseline
     paths:
       - "boards/shields/sofle/**"
       - "boards/shields/common/**"
