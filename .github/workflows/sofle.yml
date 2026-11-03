@@ -38,6 +38,8 @@ on:
       - "Kconfig"
   workflow_dispatch:
 
+# The isolated OLED test branch deliberately builds only the 128x64 dongle target.
+
 concurrency:
   group: "sofle-${{ github.ref }}"
   cancel-in-progress: true
