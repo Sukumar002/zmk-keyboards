@@ -1,5 +1,4 @@
 # The left half, right half, and dongle controller all use nice!nano.
----
 include:
   - board: nice_nano//zmk
     shield: settings_reset
@@ -28,12 +27,7 @@ include:
     cmake-args: -DCONFIG_ZMK_STUDIO=y
     artifact-name: sofle_dongle_no_display
 
-  - board: nice_nano//zmk
-    shield: sofle_central_dongle_128x32 dongle_display
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: sofle_dongle_128x32
-
+  # Test only the 128x64 OLED variant; 128x32 remains out of this build.
   - board: nice_nano//zmk
     shield: sofle_central_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
