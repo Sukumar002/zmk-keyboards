@@ -6,6 +6,7 @@ on:
       - main
       - multi-board-baseline
       - sofle-hana-port-baseline
+      - fix/sofle-oled-layout-v1.0
     paths:
       - "boards/shields/sofle/**"
       - "boards/shields/common/**"
