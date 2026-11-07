@@ -2,22 +2,18 @@
 include:
   - board: xiao_ble//zmk
     shield: hana_peripheral_left
-    artifact-name: hana_dongle_left_peripheral
-
+    artifact-name: hana left peripheral
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
-    artifact-name: hana_dongle_right_peripheral
-
+    artifact-name: hana right peripheral
   - board: xiao_ble//zmk
     shield: hana_central_dongle
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_no_display
-
+    artifact-name: hana dongle no display
   - board: xiao_ble//zmk
     shield: settings_reset
-    artifact-name: hana_halves_settings_reset
-
+    artifact-name: hana halves settings reset
   - board: xiao_ble//zmk
     shield: settings_reset
-    artifact-name: hana_dongle_settings_reset
+    artifact-name: hana dongle settings reset

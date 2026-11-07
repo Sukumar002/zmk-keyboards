@@ -64,7 +64,6 @@ jobs:
       matrix_path: ${{ steps.select.outputs.matrix_path }}
       archive_name: ${{ steps.select.outputs.archive_name }}
       raw_archive_name: ${{ steps.select.outputs.raw_archive_name }}
-      file_prefix: ${{ steps.select.outputs.file_prefix }}
     steps:
       - name: Validate selection
         id: select
@@ -110,23 +109,12 @@ jobs:
           if [[ "$CONNECTIVITY" == "dongle" ]]; then
             archive="$archive-$DISPLAY"
           fi
-          if [[ -n "$label" ]]; then
-            archive="$archive-$label"
-          else
-            archive="$archive-$stamp"
-          fi
 
-          if [[ -n "$label" ]]; then
-            file_prefix="$label"
-          else
-            file_prefix="$archive"
-          fi
           raw_archive="raw-$archive"
 
           echo "matrix_path=$matrix" >> "$GITHUB_OUTPUT"
           echo "archive_name=$archive" >> "$GITHUB_OUTPUT"
           echo "raw_archive_name=$raw_archive" >> "$GITHUB_OUTPUT"
-          echo "file_prefix=$file_prefix" >> "$GITHUB_OUTPUT"
 
           {
             echo "### Firmware build selection"
@@ -140,7 +128,7 @@ jobs:
             fi
             echo "- Matrix: `$matrix`"
             echo "- Final artifact archive: **$archive**"
-            echo "- Firmware filename prefix: **$file_prefix**"
+            echo "- Firmware filenames use the shared shield naming convention."
             echo ""
             echo "This workflow uploads an Actions artifact only. It does not create a release or tag."
           } >> "$GITHUB_STEP_SUMMARY"
@@ -162,10 +150,8 @@ jobs:
           name: ${{ needs.prepare.outputs.raw_archive_name }}
           path: raw-firmware
 
-      - name: Add client/job tag to firmware filenames
+      - name: Package firmware with consistent filenames
         shell: bash
-        env:
-          PREFIX: ${{ needs.prepare.outputs.file_prefix }}
         run: |
           set -euo pipefail
           mkdir -p final-firmware
@@ -177,7 +163,7 @@ jobs:
           fi
           for src in "${files[@]}"; do
             name="$(basename "$src")"
-            cp "$src" "final-firmware/${PREFIX}-${name}"
+            cp "$src" "final-firmware/${name}"
           done
           echo "### Final firmware package" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"

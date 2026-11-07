@@ -2,22 +2,18 @@
 include:
   - board: nice_nano//zmk
     shield: corne_peripheral_left
-    artifact-name: corne_dongle_left_peripheral
-
+    artifact-name: corne left peripheral
   - board: nice_nano//zmk
     shield: corne_peripheral_right
-    artifact-name: corne_dongle_right_peripheral
-
+    artifact-name: corne right peripheral
   - board: nice_nano//zmk
     shield: corne_central_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: corne_dongle_128x64
-
+    artifact-name: corne dongle central 128x64
   - board: nice_nano//zmk
     shield: settings_reset
     artifact-name: corne_halves_settings_reset
-
   - board: nice_nano//zmk
     shield: settings_reset
     artifact-name: corne_dongle_settings_reset
