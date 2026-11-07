@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - multi-board-baseline
+      - feature/chocofi-clean-firmware
     paths:
       - "boards/shields/chocofi/**"
       - "boards/shields/common/**"
