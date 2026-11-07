@@ -7,11 +7,15 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Match Hana's runtime-editable hold-tap tuning, including tap-then-hold
- * key repeat and the all-position hold-trigger mask. */
+/* Chocofi-only responsiveness trial: resolve home-row Shift/modifiers at
+ * the next key press, rather than waiting for that key to be released.
+ * Keep quick-tap for tap-then-hold repeated letters/Backspace.
+ * Studio runtime settings may override these compiled defaults.
+ */
 &mt {
     flavor = "balanced";
-    tapping-term-ms = <200>;
+    tapping-term-ms = <240>;
+    require-prior-idle-ms = <80>;
     quick-tap-ms = <175>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -26,6 +30,9 @@
 };
 
 &lt {
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -52,6 +59,44 @@
 };
 
 / {
+    behaviors {
+        /* Shift keys get positional opposite-hand triggering; other mod-taps
+         * retain the Studio-editable &mt behaviour for combos and home row.
+         * Retain 175ms quick tap for tap-then-hold repeat.
+         */
+        chocofi_shift_left: chocofi_shift_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <240>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <80>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 33 34 35>;
+            hold-trigger-on-release;
+        };
+
+        chocofi_shift_right: chocofi_shift_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <240>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <80>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
+            hold-trigger-on-release;
+        };
+
+        base_view_tog_chocofi: base_view_toggle_chocofi {
+            compatible = "zmk,behavior-base-view-toggle";
+            #binding-cells = <0>;
+            display-name = "BASE View Cycle";
+        };
+    };
+};
+
+/ {
     combos {
         compatible = "zmk,combos";
         combo_studio_unlock {
@@ -59,6 +104,7 @@
             key-positions = <30 35>;
             bindings = <&studio_unlock>;
         };
+
     };
 };
 
@@ -69,7 +115,7 @@
             display-name = "Base";
             bindings = <
                 &kp Q               &kp W               &kp E               &kp R               &kp T               &kp Y               &kp U               &kp I               &kp O               &kp P
-                &mt LSHIFT A        &mt LALT S          &mt LGUI D          &mt LCTRL F         &kp G               &kp H               &mt RCTRL J         &mt RGUI K          &mt LEFT_ALT L      &mt RSHIFT SEMI
+                &chocofi_shift_left LSHIFT A  &mt LALT S          &mt LGUI D          &mt LCTRL F         &kp G               &kp H               &mt RCTRL J         &mt RGUI K          &mt LEFT_ALT L      &chocofi_shift_right RSHIFT SEMI
                 &kp Z               &kp X               &kp C               &kp V               &kp B               &kp N               &kp M               &kp COMMA           &kp DOT             &kp FSLH
                                         &kp LGUI    &lt 1 RET    &kp SPACE    &lt 4 DEL  &lt 2 SPACE  &lt 3 BSPC
             >;
@@ -88,6 +134,28 @@
                 &kp F9              &kp F10             &kp F11             &kp F12             &kp F5              &kp F6              &kp F7              &kp LPAR            &kp RPAR            &trans
                 &kp F5              &kp F6              &kp F7              &kp F8              &kp LBKT            &kp RBKT            &kp BSLH            &trans              &trans              &trans
                 &kp F1              &kp F2              &kp F3              &kp F4              &kp PIPE            &kp LGUI            &trans              &kp SPACE           &kp RET             &trans
+            >;
+        };
+        /* Match Hana's SET and MOUSE capabilities while preserving Chocofi's
+         * 5-column physical layout and existing BASE/LOWER/RAISE bindings.
+         * Existing thumb layer-taps 3 and 4 now point at real layers.
+         */
+        set_layer {
+            display-name = "SET";
+            bindings = <
+                &bt_profile_shared 0 0  &bt_profile_shared 1 1  &bt_profile_shared 2 2  &bt_profile_shared 3 3  &bt_profile_shared 4 4   &bootloader  &base_view_tog_chocofi  &timeout_cycle_shared 1  &timeout_cycle_shared 0  &oled_tog_shared
+                &none                   &none                   &none                   &none                   &none                   &none        &none                   &none                    &none                    &none
+                &out OUT_TOG            &bt BT_CLR_ALL          &none                   &none                   &none                   &none        &none                   &none                    &none                    &tog_ls
+                                        &trans                  &trans                  &trans                  &trans                  &trans                  &trans
+            >;
+        };
+        mouse_layer {
+            display-name = "MOUSE";
+            bindings = <
+                &trans  &trans     &trans     &trans     &trans   &msc SCRL_LEFT  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN  &msc SCRL_RIGHT
+                &mkp LCLK  &mkp MCLK  &mkp RCLK  &trans  &trans   &trans          &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans
+                &trans  &trans     &trans     &trans     &trans   &trans          &trans          &trans          &trans          &trans
+                         &trans     &trans     &trans     &trans     &trans     &trans
             >;
         };
         ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4
