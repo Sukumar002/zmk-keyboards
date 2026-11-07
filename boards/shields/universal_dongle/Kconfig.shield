@@ -1,2 +1,0 @@
-config SHIELD_UNIVERSAL_DONGLE_128X64
-    def_bool $(shields_list_contains,universal_dongle_128x64)

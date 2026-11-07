@@ -8,6 +8,10 @@
 #include <zmk/event_manager.h>
 #include "layout_shift_map.h"
 
+#if IS_ENABLED(CONFIG_ZMK_DONGLE_DISPLAY_COMPACT_MODE)
+#include <hana_base_view.h>
+#endif
+
 enum toggle_mode {
     TOGGLE_MODE_ON,
     TOGGLE_MODE_OFF,
@@ -34,6 +38,7 @@ static bool apply_toggle(const struct device *map_dev, enum toggle_mode mode) {
 
 static int on_layout_shift_toggle_binding_pressed(struct zmk_behavior_binding *binding,
                                                  struct zmk_behavior_binding_event event) {
+    ARG_UNUSED(event);
     const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
     const struct behavior_layout_shift_toggle_config *config = dev->config;
     bool changed = false;
@@ -43,6 +48,12 @@ static int on_layout_shift_toggle_binding_pressed(struct zmk_behavior_binding *b
     }
     if (changed) {
         layout_shift_map_schedule_save();
+#if IS_ENABLED(CONFIG_ZMK_DONGLE_DISPLAY_COMPACT_MODE)
+        if (config->layout_map_count > 0) {
+            hana_base_view_flash_layout_shift(
+                layout_shift_map_is_active(config->layout_maps[0]));
+        }
+#endif
     }
 
     return ZMK_BEHAVIOR_OPAQUE;
@@ -50,6 +61,8 @@ static int on_layout_shift_toggle_binding_pressed(struct zmk_behavior_binding *b
 
 static int on_layout_shift_toggle_binding_released(struct zmk_behavior_binding *binding,
                                                   struct zmk_behavior_binding_event event) {
+    ARG_UNUSED(binding);
+    ARG_UNUSED(event);
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
@@ -70,18 +83,18 @@ static const struct behavior_driver_api behavior_layout_shift_toggle_driver_api 
 #define _TOGGLE_MAP_DEV(node, prop, idx) DEVICE_DT_GET(DT_PHANDLE_BY_IDX(node, prop, idx)),
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
-#define LAYOUT_SHIFT_TOGGLE_INST(n)                                                            \
-    static const struct device *const toggle_layout_maps_##n[] = {                              \
-        DT_INST_FOREACH_PROP_ELEM(n, layout_maps, _TOGGLE_MAP_DEV)                              \
-    };                                                                                          \
+#define LAYOUT_SHIFT_TOGGLE_INST(n) \
+    static const struct device *const toggle_layout_maps_##n[] = { \
+        DT_INST_FOREACH_PROP_ELEM(n, layout_maps, _TOGGLE_MAP_DEV) \
+    }; \
     static const struct behavior_layout_shift_toggle_config behavior_layout_shift_toggle_config_##n = { \
-        .toggle_mode = TOGGLE_MODE_FROM_STR(DT_INST_PROP_OR(n, toggle_mode, "flip")),            \
-        .layout_maps = toggle_layout_maps_##n,                                                   \
-        .layout_map_count = DT_INST_PROP_LEN(n, layout_maps),                                    \
-    };                                                                                           \
-    BEHAVIOR_DT_INST_DEFINE(n, NULL, NULL, NULL,                                                 \
-                            &behavior_layout_shift_toggle_config_##n,                            \
-                            POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,                    \
+        .toggle_mode = TOGGLE_MODE_FROM_STR(DT_INST_PROP_OR(n, toggle_mode, "flip")), \
+        .layout_maps = toggle_layout_maps_##n, \
+        .layout_map_count = DT_INST_PROP_LEN(n, layout_maps), \
+    }; \
+    BEHAVIOR_DT_INST_DEFINE(n, NULL, NULL, NULL, \
+                            &behavior_layout_shift_toggle_config_##n, \
+                            POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, \
                             &behavior_layout_shift_toggle_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(LAYOUT_SHIFT_TOGGLE_INST)
