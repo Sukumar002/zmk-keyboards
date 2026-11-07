@@ -13,7 +13,4 @@ include:
     artifact-name: corne dongle central 128x64
   - board: nice_nano//zmk
     shield: settings_reset
-    artifact-name: corne_halves_settings_reset
-  - board: nice_nano//zmk
-    shield: settings_reset
-    artifact-name: corne_dongle_settings_reset
+    artifact-name: corne settings reset

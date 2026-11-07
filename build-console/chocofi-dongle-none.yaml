@@ -13,7 +13,4 @@ include:
     artifact-name: chocofi dongle no display
   - board: nice_nano//zmk
     shield: settings_reset
-    artifact-name: chocofi_halves_settings_reset
-  - board: nice_nano//zmk
-    shield: settings_reset
-    artifact-name: chocofi_dongle_settings_reset
+    artifact-name: chocofi settings reset

@@ -20,22 +20,6 @@ on:
         options:
           - ble
           - dongle
-      split_mcu:
-        description: "Split halves MCU"
-        required: true
-        type: choice
-        default: nice_nano
-        options:
-          - nice_nano
-          - xiao_ble
-      dongle_mcu:
-        description: "Dongle MCU (ignored for BLE)"
-        required: true
-        type: choice
-        default: nice_nano
-        options:
-          - nice_nano
-          - xiao_ble
       dongle_display:
         description: "Dongle display (ignored for BLE)"
         required: true
@@ -71,36 +55,32 @@ jobs:
         env:
           BOARD: ${{ inputs.board }}
           CONNECTIVITY: ${{ inputs.connectivity }}
-          SPLIT_MCU: ${{ inputs.split_mcu }}
-          DONGLE_MCU: ${{ inputs.dongle_mcu }}
           DISPLAY: ${{ inputs.dongle_display }}
           BUILD_LABEL: ${{ inputs.build_label }}
         run: |
           set -euo pipefail
+
+          if [[ "$BOARD" == "hana" ]]; then
+            split_mcu=xiao_ble
+            dongle_mcu=nice_nano
+          else
+            split_mcu=nice_nano
+            dongle_mcu=nice_nano
+          fi
 
           case "$BOARD" in
             hana|chocofi|corne|sofle) ;;
             *) echo "::error::Unsupported board: $BOARD"; exit 1 ;;
           esac
 
-          case "$SPLIT_MCU" in
-            nice_nano|xiao_ble) ;;
-            *) echo "::error::Unsupported split MCU: $SPLIT_MCU"; exit 1 ;;
-          esac
-
-          case "$DONGLE_MCU" in
-            nice_nano|xiao_ble) ;;
-            *) echo "::error::Unsupported dongle MCU: $DONGLE_MCU"; exit 1 ;;
-          esac
-
           if [[ "$CONNECTIVITY" == "ble" ]]; then
-            matrix="build-console/generated/$BOARD-ble-split-$SPLIT_MCU.yaml"
+            matrix="build-console/$BOARD-ble.yaml"
           else
             case "$DISPLAY" in
               none|128x32|128x64) ;;
               *) echo "::error::Unsupported display selection: $DISPLAY"; exit 1 ;;
             esac
-            matrix="build-console/generated/$BOARD-dongle-$DISPLAY-split-$SPLIT_MCU-dongle-$DONGLE_MCU.yaml"
+            matrix="build-console/$BOARD-dongle-$DISPLAY.yaml"
           fi
 
           label="$(printf '%s' "$BUILD_LABEL" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
@@ -127,9 +107,9 @@ jobs:
             echo ""
             echo "- Board: **$BOARD**"
             echo "- Connectivity: **$CONNECTIVITY**"
-            echo "- Split halves MCU: **$SPLIT_MCU**"
+            echo "- Split halves MCU: **$split_mcu**"
             if [[ "$CONNECTIVITY" == "dongle" ]]; then
-              echo "- Dongle MCU: **$DONGLE_MCU**"
+              echo "- Dongle MCU: **$dongle_mcu**"
               echo "- Dongle display: **$DISPLAY**"
             fi
             echo "- Matrix: `$matrix`"

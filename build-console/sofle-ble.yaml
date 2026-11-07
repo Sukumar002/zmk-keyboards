@@ -7,7 +7,7 @@ include:
     artifact-name: sofle left central
   - board: nice_nano//zmk
     shield: sofle_peripheral_right
-    artifact-name: sofle_ble_right_peripheral
+    artifact-name: sofle right peripheral
   - board: nice_nano//zmk
     shield: settings_reset
-    artifact-name: sofle_ble_settings_reset
+    artifact-name: sofle settings reset

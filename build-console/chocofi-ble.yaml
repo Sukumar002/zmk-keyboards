@@ -7,7 +7,7 @@ include:
     artifact-name: chocofi left central
   - board: nice_nano//zmk
     shield: chocofi_peripheral_right
-    artifact-name: chocofi_ble_right_peripheral
+    artifact-name: chocofi right peripheral
   - board: nice_nano//zmk
     shield: settings_reset
-    artifact-name: chocofi_ble_settings_reset
+    artifact-name: chocofi settings reset

@@ -7,7 +7,7 @@ include:
     artifact-name: hana left central
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
-    artifact-name: hana_ble_right_peripheral
+    artifact-name: hana right peripheral
   - board: xiao_ble//zmk
     shield: settings_reset
-    artifact-name: hana_ble_settings_reset
+    artifact-name: hana halves settings reset
