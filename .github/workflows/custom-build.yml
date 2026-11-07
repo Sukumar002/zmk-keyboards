@@ -110,6 +110,12 @@ jobs:
             archive="$archive-$DISPLAY"
           fi
 
+          if [[ -n "$label" ]]; then
+            archive="$archive-$label"
+          else
+            archive="$archive-$stamp"
+          fi
+
           raw_archive="raw-$archive"
 
           echo "matrix_path=$matrix" >> "$GITHUB_OUTPUT"
