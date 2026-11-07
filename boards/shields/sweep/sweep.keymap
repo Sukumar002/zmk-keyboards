@@ -111,10 +111,10 @@
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │  RESET   │
-           &sys_reset  &out OUT_TOG &tog_ls    &tog MOUSE &bt BT_SEL 0    &trans     &trans     &trans     &trans    &sys_reset
+           &sys_reset  &out OUT_TOG &tog_ls    &tog MOUSE &bt_profile_shared 0 0    &trans     &trans     &trans     &trans    &sys_reset
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
-          &bootloader  &oled_tog_shared &base_view_tog &timeout_cycle_shared 1 &bt BT_SEL 1    &trans     &trans     &trans     &trans    &bootloader
+          &bootloader  &oled_tog_shared &base_view_tog &timeout_cycle_shared 1 &bt_profile_shared 1 1    &trans     &trans     &trans     &trans    &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
             &trans     &bt_profile_shared 3 3 &bt_profile_shared 4 4 &bt BT_CLR &bt_profile_shared 2 2    &timeout_cycle_shared 0 &trans     &trans     &trans     &trans
