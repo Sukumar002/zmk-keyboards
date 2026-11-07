@@ -17,7 +17,7 @@
     tapping-term-ms = <220>;
     quick-tap-ms = <150>;
     require-prior-idle-ms = <100>;
-}
+};
 
 // Sweep's direct-scan GPIO order is defined in sweep_matrix.dtsi.
 
