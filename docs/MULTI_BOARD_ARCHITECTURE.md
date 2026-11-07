@@ -8,6 +8,7 @@ The maintained firmware lives in one monorepo, with each keyboard isolated under
 - **Chocofi** — BLE/dongle baseline prepared; hardware validation pending.
 - **Corne** — imported from `Sukumar002/zmk-builder-reference` and adapted to the shared custom stack.
 - **Sofle** — imported from `Sukumar002/zmk-builder-reference` and adapted to the shared custom stack.
+- **Sweep** — ported from `Sukumar002/zmk-config-sweep`, preserving its Cradio-based direct-scan pin order and keymap; currently targets nice!nano v2 hardware.
 
 ## Per-board build outputs
 
@@ -45,7 +46,7 @@ Chocofi, Corne, and Sofle include `boards/shields/common/studio_features.dtsi`, 
 - custom Studio RPC through the central target,
 - dongle display integration on OLED dongle targets.
 
-Hana remains unchanged as the tested reference implementation.
+Hana remains unchanged as the tested reference implementation. Sweep also has an isolated build workflow and Build Console profiles for BLE and no-display, 128×32, and 128×64 dongle deployments.
 
 ## Deferred work
 

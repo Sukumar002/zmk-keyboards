@@ -48,6 +48,7 @@
         <label for="board">Board</label>
         <select id="board">
           <option value="hana">Hana</option>
+          <option value="sweep">Sweep</option>
           <option value="chocofi">Chocofi</option>
           <option value="sofle">Sofle</option>
           <option value="corne">Corne</option>
@@ -136,6 +137,13 @@ function title(v){return v.charAt(0).toUpperCase()+v.slice(1);}
 function refresh(){
   const b=boardEl.value,c=connEl.value;
   const dongleMode=c==="dongle";
+  const sweepMode=b==="sweep";
+  if(sweepMode){
+    splitMcuEl.value="nice_nano";
+    dongleMcuEl.value="nice_nano";
+  }
+  splitMcuEl.disabled=sweepMode;
+  dongleMcuEl.disabled=sweepMode;
   dongleMcuWrap.style.display=dongleMode?"block":"none";
   displayWrap.style.display=dongleMode?"block":"none";
   document.querySelector("#sBoard").textContent=title(b);
@@ -144,9 +152,10 @@ function refresh(){
     ? "Halves: "+splitMcuEl.selectedOptions[0].textContent+" · Dongle: "+dongleMcuEl.selectedOptions[0].textContent
     : splitMcuEl.selectedOptions[0].textContent;
   document.querySelector("#sPackage").textContent=dongleMode?"Left peripheral + right peripheral + selected dongle":"Left central + right peripheral";
-  document.querySelector("#flashInfo").innerHTML=dongleMode
+  const flashSet=dongleMode
     ? "<strong>Flash set:</strong> left peripheral + right peripheral + "+displayEl.selectedOptions[0].textContent+" central dongle. Both keyboard halves connect to the dongle."
     : "<strong>Flash set:</strong> left central + right peripheral. The left half connects to the host.";
+  document.querySelector("#flashInfo").innerHTML=flashSet+(sweepMode?"<br><strong>Hardware:</strong> Sweep is configured for nice!nano v2 on both halves and the dongle.":"");
 }
 [boardEl,connEl,splitMcuEl,dongleMcuEl,displayEl].forEach(x=>x.addEventListener("change",refresh));
 refresh();
@@ -224,8 +233,8 @@ runEl.onclick=async()=>{
   const inputs={
     board:boardEl.value,
     connectivity:connEl.value,
-    split_mcu:splitMcuEl.value,
-    dongle_mcu:connEl.value==="dongle"?dongleMcuEl.value:"nice_nano",
+    split_mcu:boardEl.value==="sweep"?"nice_nano":splitMcuEl.value,
+    dongle_mcu:boardEl.value==="sweep"?"nice_nano":(connEl.value==="dongle"?dongleMcuEl.value:"nice_nano"),
     dongle_display:connEl.value==="dongle"?displayEl.value:"none",
     build_label:labelEl.value.trim()
   };

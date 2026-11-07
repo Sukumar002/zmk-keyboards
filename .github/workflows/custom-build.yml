@@ -13,6 +13,7 @@ on:
           - chocofi
           - sofle
           - corne
+          - sweep
       connectivity:
         description: "Connectivity"
         required: true
@@ -80,9 +81,22 @@ jobs:
           set -euo pipefail
 
           case "$BOARD" in
-            hana|chocofi|corne|sofle) ;;
+            hana|chocofi|corne|sofle|sweep) ;;
             *) echo "::error::Unsupported board: $BOARD"; exit 1 ;;
           esac
+
+          # Sweep uses the Pro Micro pin mapping from the existing config,
+          # which is built for nice!nano v2 on both halves and the dongle.
+          if [[ "$BOARD" == "sweep" ]]; then
+            if [[ "$SPLIT_MCU" != "nice_nano" ]]; then
+              echo "::error::Sweep supports nice_nano for the split halves."
+              exit 1
+            fi
+            if [[ "$CONNECTIVITY" == "dongle" && "$DONGLE_MCU" != "nice_nano" ]]; then
+              echo "::error::Sweep supports nice_nano for the dongle."
+              exit 1
+            fi
+          fi
 
           case "$SPLIT_MCU" in
             nice_nano|xiao_ble) ;;
@@ -95,13 +109,21 @@ jobs:
           esac
 
           if [[ "$CONNECTIVITY" == "ble" ]]; then
-            matrix="build-console/generated/$BOARD-ble-split-$SPLIT_MCU.yaml"
+            if [[ "$BOARD" == "sweep" ]]; then
+              matrix="build-console/sweep-ble.yaml"
+            else
+              matrix="build-console/generated/$BOARD-ble-split-$SPLIT_MCU.yaml"
+            fi
           else
             case "$DISPLAY" in
               none|128x32|128x64) ;;
               *) echo "::error::Unsupported display selection: $DISPLAY"; exit 1 ;;
             esac
-            matrix="build-console/generated/$BOARD-dongle-$DISPLAY-split-$SPLIT_MCU-dongle-$DONGLE_MCU.yaml"
+            if [[ "$BOARD" == "sweep" ]]; then
+              matrix="build-console/sweep-dongle-$DISPLAY.yaml"
+            else
+              matrix="build-console/generated/$BOARD-dongle-$DISPLAY-split-$SPLIT_MCU-dongle-$DONGLE_MCU.yaml"
+            fi
           fi
 
           label="$(printf '%s' "$BUILD_LABEL" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
