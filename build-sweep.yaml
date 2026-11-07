@@ -1,0 +1,40 @@
+---
+include:
+  - board: nice_nano//zmk
+    shield: settings_reset
+    artifact-name: sweep_settings_reset
+
+  # BLE mode: left half central; right half peripheral.
+  - board: nice_nano//zmk
+    shield: sweep_central_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: sweep_ble_left_central
+
+  # The same right peripheral firmware works with BLE or dongle mode.
+  - board: nice_nano//zmk
+    shield: sweep_peripheral_right
+    artifact-name: sweep_right_peripheral
+
+  # Dongle mode: both halves are peripherals and the dongle is central.
+  - board: nice_nano//zmk
+    shield: sweep_peripheral_left
+    artifact-name: sweep_dongle_left_peripheral
+
+  - board: nice_nano//zmk
+    shield: sweep_central_dongle
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: sweep_dongle_no_display
+
+  - board: nice_nano//zmk
+    shield: sweep_central_dongle_128x32 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: sweep_dongle_128x32
+
+  - board: nice_nano//zmk
+    shield: sweep_central_dongle_128x64 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: sweep_dongle_128x64
