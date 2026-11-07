@@ -1,5 +1,6 @@
 ---
 include:
+  # Chocofi uses the nice!nano / Pro Micro nRF52840 target for all six images.
   - board: nice_nano//zmk
     shield: settings_reset
     artifact-name: chocofi_settings_reset
@@ -9,32 +10,26 @@ include:
     shield: chocofi_central_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: chocofi_ble_left_central
+    artifact-name: chocofi_left_central
 
-  # Shared right peripheral: same firmware is used in BLE and dongle modes.
+  # Dongle mode: each physical half runs its own peripheral image.
+  - board: nice_nano//zmk
+    shield: chocofi_peripheral_left
+    artifact-name: chocofi_left_peripheral
+
   - board: nice_nano//zmk
     shield: chocofi_peripheral_right
     artifact-name: chocofi_right_peripheral
 
-  # Dongle mode: both physical halves are peripherals.
+  # Dongle central, matching Hana's two OLED sizes.
   - board: nice_nano//zmk
-    shield: chocofi_peripheral_left
-    artifact-name: chocofi_dongle_left_peripheral
-
-  - board: nice_nano//zmk
-    shield: chocofi_central_dongle
+    shield: chocofi_central_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: chocofi_dongle_no_display
+    artifact-name: chocofi_dongle_central_128x64
 
   - board: nice_nano//zmk
     shield: chocofi_central_dongle_128x32 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: chocofi_dongle_128x32
-
-  - board: nice_nano//zmk
-    shield: chocofi_central_dongle_128x64 dongle_display
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: chocofi_dongle_128x64
+    artifact-name: chocofi_dongle_central_128x32
