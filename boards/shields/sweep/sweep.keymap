@@ -42,9 +42,6 @@
             layers = <0>;
             timeout-ms = <50>;
             require-prior-idle-ms = <500>;
-            runtime-editable;
-            runtime-default-active;
-            display-name = "Studio Unlock";
             bindings = <&studio_unlock>;
         };
     };
