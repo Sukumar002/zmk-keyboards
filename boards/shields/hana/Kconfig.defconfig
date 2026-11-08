@@ -7,6 +7,10 @@ endif
 
 if SHIELD_HANA_CENTRAL_DONGLE || SHIELD_HANA_CENTRAL_DONGLE_128X64 || SHIELD_HANA_CENTRAL_DONGLE_128X32
 
+# The dongle is the central for both Hana halves.
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 2
+
 config ZMK_KEYBOARD_NAME
     default "hana.dongle"
 
