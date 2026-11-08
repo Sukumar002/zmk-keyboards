@@ -8,6 +8,11 @@ if(CONFIG_LAYOUT_SHIFT)
   endif()
 endif()
 
+# OLED contrast (perceived brightness) controls for SSD1306 128x32/128x64 panels.
+target_sources(app PRIVATE
+  ${CMAKE_CURRENT_LIST_DIR}/src/behavior_oled_brightness.c
+)
+
 # Manual OLED on/off behavior. Compiles as a harmless no-op on non-display builds.
 target_sources(app PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/src/behavior_oled_toggle.c
