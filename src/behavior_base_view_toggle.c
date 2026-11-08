@@ -4,21 +4,17 @@
 #include <drivers/behavior.h>
 #include <zmk/behavior.h>
 
-#if IS_ENABLED(CONFIG_ZMK_DISPLAY)
-/* The Hana display module provides this on dongle builds. Other shield
- * central/peripheral targets may enable ZMK_DISPLAY without that module. */
+/* The display module provides this for either the LVGL or raw framebuffer
+ * dongle renderer. Keep it weak so non-display targets remain linkable. */
 extern void hana_base_view_cycle(void) __attribute__((weak));
-#endif
 
 static int on_base_view_toggle_pressed(struct zmk_behavior_binding *binding,
                                        struct zmk_behavior_binding_event event) {
     ARG_UNUSED(binding);
     ARG_UNUSED(event);
-#if IS_ENABLED(CONFIG_ZMK_DISPLAY)
-    if (hana_base_view_cycle != NULL) {
+if (hana_base_view_cycle != NULL) {
         hana_base_view_cycle();
     }
-#endif
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
