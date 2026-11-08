@@ -1,0 +1,22 @@
+name: "Hana 128x32 OLED Driver Diagnostic"
+
+on:
+  push:
+    branches:
+      - diagnostic/hana-128x32-builtin-display
+    paths:
+      - "boards/shields/hana/**"
+      - "build-hana-128x32-diagnostic.yaml"
+      - "config/**"
+      - ".github/workflows/hana-128x32-diagnostic.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-hana-128x32-diagnostic.yaml
+      archive_name: hana-128x32-oled-driver-diagnostic
