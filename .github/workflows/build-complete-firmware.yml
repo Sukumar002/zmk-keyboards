@@ -111,15 +111,13 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p final-firmware
-          shopt -s nullglob
-          files=(raw-firmware/*)
+          mapfile -d '' files < <(find raw-firmware -type f -print0)
           if (( ${#files[@]} == 0 )); then
             echo "::error::No firmware files were found in the raw build artifact."
             exit 1
           fi
 
           for src in "${files[@]}"; do
-            [[ -f "$src" ]] || continue
             cp "$src" "final-firmware/$(basename "$src")"
           done
 
