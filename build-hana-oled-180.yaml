@@ -1,0 +1,26 @@
+---
+include:
+  # Hana dongle with 128x32 SSD1306, rotated 180 degrees.
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x32_180 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: >-
+      -DCONFIG_ZMK_STUDIO=y
+      -DCONFIG_ZMK_DISPLAY=n
+      -DCONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=n
+      -DCONFIG_HANA_RAW_DASHBOARD=y
+      -DCONFIG_ZMK_DONGLE_DISPLAY_COMPACT_MODE=n
+      -DCONFIG_ZMK_DONGLE_DISPLAY_BONGO_CAT=n
+      -DCONFIG_ZMK_DONGLE_DISPLAY_WPM=n
+      -DCONFIG_ZMK_DONGLE_DISPLAY_MODIFIERS=n
+      -DCONFIG_ZMK_DONGLE_DISPLAY_LAYER=n
+      -DCONFIG_ZMK_DONGLE_DISPLAY_DONGLE_BATTERY=n
+      -DCONFIG_ZMK_HID_INDICATORS=n
+    artifact-name: hana-dongle-128x32-180
+
+  # Hana dongle with 128x64 SSD1306, rotated 180 degrees.
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x64_180 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: hana-dongle-128x64-180
