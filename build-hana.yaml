@@ -1,3 +1,4 @@
+# OLED renderer integration: compact 128x32 uses the standalone Zephyr framebuffer path.
 ---
 include:
   - board: xiao_ble//zmk
