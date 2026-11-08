@@ -1,30 +1,38 @@
 #include "hana_central_dongle.overlay"
 
-/ {
-    chosen {
-        zephyr,display = &oled;
-    };
+/*
+ * Match the mctechnology17 OLED adapter's isolated 128x32 node pattern.
+ * Disable any inherited node labelled "oled" before declaring our dedicated
+ * 128x32 controller node, so the chosen display cannot resolve ambiguously.
+ */
+#if defined(DT_NODELABEL_oled)
+&oled {
+    status = "disabled";
 };
+#endif
 
 &pro_micro_i2c {
     status = "okay";
 
-    oled: ssd1306@3c {
+    oled_128x32: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
-
         width = <128>;
         height = <32>;
-
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
-
         multiplex-ratio = <31>;
-
         segment-remap;
         com-invdir;
-
+        com-sequential;
+        inversion-on;
         prechargep = <0x22>;
+    };
+};
+
+/ {
+    chosen {
+        zephyr,display = &oled_128x32;
     };
 };
