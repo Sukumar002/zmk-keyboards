@@ -50,6 +50,22 @@ Still requiring a deliberate extraction/compatibility pass:
 - A consistent feature configuration interface for all shield profiles.
 - Display renderer parity between the 128x32 and 128x64 paths, including Hana's validated raw 128x32 path and the compact LVGL path used by other current targets.
 
+## Unified default keymap
+
+All supported shields use the same five default layers in the same order and with the same display labels:
+
+| Index | Layer | Shared purpose |
+|---:|---|---|
+| 0 | Base | Board's normal typing layout and home-row/board-specific typing behaviors |
+| 1 | Num | Number row, function keys and symbols |
+| 2 | Nav | Cursor movement, navigation, paging and host/media controls |
+| 3 | Set | Bluetooth profile selection/hold-to-clear, Bluetooth clear-all, output toggle, layout shift, OLED toggle, BASE-view cycle, timeout controls, bootloader and reset |
+| 4 | Mouse | Pointer movement, scrolling and mouse buttons |
+
+The physical binding positions are adapted to each shield's matrix and thumb cluster, but the layer indices and feature meanings are kept consistent. The original typing layout and board-specific hardware configuration are retained.
+
+All five keymaps include `studio_features.dtsi`, `studio_runtime_layers.dtsi` and the single shared `studio_unlock_combo.dtsi`. Studio unlock is the Base-layer chord at physical key positions `0 1` on every shield. Do not add per-shield copies of this combo.
+
 ## Feature parity audit
 
 The shared behavior definitions are now included by all five keymaps. Hana's board-local copies of the layout-shift map, Bluetooth profile hold-tap, OLED toggle, BASE-view toggle and timeout-cycle behavior have been replaced with the common definitions. Hana retains only its hardware/layout-specific keymap and hold-trigger-position overrides. Sweep also uses the shared BASE-view behavior instead of a duplicate local node.
