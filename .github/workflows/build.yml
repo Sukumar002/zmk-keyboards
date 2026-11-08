@@ -15,6 +15,7 @@ on:
       - "build-hana.yaml"
       - ".github/workflows/hana.yml"
       - ".github/workflows/build.yml"
+      - ".github/workflows/build.yml"
       - "config/**"
       - "snippets/**"
       - "src/**"
