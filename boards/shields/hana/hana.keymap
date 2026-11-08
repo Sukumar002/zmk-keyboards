@@ -5,12 +5,14 @@
 #include <dt-bindings/zmk/pointing.h>
 #include "../common/studio_features.dtsi"
 #include "../common/studio_runtime_layers.dtsi"
+#include "../common/studio_unlock_combo.dtsi"
 
-#define BASE       0
-#define NUM        1
-#define NAV        2
-#define SET        3
-#define MOUSE      4
+
+#define BASE  0
+#define NUM   1
+#define NAV   2
+#define SET   3
+#define MOUSE 4
 
 
 // Layout-shift behavior and GUI/Alt mapping come from the shared feature include.
@@ -70,18 +72,18 @@
         compatible = "zmk,keymap";
 
         base_layer {
-            display-name = "BASE";
+            display-name = "Base";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
                 &lt SET TAB  &kp Q              &kp W      &kp E      &kp R      &kp T                         &kp Y      &kp U      &kp I      &kp O      &kp P              &kp BSPC
                 &mt LSHIFT GRAVE    &mt LSHIFT A       &kp S      &kp D      &kp F      &kp G                         &kp H      &kp J      &kp K      &kp L      &mt RSHIFT SEMI    &mt RSHIFT SQT
                 &mt LCTRL ESC       &kp Z              &kp X      &kp C      &kp V      &kp B      &kp C_MUTE  &kp C_PP &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH           &mt RCTRL DEL
-                                      &mt LCTRL CAPS     &mt LALT BSPC        &mt LGUI RET &lt NUM SPACE                   &lt NAV RET &mt LGUI SPACE &mt LALT DEL &studio_unlock
+                                      &mt LCTRL CAPS     &mt LALT BSPC        &mt LGUI RET &lt NUM SPACE                   &lt NAV RET &mt LGUI SPACE &mt LALT DEL &lt MOUSE RALT
             >;
         };
 
         num_layer {
-            display-name = "NUM";
+            display-name = "Num";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
                 &kp F11   &kp F1             &kp F2    &kp F3    &kp F4    &kp F5                      &kp F6     &kp F7     &kp F8     &kp F9     &kp F10            &trans
@@ -92,7 +94,7 @@
         };
 
         nav_layer {
-            display-name = "NAV";
+            display-name = "Nav";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
                 &trans    &trans             &trans       &trans       &trans       &trans                        &kp C_VOL_UP  &kp HOME    &kp UP       &kp END      &kp PG_UP    &kp BSPC
@@ -103,7 +105,7 @@
         };
 
         set_layer {
-            display-name = "SET";
+            display-name = "Set";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
                 &none     &bt_profile_shared 0 0      &bt_profile_shared 1 1  &bt_profile_shared 2 2  &bt_profile_shared 3 3  &bt_profile_shared 4 4       &bootloader  &none  &base_view_tog_shared  &timeout_cycle_shared 1  &timeout_cycle_shared 0  &oled_tog_shared
@@ -115,7 +117,7 @@
 
 
         mouse_layer {
-            display-name = "MOUSE";
+            display-name = "Mouse";
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
                 &trans    &trans             &trans        &trans        &trans        &trans                         &msc SCRL_LEFT  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans
