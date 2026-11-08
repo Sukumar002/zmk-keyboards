@@ -1,4 +1,4 @@
-name: "Hana 128x32 Full-Screen Diagnostic"
+name: "Hana 128x32 Base Status Candidate"
 
 # Isolated 128x32 hardware test. No 128x64 build is part of this workflow.
 on:
@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: "hana-128x32-fullscreen-diagnostic"
+  group: "hana-128x32-base-status"
   cancel-in-progress: false
 
 jobs:
@@ -23,4 +23,4 @@ jobs:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       build_matrix_path: build-hana-128x32-candidate.yaml
-      archive_name: hana-128x32-fullscreen-diagnostic
+      archive_name: hana-128x32-base-status
