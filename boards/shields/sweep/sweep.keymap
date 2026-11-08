@@ -8,7 +8,13 @@
 #include <dt-bindings/zmk/pointing.h>
 #include "../common/studio_features.dtsi"
 #include "../common/studio_runtime_layers.dtsi"
+#include "../common/studio_unlock_combo.dtsi"
 
+
+#define BASE  0
+#define NUM   1
+#define NAV   2
+#define SET   3
 #define MOUSE 4
 
 // Keep Sweep's existing home-row mod timing and tap-preferred feel.
@@ -27,29 +33,10 @@
 #define HRMR(k1,k2,k3,k4) &mt RGUI k1  &mt RCTRL k2  &mt RALT k3  &mt RSHFT k4
 
 / {
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-        studio_unlock_combo {
-            key-positions = <0 1>;
-            layers = <0>;
-            timeout-ms = <50>;
-            require-prior-idle-ms = <500>;
-            bindings = <&studio_unlock>;
-        };
-    };
-
-
     keymap {
         compatible = "zmk,keymap";
-        default_layer {
+        base_layer {
+            display-name = "Base";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│  Q       │  W       │  E       │  R       │  T       │   │  Y       │  U       │  I       │  O       │  P       │
@@ -61,12 +48,13 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 1 BSPC
+                                            &lt SET TAB   &lt NUM RET     &lt NAV SPACE  &lt MOUSE BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
 
-        right_layer {
+        num_layer {
+            display-name = "Num";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ INSERT   │  1       │  2       │  3       │          │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
@@ -83,7 +71,8 @@
             >;
         };
 
-        left_layer {
+        nav_layer {
+            display-name = "Nav";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │  [       │  {       │  }       │          │   │  ^       │  (       │  )       │  ]       │  ~       │
@@ -100,17 +89,18 @@
             >;
         };
 
-        tri_layer {
+        set_layer {
+            display-name = "Set";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │  RESET   │
-           &sys_reset  &out OUT_TOG &tog_ls    &tog MOUSE &bt_profile_shared 0 0    &trans     &trans     &trans     &trans    &sys_reset
+           &sys_reset  &out OUT_TOG &tog_ls    &oled_tog_shared &bt_profile_shared 0 0    &trans     &trans     &trans     &trans    &sys_reset
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
           &bootloader  &oled_tog_shared &base_view_tog_shared &timeout_cycle_shared 1 &bt_profile_shared 1 1    &trans     &trans     &trans     &trans    &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
-            &trans     &bt_profile_shared 3 3 &bt_profile_shared 4 4 &bt BT_CLR &bt_profile_shared 2 2    &timeout_cycle_shared 0 &trans     &trans     &trans     &trans
+            &trans     &bt_profile_shared 3 3 &bt_profile_shared 4 4 &bt BT_CLR_ALL &bt_profile_shared 2 2    &timeout_cycle_shared 0 &trans     &trans     &trans     &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
@@ -118,6 +108,7 @@
         };
 
         mouse_layer {
+            display-name = "Mouse";
             display-name = "MOUSE";
             bindings = <
                 &msc SCRL_LEFT &msc SCRL_UP &mmv MOVE_UP &msc SCRL_DOWN &msc SCRL_RIGHT &trans &trans &trans &trans &trans
