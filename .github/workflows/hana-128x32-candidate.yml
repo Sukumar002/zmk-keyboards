@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - fix/hana-128x32-raw-baseline
+      - feature/hana-128x32-base-views
     paths:
       - "config/**"
       - "boards/shields/hana/**"
