@@ -6,6 +6,7 @@ on:
       - main
       - multi-board-baseline
       - feature/shared-firmware-architecture
+      - feature/reconciled-multi-board-oled
     paths:
       - "boards/shields/sofle/**"
       - "boards/shields/common/**"
