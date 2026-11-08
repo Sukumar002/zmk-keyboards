@@ -1,0 +1,167 @@
+name: Build Complete Firmware Pack
+
+run-name: ${{ inputs.board }} complete firmware pack
+
+on:
+  workflow_dispatch:
+    inputs:
+      board:
+        description: Keyboard shield to build
+        required: true
+        type: choice
+        options:
+          - hana
+          - chocofi
+          - sweep
+          - corne
+          - sofle
+      build_label:
+        description: Optional label for this build package
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix_path: ${{ steps.select.outputs.matrix_path }}
+      archive_name: ${{ steps.select.outputs.archive_name }}
+      raw_archive_name: ${{ steps.select.outputs.raw_archive_name }}
+      mcu_summary: ${{ steps.select.outputs.mcu_summary }}
+    steps:
+      - name: Select complete board matrix
+        id: select
+        shell: bash
+        env:
+          BOARD: ${{ inputs.board }}
+          BUILD_LABEL: ${{ inputs.build_label }}
+        run: |
+          set -euo pipefail
+
+          case "$BOARD" in
+            hana|chocofi|sweep|corne|sofle)
+              matrix="build-$BOARD.yaml"
+              ;;
+            *)
+              echo "::error::Unsupported board: $BOARD"
+              exit 1
+              ;;
+          esac
+
+          if [[ "$BOARD" == "hana" ]]; then
+            mcu_summary="Halves: Seeed XIAO nRF52840; dongle: ProMicro/nice!nano nRF52840"
+          else
+            mcu_summary="Halves and dongle: ProMicro/nice!nano v2 nRF52840"
+          fi
+
+          label="$(printf '%s' "$BUILD_LABEL" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
+          stamp="$(date -u +%Y%m%d-%H%M%S)"
+          if [[ -n "$label" ]]; then
+            archive="$BOARD-complete-firmware-$label"
+          else
+            archive="$BOARD-complete-firmware-$stamp"
+          fi
+          raw_archive="raw-$archive"
+
+          echo "matrix_path=$matrix" >> "$GITHUB_OUTPUT"
+          echo "archive_name=$archive" >> "$GITHUB_OUTPUT"
+          echo "raw_archive_name=$raw_archive" >> "$GITHUB_OUTPUT"
+          echo "mcu_summary=$mcu_summary" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### Complete firmware build"
+            echo ""
+            echo "- Board: **$BOARD**"
+            echo "- MCU mapping: $mcu_summary"
+            echo "- Build matrix: `$matrix`"
+            echo "- Package: **$archive**"
+            echo ""
+            echo "This build includes BLE central/peripheral, dongle peripheral/central, both OLED sizes, no-display dongle, and settings-reset images. Hana includes separate settings-reset images for its two MCU families."
+            echo ""
+            echo "This workflow uploads an Actions artifact only. It does not create a release or tag."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  build:
+    needs: prepare
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: ${{ needs.prepare.outputs.matrix_path }}
+      archive_name: ${{ needs.prepare.outputs.raw_archive_name }}
+
+  package:
+    runs-on: ubuntu-latest
+    needs: [prepare, build]
+    steps:
+      - name: Download compiled firmware
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.prepare.outputs.raw_archive_name }}
+          path: raw-firmware
+
+      - name: Assemble complete firmware package
+        shell: bash
+        env:
+          BOARD: ${{ inputs.board }}
+          MCU_SUMMARY: ${{ needs.prepare.outputs.mcu_summary }}
+          SOURCE_SHA: ${{ github.sha }}
+          BUILD_LABEL: ${{ inputs.build_label }}
+        run: |
+          set -euo pipefail
+          mkdir -p final-firmware
+          shopt -s nullglob
+          files=(raw-firmware/*)
+          if (( ${#files[@]} == 0 )); then
+            echo "::error::No firmware files were found in the raw build artifact."
+            exit 1
+          fi
+
+          for src in "${files[@]}"; do
+            [[ -f "$src" ]] || continue
+            cp "$src" "final-firmware/$(basename "$src")"
+          done
+
+          uf2_count="$(find final-firmware -maxdepth 1 -type f -name '*.uf2' | wc -l | tr -d ' ')"
+          if (( uf2_count < 7 )); then
+            echo "::error::Expected at least 7 UF2 images, found $uf2_count."
+            exit 1
+          fi
+
+          {
+            echo "Board: $BOARD"
+            echo "Source commit: $SOURCE_SHA"
+            echo "Build label: ${BUILD_LABEL:-none}"
+            echo "MCU mapping: $MCU_SUMMARY"
+            echo "UF2 image count: $uf2_count"
+            echo ""
+            echo "Expected targets:"
+            echo "- $BOARD left central"
+            echo "- $BOARD left peripheral"
+            echo "- $BOARD right peripheral"
+            echo "- $BOARD dongle central 128x64"
+            echo "- $BOARD dongle central 128x32"
+            echo "- $BOARD dongle no display"
+            if [[ "$BOARD" == "hana" ]]; then
+              echo "- hana halves settings reset (XIAO nRF52840)"
+              echo "- hana dongle settings reset (ProMicro/nice!nano nRF52840)"
+            else
+              echo "- $BOARD settings reset"
+            fi
+            echo ""
+            echo "Actual files:"
+            for file in final-firmware/*; do
+              echo "- $(basename "$file")"
+            done
+          } > final-firmware/BUILD-MANIFEST.txt
+
+          cat final-firmware/BUILD-MANIFEST.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload complete firmware package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ needs.prepare.outputs.archive_name }}
+          path: final-firmware
+          if-no-files-found: error
+          retention-days: 30
