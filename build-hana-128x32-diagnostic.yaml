@@ -1,0 +1,9 @@
+---
+include:
+  # Diagnostic only: exercise the OLED through ZMK's built-in status screen.
+  # Deliberately omit the custom "dongle_display" shield.
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x32
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_DISPLAY_STATUS_SCREEN_BUILT_IN=y -DCONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=n
+    artifact-name: hana 128x32 built-in display diagnostic
