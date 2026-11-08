@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - fix/hana-128x32-full-size-status\n      - fix/hana-128x32-raw-baseline
+      - fix/hana-128x32-full-size-status
+      - fix/hana-128x32-raw-baseline
     paths:
       - "config/**"
       - "boards/shields/hana/**"
