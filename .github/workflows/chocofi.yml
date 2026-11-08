@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - multi-board-baseline
+      - feature/shared-firmware-architecture
     paths:
       - "boards/shields/chocofi/**"
       - "boards/shields/common/**"
