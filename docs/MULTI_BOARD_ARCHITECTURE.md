@@ -1,53 +1,75 @@
 # Multi-board firmware architecture
 
-The maintained firmware lives in one monorepo, with each keyboard isolated under `boards/shields/<board>/`.
+The maintained keyboard firmware is organized as a multi-board workspace. Each keyboard shield owns its physical hardware description and keymap; common behaviors and dongle display functionality are consumed as shared Zephyr/ZMK modules.
 
-## Board nodes
+## Supported boards
 
-- **Hana** — hardware-tested reference implementation.
-- **Chocofi** — BLE/dongle baseline prepared; hardware validation pending.
-- **Corne** — imported from `Sukumar002/zmk-builder-reference` and adapted to the shared custom stack.
-- **Sofle** — imported from `Sukumar002/zmk-builder-reference` and adapted to the shared custom stack.
-- **Sweep** — ported from `Sukumar002/zmk-config-sweep`, preserving its Cradio-based direct-scan pin order and keymap; currently targets nice!nano v2 hardware.
+- **Hana** — Seeed XIAO nRF52840 halves and ProMicro/nice!nano-form-factor nRF52840 dongle.
+- **Chocofi** — ProMicro/nice!nano v2 nRF52840 halves and dongle.
+- **Sweep** — ProMicro/nice!nano v2 nRF52840 halves and dongle; its direct-scan pin order and original keymap are retained.
+- **Corne** — ProMicro/nice!nano v2 nRF52840 halves and dongle.
+- **Sofle** — ProMicro/nice!nano v2 nRF52840 halves and dongle.
 
-## Per-board build outputs
+The MCU mapping is a board profile, not a user-selectable build guess. Hana is the exception: its halves use `xiao_ble//zmk`, while its dongle uses `nice_nano//zmk`. Other supported boards currently use `nice_nano//zmk` for both halves and dongle.
 
-Every board workflow produces one archive containing:
+## Standard firmware package
 
-### BLE deployment
-- `<board>_ble_left_central`
-- `<board>_right_peripheral`
+The manual **Build Complete Firmware Pack** workflow accepts one input: the board name. It builds the complete matrix in `build-<board>.yaml` and uploads one ZIP artifact containing:
 
-### Dongle deployment
-- `<board>_dongle_left_peripheral`
-- `<board>_right_peripheral` (same right-peripheral firmware; compiled once)
-- `<board>_dongle_no_display`
-- `<board>_dongle_128x32`
-- `<board>_dongle_128x64`
+- `<board> left central`
+- `<board> left peripheral`
+- `<board> right peripheral`
+- `<board> dongle central 128x64`
+- `<board> dongle central 128x32`
+- `<board> dongle no display`
+- `<board> settings reset`
 
-### Recovery
-- settings-reset firmware for the MCU family used by that board.
+Hana has two reset images instead of one:
+- `hana halves settings reset` — XIAO nRF52840.
+- `hana dongle settings reset` — ProMicro/nice!nano nRF52840.
 
-Hana additionally emits separate XIAO and nice!nano reset images because its halves and dongle use different MCU families.
+The right-peripheral image is built once and is shared by BLE-central and dongle-central deployment. The package includes a build manifest with the source commit, MCU mapping, and actual firmware filenames.
 
-## CI isolation
-
-Each board has its own `build-<board>.yaml` and GitHub Actions workflow. Board-local changes build only that board. Shared custom-core-facing changes (common Studio helpers, west manifest, snippets, custom behaviors, display module integration, etc.) intentionally fan out to all affected board workflows.
+Per-board build workflows remain available for pull-request and push validation. The complete-pack workflow is the single manual entry point for obtaining all deployment variants.
 
 ## Shared feature layer
 
-Chocofi, Corne, and Sofle include `boards/shields/common/studio_features.dtsi`, which exposes the same Hana-derived runtime features without replacing board-specific keymaps:
+The goal is for shield folders to contain hardware configuration, matrix/physical-layout metadata, and board-specific keymaps—not copies of feature implementations.
 
-- runtime-editable Mod-Tap and Layer-Tap,
-- runtime-editable Bluetooth Profile hold-tap,
-- GUI/Alt layout-shift behavior,
-- OLED/base-view/timeout custom behaviors,
-- four Studio runtime-addable layer slots,
-- custom Studio RPC through the central target,
-- dongle display integration on OLED dongle targets.
+Already shared in the current workspace:
+- GUI/Alt layout-shift behavior and its custom behavior implementation.
+- Bluetooth profile hold behavior for profile selection and long-hold clear/pair operations.
+- OLED on/off, BASE-view cycle, and timeout-cycle behaviors.
+- Runtime-editable Mod-Tap and Layer-Tap defaults.
+- Four ZMK Studio runtime-addable layer slots.
+- Dongle display widgets and status sources, including battery, output, layer, modifier, WPM, Bongo Cat, timeout and host lock indicators.
 
-Hana remains unchanged as the tested reference implementation. Sweep also has an isolated build workflow and Build Console profiles for BLE and no-display, 128×32, and 128×64 dongle deployments.
+Still requiring a deliberate extraction/compatibility pass:
+- Common mouse-layer behavior bindings and per-keymap placement.
+- Output-toggle binding and other shared utility bindings.
+- A consistent feature configuration interface for all shield profiles.
+- Display renderer parity between the 128x32 and 128x64 paths, including Hana's validated raw 128x32 path and the compact LVGL path used by other current targets.
 
-## Deferred work
+## Hardware-specific responsibilities
 
-The one-dongle / multiple-split switching project is intentionally parked until all four boards have independently validated baseline firmware.
+These remain in the individual board profile:
+- MCU family and board target.
+- Matrix wiring, transforms, GPIO assignments and I2C aliases.
+- OLED controller, resolution, rotation/offset and display enablement.
+- Battery/charge sensing capabilities.
+- Keymap positions and which optional feature bindings are exposed.
+
+A ProMicro footprint does not guarantee identical I2C, ADC, charge-detection or regulator wiring. Profiles must declare actual supported hardware rather than assume all clones are electrically identical.
+
+## Project boundary
+
+The experimental two-keyboard **Unified Dongle** router remains isolated in `Sukumar002/zmk-unified-dongle`. It is not part of the standard per-keyboard firmware package or the ordinary central-dongle targets.
+
+## Validation gates
+
+1. Every complete board matrix compiles and produces the expected UF2 count.
+2. Studio-enabled central targets expose the intended RPC transport and runtime-editable behaviors.
+3. Both OLED sizes render correctly on the intended dongle hardware.
+4. Split BLE pairing, reconnection, battery telemetry, timeout behavior, and mouse behavior are hardware-tested.
+5. Settings-reset images are tested against the matching MCU family.
+6. A green build is compile evidence only; it is not a substitute for physical validation.
