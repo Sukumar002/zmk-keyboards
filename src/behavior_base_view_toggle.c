@@ -12,7 +12,7 @@ static int on_base_view_toggle_pressed(struct zmk_behavior_binding *binding,
                                        struct zmk_behavior_binding_event event) {
     ARG_UNUSED(binding);
     ARG_UNUSED(event);
-if (hana_base_view_cycle != NULL) {
+    if (hana_base_view_cycle != NULL) {
         hana_base_view_cycle();
     }
     return ZMK_BEHAVIOR_OPAQUE;
