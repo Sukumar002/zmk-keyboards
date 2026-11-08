@@ -1,29 +1,26 @@
-name: "Hana 128x32 Dashboard Candidate"
+name: "Hana 128x32 Full-Screen Diagnostic"
 
+# Isolated 128x32 hardware test. No 128x64 build is part of this workflow.
 on:
   workflow_dispatch:
   push:
     branches:
-      - fix/hana-128x32-full-size-status
       - fix/hana-128x32-raw-baseline
     paths:
       - "config/**"
-      - "boards/shields/hana/**"
       - "build-hana-128x32-candidate.yaml"
       - ".github/workflows/hana-128x32-candidate.yml"
-      - "CMakeLists.txt"
-      - "Kconfig"
 
 permissions:
   contents: read
 
 concurrency:
-  group: "hana-128x32-candidate"
-  cancel-in-progress: true
+  group: "hana-128x32-fullscreen-diagnostic"
+  cancel-in-progress: false
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       build_matrix_path: build-hana-128x32-candidate.yaml
-      archive_name: hana-128x32-dashboard-candidate
+      archive_name: hana-128x32-fullscreen-diagnostic
