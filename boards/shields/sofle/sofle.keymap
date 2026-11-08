@@ -83,7 +83,7 @@
             display-name = "Set";
             bindings = <
                 &bt_profile_shared 0 0 &bt_profile_shared 1 1 &bt_profile_shared 2 2 &bt_profile_shared 3 3 &bt_profile_shared 4 4 &out OUT_TOG &tog_ls &oled_tog_shared &base_view_tog_shared &timeout_cycle_shared 1 &bootloader &sys_reset
-                &timeout_cycle_shared 0 &bt BT_CLR_ALL &ext_power EP_TOG &rgb_ug RGB_HUD &rgb_ug RGB_HUI &rgb_ug RGB_SAD &rgb_ug RGB_SAI &rgb_ug RGB_EFF &trans &trans &trans &trans
+                &timeout_cycle_shared 0 &bt BT_CLR_ALL &ext_power EP_TOG &rgb_ug RGB_HUD &rgb_ug RGB_HUI &rgb_ug RGB_SAD &rgb_ug RGB_SAI &rgb_ug RGB_EFF &trans &trans &oled_brightness_shared 0  &oled_brightness_shared 1
                 &trans &rgb_ug RGB_BRD &rgb_ug RGB_BRI &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
