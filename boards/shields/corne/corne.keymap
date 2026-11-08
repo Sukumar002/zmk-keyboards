@@ -13,6 +13,12 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include "../common/studio_unlock_combo.dtsi"
 
+#define BASE  0
+#define NUM   1
+#define NAV   2
+#define SET   3
+#define MOUSE 4
+
 
 / {
         keymap {
