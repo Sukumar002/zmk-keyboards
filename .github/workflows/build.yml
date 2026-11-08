@@ -8,6 +8,7 @@ on:
       - feature/shared-firmware-architecture
       - feature/reconciled-multi-board-oled
       - mvp/all-shields-oled-studio
+      - fix/hana-layer-status-128x32-parity
     paths:
       - "boards/shields/hana/**"
       - "boards/shields/common/**"
