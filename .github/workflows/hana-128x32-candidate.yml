@@ -1,6 +1,7 @@
 name: "Hana 128x32 Dashboard Candidate"
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - fix/hana-128x32-full-size-status\n      - fix/hana-128x32-raw-baseline
