@@ -92,21 +92,12 @@
         set_layer {
             display-name = "Set";
             bindings = <
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │  RESET   │
-           &sys_reset  &out OUT_TOG &tog_ls    &oled_tog_shared &bt_profile_shared 0 0    &trans     &trans     &trans     &trans    &sys_reset
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
-          &bootloader  &oled_tog_shared &base_view_tog_shared &timeout_cycle_shared 1 &bt_profile_shared 1 1    &trans     &trans     &trans     &trans    &bootloader
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
-            &trans     &bt_profile_shared 3 3 &bt_profile_shared 4 4 &bt BT_CLR_ALL &bt_profile_shared 2 2    &timeout_cycle_shared 0 &trans     &trans     &trans     &trans
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &trans     &trans         &trans     &trans
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+                &bt_profile_shared 0 0 &bt_profile_shared 1 1 &bt_profile_shared 2 2 &bt_profile_shared 3 3 &bt_profile_shared 4 4 &out OUT_TOG &tog_ls &oled_tog_shared &base_view_tog_shared &timeout_cycle_shared 1
+                &timeout_cycle_shared 0 &bt BT_CLR_ALL &bootloader &sys_reset &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans
             >;
         };
-
         mouse_layer {
             display-name = "Mouse";
             
@@ -114,7 +105,7 @@
                 &msc SCRL_LEFT &msc SCRL_UP &mmv MOVE_UP &msc SCRL_DOWN &msc SCRL_RIGHT &trans &trans &trans &trans &trans
                 &mkp LCLK &mkp MCLK &mkp RCLK &trans &trans &trans &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &tog MOUSE
+                &trans &trans &trans &trans
             >;
         };
 
