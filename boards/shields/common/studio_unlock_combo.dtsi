@@ -1,0 +1,13 @@
+/* Shared Studio unlock chord: physical positions 0 + 1 on every shield. */
+/ {
+    combos {
+        compatible = "zmk,combos";
+        studio_unlock_combo {
+            timeout-ms = <50>;
+            require-prior-idle-ms = <500>;
+            layers = <0>;
+            key-positions = <0 1>;
+            bindings = <&studio_unlock>;
+        };
+    };
+};
