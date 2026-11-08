@@ -1,0 +1,27 @@
+name: "Hana 128x32 Dashboard Candidate"
+
+on:
+  push:
+    branches:
+      - fix/hana-128x32-full-size-status
+    paths:
+      - "config/**"
+      - "boards/shields/hana/**"
+      - "build-hana-128x32-candidate.yaml"
+      - ".github/workflows/hana-128x32-candidate.yml"
+      - "CMakeLists.txt"
+      - "Kconfig"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "hana-128x32-candidate"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-hana-128x32-candidate.yaml
+      archive_name: hana-128x32-dashboard-candidate

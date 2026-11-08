@@ -2,43 +2,36 @@
 include:
   - board: xiao_ble//zmk
     shield: settings_reset
-    artifact-name: hana_xiao_settings_reset
-
+    artifact-name: hana halves settings reset
   - board: nice_nano//zmk
     shield: settings_reset
-    artifact-name: hana_dongle_settings_reset
-
+    artifact-name: hana dongle settings reset
   # BLE mode: left half is central; right half is peripheral.
   - board: xiao_ble//zmk
     shield: hana_central_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_ble_left_central
-
+    artifact-name: hana left central
   # Shared right peripheral: same firmware works with left-central or dongle-central.
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
-    artifact-name: hana_right_peripheral
-
+    artifact-name: hana right peripheral
   # Dongle mode.
   - board: xiao_ble//zmk
     shield: hana_peripheral_left
-    artifact-name: hana_dongle_left_peripheral
-
+    artifact-name: hana left peripheral
   - board: nice_nano//zmk
     shield: hana_central_dongle
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_no_display
-
+    artifact-name: hana dongle no display
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x32 dongle_display
     snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x32
-
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_DONGLE_DISPLAY_COMPACT_MODE=y -DCONFIG_LV_Z_VDB_SIZE=32 -DCONFIG_ZMK_DONGLE_DISPLAY_BONGO_CAT=n -DCONFIG_ZMK_DONGLE_DISPLAY_MODIFIERS=n -DCONFIG_ZMK_DONGLE_DISPLAY_LAYER=n
+    artifact-name: hana dongle central 128x32
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x64
+    artifact-name: hana dongle central 128x64

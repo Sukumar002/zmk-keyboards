@@ -20,22 +20,6 @@ on:
         options:
           - ble
           - dongle
-      split_mcu:
-        description: "Split halves MCU"
-        required: true
-        type: choice
-        default: nice_nano
-        options:
-          - nice_nano
-          - xiao_ble
-      dongle_mcu:
-        description: "Dongle MCU (ignored for BLE)"
-        required: true
-        type: choice
-        default: nice_nano
-        options:
-          - nice_nano
-          - xiao_ble
       dongle_display:
         description: "Dongle display (ignored for BLE)"
         required: true
@@ -64,7 +48,6 @@ jobs:
       matrix_path: ${{ steps.select.outputs.matrix_path }}
       archive_name: ${{ steps.select.outputs.archive_name }}
       raw_archive_name: ${{ steps.select.outputs.raw_archive_name }}
-      file_prefix: ${{ steps.select.outputs.file_prefix }}
     steps:
       - name: Validate selection
         id: select
@@ -72,36 +55,32 @@ jobs:
         env:
           BOARD: ${{ inputs.board }}
           CONNECTIVITY: ${{ inputs.connectivity }}
-          SPLIT_MCU: ${{ inputs.split_mcu }}
-          DONGLE_MCU: ${{ inputs.dongle_mcu }}
           DISPLAY: ${{ inputs.dongle_display }}
           BUILD_LABEL: ${{ inputs.build_label }}
         run: |
           set -euo pipefail
+
+          if [[ "$BOARD" == "hana" ]]; then
+            split_mcu=xiao_ble
+            dongle_mcu=nice_nano
+          else
+            split_mcu=nice_nano
+            dongle_mcu=nice_nano
+          fi
 
           case "$BOARD" in
             hana|chocofi|corne|sofle) ;;
             *) echo "::error::Unsupported board: $BOARD"; exit 1 ;;
           esac
 
-          case "$SPLIT_MCU" in
-            nice_nano|xiao_ble) ;;
-            *) echo "::error::Unsupported split MCU: $SPLIT_MCU"; exit 1 ;;
-          esac
-
-          case "$DONGLE_MCU" in
-            nice_nano|xiao_ble) ;;
-            *) echo "::error::Unsupported dongle MCU: $DONGLE_MCU"; exit 1 ;;
-          esac
-
           if [[ "$CONNECTIVITY" == "ble" ]]; then
-            matrix="build-console/generated/$BOARD-ble-split-$SPLIT_MCU.yaml"
+            matrix="build-console/$BOARD-ble.yaml"
           else
             case "$DISPLAY" in
               none|128x32|128x64) ;;
               *) echo "::error::Unsupported display selection: $DISPLAY"; exit 1 ;;
             esac
-            matrix="build-console/generated/$BOARD-dongle-$DISPLAY-split-$SPLIT_MCU-dongle-$DONGLE_MCU.yaml"
+            matrix="build-console/$BOARD-dongle-$DISPLAY.yaml"
           fi
 
           label="$(printf '%s' "$BUILD_LABEL" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
@@ -110,37 +89,32 @@ jobs:
           if [[ "$CONNECTIVITY" == "dongle" ]]; then
             archive="$archive-$DISPLAY"
           fi
+
           if [[ -n "$label" ]]; then
             archive="$archive-$label"
           else
             archive="$archive-$stamp"
           fi
 
-          if [[ -n "$label" ]]; then
-            file_prefix="$label"
-          else
-            file_prefix="$archive"
-          fi
           raw_archive="raw-$archive"
 
           echo "matrix_path=$matrix" >> "$GITHUB_OUTPUT"
           echo "archive_name=$archive" >> "$GITHUB_OUTPUT"
           echo "raw_archive_name=$raw_archive" >> "$GITHUB_OUTPUT"
-          echo "file_prefix=$file_prefix" >> "$GITHUB_OUTPUT"
 
           {
             echo "### Firmware build selection"
             echo ""
             echo "- Board: **$BOARD**"
             echo "- Connectivity: **$CONNECTIVITY**"
-            echo "- Split halves MCU: **$SPLIT_MCU**"
+            echo "- Split halves MCU: **$split_mcu**"
             if [[ "$CONNECTIVITY" == "dongle" ]]; then
-              echo "- Dongle MCU: **$DONGLE_MCU**"
+              echo "- Dongle MCU: **$dongle_mcu**"
               echo "- Dongle display: **$DISPLAY**"
             fi
             echo "- Matrix: `$matrix`"
             echo "- Final artifact archive: **$archive**"
-            echo "- Firmware filename prefix: **$file_prefix**"
+            echo "- Firmware filenames use the shared shield naming convention."
             echo ""
             echo "This workflow uploads an Actions artifact only. It does not create a release or tag."
           } >> "$GITHUB_STEP_SUMMARY"
@@ -162,10 +136,8 @@ jobs:
           name: ${{ needs.prepare.outputs.raw_archive_name }}
           path: raw-firmware
 
-      - name: Add client/job tag to firmware filenames
+      - name: Package firmware with consistent filenames
         shell: bash
-        env:
-          PREFIX: ${{ needs.prepare.outputs.file_prefix }}
         run: |
           set -euo pipefail
           mkdir -p final-firmware
@@ -177,7 +149,7 @@ jobs:
           fi
           for src in "${files[@]}"; do
             name="$(basename "$src")"
-            cp "$src" "final-firmware/${PREFIX}-${name}"
+            cp "$src" "final-firmware/${name}"
           done
           echo "### Final firmware package" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
