@@ -1,5 +1,6 @@
 /* Shared Studio unlock chord: physical positions 0 + 1 on every shield.
  * Keep this definition centralized so all five default keymaps behave identically.
+ * The chord is deliberately active only on layer index 0 (Base).
  */
 / {
     combos {
