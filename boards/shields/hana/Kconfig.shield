@@ -10,6 +10,9 @@ config SHIELD_HANA_CENTRAL_DONGLE_128X64
 config SHIELD_HANA_CENTRAL_DONGLE_128X32
     def_bool $(shields_list_contains,hana_central_dongle_128x32)
 
+config SHIELD_HANA_CENTRAL_DONGLE_128X32_DIAG
+    def_bool $(shields_list_contains,hana_central_dongle_128x32_diag)
+
 config SHIELD_HANA_CENTRAL_LEFT
     def_bool $(shields_list_contains,hana_central_left)
 
