@@ -3,5 +3,5 @@ include:
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x32 dongle_display
     snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana dongle central 128x32
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_HANA_RAW_DASHBOARD=y -DCONFIG_ZMK_DISPLAY=n
+    artifact-name: hana dongle central 128x32 fullscreen-test
