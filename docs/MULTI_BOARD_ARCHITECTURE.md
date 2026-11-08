@@ -50,6 +50,21 @@ Still requiring a deliberate extraction/compatibility pass:
 - A consistent feature configuration interface for all shield profiles.
 - Display renderer parity between the 128x32 and 128x64 paths, including Hana's validated raw 128x32 path and the compact LVGL path used by other current targets.
 
+## Feature parity audit
+
+The shared behavior definitions are now included by all five keymaps. Hana's board-local copies of the layout-shift map, Bluetooth profile hold-tap, OLED toggle, BASE-view toggle and timeout-cycle behavior have been replaced with the common definitions. Hana retains only its hardware/layout-specific keymap and hold-trigger-position overrides. Sweep also uses the shared BASE-view behavior instead of a duplicate local node.
+
+The keymap bindings are not yet at full parity:
+- **Hana and Sweep** expose the complete feature-control set in their keymaps, including output toggle and mouse controls.
+- **Chocofi** includes the common feature definitions and Studio runtime layers, but its current keymap still uses direct Bluetooth selection and does not yet expose the full OLED/timeout/output/mouse control set.
+- **Corne and Sofle** include the shared definitions and Studio runtime layers, but their imported keymaps still need feature-control bindings.
+
+The next keymap pass should add a consistent feature/adjust layer and optional mouse layer without replacing each board's existing base typing layout. Key positions remain board-specific.
+
+## Display integration status
+
+All five complete build matrices include both 128×32 and 128×64 dongle targets. The current shared display dependency is pinned to the Sweep-tested module line. Hana's separately validated raw-framebuffer 128×32 candidate is on the dedicated `feature/hana-oled-refinement` branch and has not yet been reconciled with that shared display-module line. The complete-pack workflow must not be treated as release-ready for Hana's 128×32 target until that renderer integration is completed and built.
+
 ## Hardware-specific responsibilities
 
 These remain in the individual board profile:
