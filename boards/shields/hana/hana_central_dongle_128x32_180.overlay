@@ -1,0 +1,13 @@
+/*
+ * 180-degree SSD1306 orientation variant.
+ *
+ * The standard 128x32 overlay enables segment-remap and com-invdir.
+ * Clearing both controller scan-direction flags reverses both axes,
+ * producing a 180-degree rotation without changing framebuffer geometry.
+ */
+#include "hana_central_dongle_128x32.overlay"
+
+&oled_128x32 {
+    /delete-property/ segment-remap;
+    /delete-property/ com-invdir;
+};
