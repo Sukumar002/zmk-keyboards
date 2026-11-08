@@ -1,4 +1,6 @@
-/* Shared Studio unlock chord: physical positions 0 + 1 on every shield. */
+/* Shared Studio unlock chord: physical positions 0 + 1 on every shield.
+ * Keep this definition centralized so all five default keymaps behave identically.
+ */
 / {
     combos {
         compatible = "zmk,combos";
