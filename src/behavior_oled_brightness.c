@@ -64,7 +64,7 @@ static const struct behavior_parameter_metadata oled_brightness_metadata = {
 };
 #endif
 
-#if IS_ENABLED(CONFIG_SETTINGS)
+#if IS_ENABLED(CONFIG_SETTINGS) && DT_HAS_CHOSEN(zephyr_display) && IS_ENABLED(CONFIG_DISPLAY)
 static int oled_brightness_settings_set(const char *name, size_t len,
                                         settings_read_cb read_cb, void *cb_arg)
 {
@@ -115,7 +115,7 @@ static int oled_brightness_pressed(struct zmk_behavior_binding *binding,
         LOG_WRN("OLED contrast adjustment failed: %d", rc);
     }
 
-#if IS_ENABLED(CONFIG_SETTINGS)
+#if IS_ENABLED(CONFIG_SETTINGS) && DT_HAS_CHOSEN(zephyr_display) && IS_ENABLED(CONFIG_DISPLAY)
     if (rc == 0) {
         (void)settings_save_one("oled_brightness/contrast", &oled_contrast,
                                 sizeof(oled_contrast));
