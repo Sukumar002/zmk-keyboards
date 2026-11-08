@@ -6,6 +6,7 @@ on:
       - main
       - feature/shared-firmware-architecture
       - feature/reconciled-multi-board-oled
+      - mvp/all-shields-oled-studio
     paths:
       - "boards/shields/sweep/**"
       - "boards/shields/common/**"
