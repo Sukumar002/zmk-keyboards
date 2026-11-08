@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - feature/shared-firmware-architecture
+      - feature/reconciled-multi-board-oled
     paths:
       - "boards/shields/sweep/**"
       - "boards/shields/common/**"
