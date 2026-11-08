@@ -8,6 +8,7 @@ on:
       - fix/hana-128x32-raw-baseline
     paths:
       - "config/**"
+      - "boards/shields/hana/**"
       - "build-hana-128x32-candidate.yaml"
       - ".github/workflows/hana-128x32-candidate.yml"
 
