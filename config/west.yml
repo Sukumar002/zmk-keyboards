@@ -8,6 +8,9 @@ manifest:
     - name: sukumar
       url-base: https://github.com/Sukumar002
 
+    - name: mctechnology17
+      url-base: https://github.com/mctechnology17
+
   projects:
     - name: zmk
       remote: sukumar
@@ -17,6 +20,11 @@ manifest:
     - name: zmk-dongle-display
       remote: sukumar
       revision: e4dcead5d2086ad920ae3d1100439beb72dc23bd
+
+    # OLED hardware adapter: explicit 128x32 / 128x64 display devicetree overlays.
+    - name: zmk-oled-adapter
+      remote: mctechnology17
+      revision: 892c83d60b6a365c35334c06831d9c5b0f2ba9c0
 
   self:
     path: config
