@@ -11,6 +11,13 @@ if SHIELD_HANA_CENTRAL_DONGLE || SHIELD_HANA_CENTRAL_DONGLE_128X64 || SHIELD_HAN
 config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
     default 2
 
+# Two split peripherals plus the five default host Bluetooth profiles.
+config BT_MAX_CONN
+    default 7
+
+config BT_MAX_PAIRED
+    default 7
+
 config ZMK_KEYBOARD_NAME
     default "hana.dongle"
 
