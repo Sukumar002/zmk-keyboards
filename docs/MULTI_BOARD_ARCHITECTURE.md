@@ -68,14 +68,20 @@ All five keymaps include `studio_features.dtsi`, `studio_runtime_layers.dtsi` an
 
 ## Feature parity audit
 
-The shared behavior definitions are now included by all five keymaps. Hana's board-local copies of the layout-shift map, Bluetooth profile hold-tap, OLED toggle, BASE-view toggle and timeout-cycle behavior have been replaced with the common definitions. Hana retains only its hardware/layout-specific keymap and hold-trigger-position overrides. Sweep also uses the shared BASE-view behavior instead of a duplicate local node.
+All five default keymaps now expose the same five-layer structure and the shared feature controls:
+- Bluetooth profile selection with hold-to-clear/re-pair behavior for each profile, plus clear-all.
+- Output toggle and GUI/Alt layout shift.
+- OLED toggle, BASE-view cycle, and keyboard/OLED timeout controls.
+- Bootloader and system reset access.
+- Mouse movement, scrolling and mouse buttons.
+- Four ZMK Studio runtime-addable layer slots.
+- Shared runtime-editable Mod-Tap and Layer-Tap behaviors.
 
-The keymap bindings are not yet at full parity:
-- **Hana and Sweep** expose the complete feature-control set in their keymaps, including output toggle and mouse controls.
-- **Chocofi** includes the common feature definitions and Studio runtime layers, but its current keymap still uses direct Bluetooth selection and does not yet expose the full OLED/timeout/output/mouse control set.
-- **Corne and Sofle** include the shared definitions and Studio runtime layers, but their imported keymaps still need feature-control bindings.
+The physical positions differ to fit each keyboard's matrix and thumb cluster. Each shield retains its original typing layout and hardware wiring. Sofle's existing RGB and external-power controls remain available on Set.
 
-The next keymap pass should add a consistent feature/adjust layer and optional mouse layer without replacing each board's existing base typing layout. Key positions remain board-specific.
+Studio unlock is centralized in `studio_unlock_combo.dtsi` and uses positions `0 1` on Base for every shield. The keymaps no longer define their own unlock combos or direct unlock keys.
+
+These are source-level parity changes. Successful compilation and physical validation are tracked separately; the feature controls should not be considered hardware-verified on every board until those checks pass.
 
 ## Display integration status
 
