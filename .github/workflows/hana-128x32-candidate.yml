@@ -11,16 +11,6 @@ on:
       - ".github/workflows/hana-128x32-candidate.yml"
       - "CMakeLists.txt"
       - "Kconfig"
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "config/**"
-      - "boards/shields/hana/**"
-      - "build-hana-128x32-candidate.yaml"
-      - ".github/workflows/hana-128x32-candidate.yml"
-      - "CMakeLists.txt"
-      - "Kconfig"
 
 permissions:
   contents: read
