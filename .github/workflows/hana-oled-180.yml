@@ -1,0 +1,26 @@
+name: "Hana OLED 180 Degree Orientation Variants"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/hana-oled-180-rotation
+    paths:
+      - "boards/shields/hana/**"
+      - "config/**"
+      - "build-hana-oled-180.yaml"
+      - ".github/workflows/hana-oled-180.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "hana-oled-180-orientation"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-hana-oled-180.yaml
+      archive_name: hana-oled-180-orientation
