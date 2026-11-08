@@ -49,6 +49,12 @@
             display-name = "OLED Toggle";
         };
 
+        oled_brightness_shared: oled_brightness_shared {
+            compatible = "zmk,behavior-oled-brightness";
+            #binding-cells = <1>;
+            display-name = "OLED Brightness";
+        };
+
         timeout_cycle_shared: timeout_cycle_shared {
             compatible = "zmk,behavior-timeout-cycle";
             #binding-cells = <1>;
