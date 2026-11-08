@@ -1,7 +1,6 @@
 #define DT_DRV_COMPAT zmk_behavior_oled_toggle
 
 #include <zephyr/device.h>
-#include <zephyr/drivers/display.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 
@@ -10,9 +9,8 @@
 
 #if IS_ENABLED(CONFIG_ZMK_DISPLAY)
 #include <zmk/display.h>
-#elif IS_ENABLED(CONFIG_DONGLE_DISPLAY_RAW_DASHBOARD) && DT_HAS_CHOSEN(zephyr_display)
-static const struct device *const raw_oled = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
-static bool raw_oled_manual_power_on = true;
+#elif IS_ENABLED(CONFIG_DONGLE_DISPLAY_RAW_DASHBOARD)
+extern void zmk_raw_display_toggle_manual_power(void);
 #endif
 
 LOG_MODULE_REGISTER(zmk_behavior_oled_toggle, LOG_LEVEL_WRN);
@@ -23,17 +21,8 @@ static int on_oled_toggle_pressed(struct zmk_behavior_binding *binding,
     ARG_UNUSED(event);
 #if IS_ENABLED(CONFIG_ZMK_DISPLAY)
     zmk_display_toggle_manual_power();
-#elif IS_ENABLED(CONFIG_DONGLE_DISPLAY_RAW_DASHBOARD) && DT_HAS_CHOSEN(zephyr_display)
-    if (!device_is_ready(raw_oled)) {
-        LOG_WRN("OLED device is not ready; manual toggle ignored");
-        return ZMK_BEHAVIOR_OPAQUE;
-    }
-    raw_oled_manual_power_on = !raw_oled_manual_power_on;
-    int err = raw_oled_manual_power_on ? display_blanking_off(raw_oled)
-                                       : display_blanking_on(raw_oled);
-    if (err) {
-        LOG_WRN("OLED manual power toggle failed: %d", err);
-    }
+#elif IS_ENABLED(CONFIG_DONGLE_DISPLAY_RAW_DASHBOARD)
+    zmk_raw_display_toggle_manual_power();
 #endif
     return ZMK_BEHAVIOR_OPAQUE;
 }
