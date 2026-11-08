@@ -76,7 +76,7 @@
             display-name = "Set";
             bindings = <
                 &bt_profile_shared 0 0 &bt_profile_shared 1 1 &bt_profile_shared 2 2 &bt_profile_shared 3 3 &bt_profile_shared 4 4 &out OUT_TOG &tog_ls &oled_tog_shared &base_view_tog_shared &timeout_cycle_shared 1
-                &timeout_cycle_shared 0 &bt BT_CLR_ALL &bootloader &sys_reset &trans &trans &trans &trans &trans &trans
+                &timeout_cycle_shared 0 &bt BT_CLR_ALL &bootloader &sys_reset &trans &trans &trans &trans &oled_brightness_shared 0  &oled_brightness_shared 1
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans
             >;
