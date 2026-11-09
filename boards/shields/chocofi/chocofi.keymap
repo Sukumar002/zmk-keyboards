@@ -118,7 +118,7 @@
 
         combo_set_layer {
             timeout-ms = <50>;
-            key-positions = <35 36>;
+            key-positions = <32 33>;
             bindings = <&lt 3 CAPSLOCK>;
         };
     };
