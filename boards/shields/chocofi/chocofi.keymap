@@ -82,31 +82,31 @@
 
         combo_alt_tab {
             timeout-ms = <50>;
-            key-positions = <13 14>;
+            key-positions = <12 13>;
             bindings = <&mt LALT TAB>;
         };
 
         combo_grave_gui {
             timeout-ms = <50>;
-            key-positions = <12 13>;
+            key-positions = <11 12>;
             bindings = <&mt LGUI GRAVE>;
         };
 
         combo_bksp_alt {
             timeout-ms = <50>;
-            key-positions = <17 18>;
+            key-positions = <16 17>;
             bindings = <&mt LALT BACKSPACE>;
         };
 
         combo_quote_ctrl {
             timeout-ms = <50>;
-            key-positions = <17 19>;
+            key-positions = <18 19>;
             bindings = <&mt LCTRL SQT>;
         };
 
         combo_del_gui {
             timeout-ms = <50>;
-            key-positions = <18 19>;
+            key-positions = <17 18>;
             bindings = <&mt RGUI DELETE>;
         };
 
