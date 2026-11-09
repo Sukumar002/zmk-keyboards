@@ -14,7 +14,7 @@
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
-    require-prior-idle-ms = <-1>;
+    require-prior-idle-ms = <(-1)>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -34,7 +34,7 @@
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
-    require-prior-idle-ms = <-1>;
+    require-prior-idle-ms = <(-1)>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
