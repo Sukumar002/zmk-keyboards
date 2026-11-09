@@ -154,8 +154,8 @@
         nav_layer {
             display-name = "Nav";
             bindings = <
-                &kp F10            &kp F7             &kp F8             &kp F9             &kp SCROLL_LOCK    &kp C_VOL_UP       &kp HOME           &kp UP_ARROW       &kp END            &kp PAGE_UP
-                &kp F11            &kp F4             &kp F5             &kp F6             &kp NUM_LOCK       &kp C_VOL_DN       &kp LEFT           &kp DOWN           &kp RIGHT          &kp PAGE_DOWN
+                &kp F10            &kp F7             &kp F8             &kp F9             &kp SCROLLLOCK    &kp C_VOL_UP       &kp HOME           &kp UP_ARROW       &kp END            &kp PAGE_UP
+                &kp F11            &kp F4             &kp F5             &kp F6             &kp KP_NUMLOCK       &kp C_VOL_DN       &kp LEFT           &kp DOWN           &kp RIGHT          &kp PAGE_DOWN
                 &kp F12            &kp N1             &kp N2             &kp N3             &kp CAPSLOCK       &kp C_MUTE         &trans             &trans             &trans             &trans
                                         &trans          &trans             &trans            &trans             &trans             &trans
             >;
