@@ -19,7 +19,7 @@ manifest:
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: cc713b76475edc278e42e4ec4302600d5b6b6431
+      revision: 9deadf2959df72a1474d7a1bea4b77e78ad465af
 
     # OLED hardware adapter: explicit 128x32 / 128x64 display devicetree overlays.
     - name: zmk-oled-adapter
