@@ -31,10 +31,7 @@
 };
 
 &lt {
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <175>;
-    require-prior-idle-ms = <(-1)>;
+    /* Keep Hana's Layer-Tap defaults; only share the unrestricted trigger mask. */
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -79,7 +76,7 @@
 
         combo_studio_unlock {
             timeout-ms = <50>;
-            key-positions = <1 2>;
+            key-positions = <30 35>;
             bindings = <&studio_unlock>;
         };
 
