@@ -11,6 +11,27 @@
 
 #define MOUSE 4
 
+// Expose the standard pointer behaviors to ZMK Studio's runtime behavior picker.
+// Keep this Sweep-specific so other keyboard firmware is unaffected.
+&mmv {
+    runtime-editable;
+    runtime-default-active;
+    display-name = "Mouse Move";
+};
+
+&msc {
+    runtime-editable;
+    runtime-default-active;
+    display-name = "Mouse Scroll";
+};
+
+&mkp {
+    runtime-editable;
+    runtime-default-active;
+    display-name = "Mouse Click";
+};
+
+
 // Keep Sweep's existing home-row mod timing and tap-preferred feel.
 &mt {
     flavor = "tap-preferred";
