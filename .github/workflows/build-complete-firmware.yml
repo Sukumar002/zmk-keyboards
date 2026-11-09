@@ -150,7 +150,7 @@ jobs:
               echo "- hana_left_central"
               echo "- hana_left_peripheral"
               echo "- hana_right_peripheral"
-              echo "- hana_settings_reset_xiao"
+              echo "- hana_settings_reset"
               echo "- hana_settings_reset_dongle"
             else
               echo "- $BOARD dongle central 128x64"
