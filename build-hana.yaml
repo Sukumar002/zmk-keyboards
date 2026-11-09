@@ -1,5 +1,6 @@
 ---
 include:
+  # Reset images
   - board: xiao_ble//zmk
     shield: settings_reset
     artifact-name: hana_xiao_settings_reset
@@ -8,37 +9,29 @@ include:
     shield: settings_reset
     artifact-name: hana_dongle_settings_reset
 
-  # BLE mode: left half is central; right half is peripheral.
+  # Hana halves: these two peripheral images pair with the central dongle.
   - board: xiao_ble//zmk
-    shield: hana_central_left
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_ble_left_central
+    shield: hana_peripheral_left
+    artifact-name: hana_left_peripheral
 
-  # Shared right peripheral: same firmware works with left-central or dongle-central.
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
     artifact-name: hana_right_peripheral
 
-  # Dongle mode.
-  - board: xiao_ble//zmk
-    shield: hana_peripheral_left
-    artifact-name: hana_dongle_left_peripheral
-
-  - board: nice_nano//zmk
-    shield: hana_central_dongle
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_no_display
-
+  # Central dongle display variants.
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x32 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x32
+    artifact-name: hana_dongle_oled_128x32
 
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x64 dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x64
+    artifact-name: hana_dongle_oled_128x64
+
+  # Pro Micro footprint GPIO validation image.
+  - board: nice_nano//zmk
+    shield: tester_pro_micro
+    artifact-name: hana_dongle_promicro_gpio_tester
