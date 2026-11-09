@@ -5,11 +5,12 @@ on:
     branches:
       - main
       - multi-board-baseline
+      - feature/hana-128x32-standard-dashboard
     paths:
       - "boards/shields/hana/**"
       - "boards/shields/common/**"
       - "build-hana.yaml"
-      - ".github/workflows/hana.yml"
+      - ".github/workflows/build.yml"
       - "config/**"
       - "snippets/**"
       - "src/**"
