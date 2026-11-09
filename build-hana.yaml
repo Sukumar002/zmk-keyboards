@@ -4,7 +4,7 @@ include:
   # Hana halves use Seeed XIAO nRF52840.
   - board: xiao_ble//zmk
     shield: settings_reset
-    artifact-name: hana_settings_reset_xiao
+    artifact-name: hana_settings_reset
 
   # Dongle uses the ProMicro/nice!nano nRF52840 target.
   - board: nice_nano//zmk
