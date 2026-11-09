@@ -1,31 +1,33 @@
-# OLED renderer integration: compact 128x32 uses the standalone Zephyr framebuffer path.
+# Hana firmware package: seven standard images plus the two MCU-specific reset images.
 ---
 include:
+  # Hana halves use Seeed XIAO nRF52840.
   - board: xiao_ble//zmk
     shield: settings_reset
-    artifact-name: hana_xiao_settings_reset
+    artifact-name: hana_settings_reset_xiao
 
+  # Dongle uses the ProMicro/nice!nano nRF52840 target.
   - board: nice_nano//zmk
     shield: settings_reset
-    artifact-name: hana_dongle_settings_reset
+    artifact-name: hana_settings_reset_dongle
 
   # BLE mode: left half is central; right half is peripheral.
   - board: xiao_ble//zmk
     shield: hana_central_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_ble_left_central
+    artifact-name: hana_left_central
 
-  # Shared right peripheral: same firmware works with left-central or dongle-central.
+  # Split halves for dongle-central mode.
+  - board: xiao_ble//zmk
+    shield: hana_peripheral_left
+    artifact-name: hana_left_peripheral
+
   - board: xiao_ble//zmk
     shield: hana_peripheral_right
     artifact-name: hana_right_peripheral
 
-  # Dongle mode.
-  - board: xiao_ble//zmk
-    shield: hana_peripheral_left
-    artifact-name: hana_dongle_left_peripheral
-
+  # Central dongle variants.
   - board: nice_nano//zmk
     shield: hana_central_dongle
     snippet: studio-rpc-usb-uart
@@ -36,26 +38,10 @@ include:
     shield: hana_central_dongle_128x32 dongle_display oled_adapter_pro_micro_128x32
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x32
-
-  # Isolation: retain the raw dashboard but omit the OLED adapter overlay.
-  # Hana's own 128x32 overlay supplies the SSD1306 node; this tests whether
-  # the adapter overlay is conflicting with the dashboard/central startup.
-  - board: nice_nano//zmk
-    shield: hana_central_dongle_128x32 dongle_display
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x32_raw_no_adapter
-
-  # Diagnostic: same 128x32 panel/driver path, with raw dashboard disabled.
-  - board: nice_nano//zmk
-    shield: hana_central_dongle_128x32_diag
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x32_no_raw_dashboard
+    artifact-name: hana_dongle_central_128x32
 
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x64 dongle_display oled_adapter_pro_micro_128x64
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: hana_dongle_128x64
+    artifact-name: hana_dongle_central_128x64
