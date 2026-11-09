@@ -10,6 +10,7 @@ on:
       - mvp/all-shields-oled-studio
       - fix/hana-layer-status-128x32-parity
       - feature/hana-right-panel
+      # Isolated 128x32 right-panel validation branch.
     paths:
       - "boards/shields/hana/**"
       - "boards/shields/common/**"
