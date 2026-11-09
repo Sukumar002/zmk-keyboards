@@ -9,6 +9,7 @@ on:
       - feature/reconciled-multi-board-oled
       - mvp/all-shields-oled-studio
       - fix/hana-layer-status-128x32-parity
+      - feature/hana-right-panel
     paths:
       - "boards/shields/hana/**"
       - "boards/shields/common/**"
