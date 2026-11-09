@@ -1,4 +1,4 @@
-# OLED renderer integration: compact 128x32 uses the standalone Zephyr framebuffer path.
+# OLED renderer integration: both OLED sizes use the standard ZMK/LVGL display path.
 ---
 include:
   - board: xiao_ble//zmk
