@@ -79,7 +79,7 @@ jobs:
             echo "- Build matrix: `$matrix`"
             echo "- Package: **$archive**"
             echo ""
-            echo "This build includes BLE central/peripheral, dongle peripheral/central, both OLED sizes, no-display dongle, and settings-reset images. Hana includes separate settings-reset images for its two MCU families."
+            echo "This build contains the seven standard firmware roles. Hana also includes separate XIAO-half and dongle-MCU settings-reset images."
             echo ""
             echo "This workflow uploads an Actions artifact only. It does not create a release or tag."
           } >> "$GITHUB_STEP_SUMMARY"
@@ -122,8 +122,12 @@ jobs:
           done
 
           uf2_count="$(find final-firmware -maxdepth 1 -type f -name '*.uf2' | wc -l | tr -d ' ')"
-          if (( uf2_count < 7 )); then
-            echo "::error::Expected at least 7 UF2 images, found $uf2_count."
+          expected_count=7
+          if [[ "$BOARD" == "hana" ]]; then
+            expected_count=8
+          fi
+          if (( uf2_count != expected_count )); then
+            echo "::error::Expected $expected_count UF2 images for $BOARD, found $uf2_count."
             exit 1
           fi
 
@@ -135,16 +139,22 @@ jobs:
             echo "UF2 image count: $uf2_count"
             echo ""
             echo "Expected targets:"
-            echo "- $BOARD left central"
-            echo "- $BOARD left peripheral"
-            echo "- $BOARD right peripheral"
-            echo "- $BOARD dongle central 128x64"
-            echo "- $BOARD dongle central 128x32"
-            echo "- $BOARD dongle no display"
             if [[ "$BOARD" == "hana" ]]; then
-              echo "- hana halves settings reset (XIAO nRF52840)"
-              echo "- hana dongle settings reset (ProMicro/nice!nano nRF52840)"
+              echo "- hana_dongle_central_128x64"
+              echo "- hana_dongle_central_128x32"
+              echo "- hana_dongle_no_display"
+              echo "- hana_left_central"
+              echo "- hana_left_peripheral"
+              echo "- hana_right_peripheral"
+              echo "- hana_settings_reset_xiao"
+              echo "- hana_settings_reset_dongle"
             else
+              echo "- $BOARD dongle central 128x64"
+              echo "- $BOARD dongle central 128x32"
+              echo "- $BOARD dongle no display"
+              echo "- $BOARD left central"
+              echo "- $BOARD left peripheral"
+              echo "- $BOARD right peripheral"
               echo "- $BOARD settings reset"
             fi
             echo ""
