@@ -11,13 +11,12 @@ on:
       - fix/hana-layer-status-128x32-parity
       - feature/hana-right-panel
       - hana-right-panel-enhanced
-      # Isolated 128x32 right-panel validation branch.
+      - hana-v2.3-startup-banner
     paths:
       - "boards/shields/hana/**"
       - "boards/shields/common/**"
       - "build-hana.yaml"
       - ".github/workflows/hana.yml"
-      - ".github/workflows/build.yml"
       - ".github/workflows/build.yml"
       - "config/**"
       - "snippets/**"
