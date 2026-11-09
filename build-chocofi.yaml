@@ -19,7 +19,7 @@ include:
   # Dongle mode: both physical halves are peripherals.
   - board: nice_nano//zmk
     shield: chocofi_peripheral_left
-    artifact-name: chocofi_dongle_left_peripheral
+    artifact-name: chocofi_left_peripheral
 
   - board: nice_nano//zmk
     shield: chocofi_central_dongle
