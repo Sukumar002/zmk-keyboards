@@ -11,6 +11,22 @@
 
 #define MOUSE 4
 
+// Give the standard pointer behaviors readable names in ZMK Studio.
+// The upstream behavior bindings accept display-name, but do not define
+// runtime-editable or runtime-default-active.
+&mmv {
+    display-name = "Mouse Move";
+};
+
+&msc {
+    display-name = "Mouse Scroll";
+};
+
+&mkp {
+    display-name = "Mouse Click";
+};
+
+
 // Keep Sweep's existing home-row mod timing and tap-preferred feel.
 &mt {
     flavor = "tap-preferred";
