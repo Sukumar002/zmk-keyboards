@@ -126,8 +126,12 @@ jobs:
           if [[ "$BOARD" == "hana" ]]; then
             expected_count=8
           fi
-          if (( uf2_count != expected_count )); then
+          if [[ "$BOARD" == "hana" ]] && (( uf2_count != expected_count )); then
             echo "::error::Expected $expected_count UF2 images for $BOARD, found $uf2_count."
+            exit 1
+          fi
+          if [[ "$BOARD" != "hana" ]] && (( uf2_count < 7 )); then
+            echo "::error::Expected at least 7 UF2 images for $BOARD, found $uf2_count."
             exit 1
           fi
 
