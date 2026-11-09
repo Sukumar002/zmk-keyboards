@@ -14,12 +14,12 @@ manifest:
   projects:
     - name: zmk
       remote: sukumar
-      revision: 88d03e9a30d0433375ded7c07c82e5a61f023fbb
+      revision: 77fd6f7710c63d1a13013c3fde24ca4ddcb92436
       import: app/west.yml
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: 1c5efa9cb188f9b3c36a18fa8db0d6faba68457f
+      revision: 9adc794d7ad60372d6773a2d90575262dfe65188
 
     # OLED hardware adapter: explicit 128x32 / 128x64 display devicetree overlays.
     - name: zmk-oled-adapter
