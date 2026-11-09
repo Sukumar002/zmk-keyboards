@@ -1,4 +1,6 @@
-/* Chocofi 5-column keymap with six thumbs. SPDX-License-Identifier: MIT */
+/* Chocofi 5-column keymap restored from the ZMK Studio export.
+ * SPDX-License-Identifier: MIT
+ */
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
@@ -7,13 +9,12 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Match Hana's proven mod-tap timing and interrupt behavior.
- * Runtime editing is enabled so Studio can expose the same controls.
- */
+/* Match Hana's responsive mod-tap timing and the Studio-exported settings. */
 &mt {
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
+    require-prior-idle-ms = <-1>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -30,6 +31,10 @@
 };
 
 &lt {
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <-1>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -71,65 +76,111 @@
 / {
     combos {
         compatible = "zmk,combos";
+
         combo_studio_unlock {
             timeout-ms = <50>;
-            key-positions = <30 35>;
+            key-positions = <1 2>;
             bindings = <&studio_unlock>;
         };
 
+        combo_alt_tab {
+            timeout-ms = <50>;
+            key-positions = <13 14>;
+            bindings = <&mt LALT TAB>;
+        };
+
+        combo_grave_gui {
+            timeout-ms = <50>;
+            key-positions = <12 13>;
+            bindings = <&mt LGUI GRAVE>;
+        };
+
+        combo_bksp_alt {
+            timeout-ms = <50>;
+            key-positions = <17 18>;
+            bindings = <&mt LALT BACKSPACE>;
+        };
+
+        combo_quote_ctrl {
+            timeout-ms = <50>;
+            key-positions = <17 19>;
+            bindings = <&mt LCTRL SQT>;
+        };
+
+        combo_del_gui {
+            timeout-ms = <50>;
+            key-positions = <18 19>;
+            bindings = <&mt RGUI DELETE>;
+        };
+
+        combo_mouse_layer {
+            timeout-ms = <50>;
+            key-positions = <12 13 14>;
+            bindings = <&lt 4 ESC>;
+        };
+
+        combo_set_layer {
+            timeout-ms = <50>;
+            key-positions = <35 36>;
+            bindings = <&lt 3 CAPSLOCK>;
+        };
     };
 };
 
 / {
     keymap {
         compatible = "zmk,keymap";
+
         default_layer {
             display-name = "Base";
             bindings = <
-                &kp Q               &kp W               &kp E               &kp R               &kp T               &kp Y               &kp U               &kp I               &kp O               &kp P
-                &mt LSHIFT A  &mt LALT S          &mt LGUI D          &mt LCTRL F         &kp G               &kp H               &mt RCTRL J         &mt RGUI K          &mt LEFT_ALT L      &mt RSHIFT SEMI
-                &kp Z               &kp X               &kp C               &kp V               &kp B               &kp N               &kp M               &kp COMMA           &kp DOT             &kp FSLH
-                                        &kp LGUI    &lt 1 RET    &kp SPACE    &lt 4 DEL  &lt 2 SPACE  &lt 3 BSPC
+                &kp Q              &kp W              &kp E              &kp R              &kp T              &kp Y              &kp U              &kp I              &kp O              &kp P
+                &mt LSHIFT A       &mt LGUI S         &mt LALT D         &mt LCTRL F        &kp G              &kp H              &mt RCTRL J        &mt LALT K         &mt LGUI L         &mt RSHIFT SEMI
+                &mt LCTRL Z        &kp X              &kp C              &kp V              &kp B              &kp N              &kp M              &kp COMMA          &kp DOT            &mt RCTRL FSLH
+                                        &mt LALT ESC    &mt LGUI ENTER    &lt 1 TAB         &lt 2 ENTER        &mt LGUI SPACE     &mt LALT BACKSPACE
             >;
         };
-        lower_layer {
-            display-name = "Lower";
+
+        num_layer {
+            display-name = "Num";
             bindings = <
-                &kp NUMBER_1        &kp NUMBER_2        &kp NUMBER_3        &kp NUMBER_4        &kp N5              &kp NUMBER_6        &kp N7              &kp N8              &kp N9              &kp N0
-                &bt BT_SEL 0        &bt BT_SEL 1        &kp LEFT            &kp DOWN            &kp UP              &kp RIGHT           &kp HOME            &kp UP_ARROW        &kp END             &kp PAGE_UP
-                &bt BT_CLR_ALL      &trans              &trans              &trans              &trans              &kp LGUI            &kp LEFT            &kp DOWN            &kp RIGHT           &kp PAGE_DOWN
+                &kp N1             &kp N2             &kp N3             &kp N4             &kp N5             &kp N6             &kp N7             &kp N8             &kp N9             &kp N0
+                &mt LSHIFT N1      &kp N2             &kp N3             &kp N4             &kp N5             &kp N6             &kp N7             &kp N8             &kp N9             &mt RSHIFT N0
+                &kp F11            &kp F12            &kp BSLH           &kp LBKT           &kp RBKT           &kp EQUAL          &kp MINUS          &trans             &trans             &trans
+                                        &trans          &trans             &trans            &trans             &trans             &kp COLON
             >;
         };
-        raise_layer {
-            display-name = "Raise";
+
+        nav_layer {
+            display-name = "Nav";
             bindings = <
-                &kp F9              &kp F10             &kp F11             &kp F12             &kp F5              &kp F6              &kp F7              &kp LPAR            &kp RPAR            &trans
-                &kp F5              &kp F6              &kp F7              &kp F8              &kp LBKT            &kp RBKT            &kp BSLH            &trans              &trans              &trans
-                &kp F1              &kp F2              &kp F3              &kp F4              &kp PIPE            &kp LGUI            &trans              &kp SPACE           &kp RET             &trans
+                &kp F10            &kp F7             &kp F8             &kp F9             &kp SCROLL_LOCK    &kp C_VOL_UP       &kp HOME           &kp UP_ARROW       &kp END            &kp PAGE_UP
+                &kp F11            &kp F4             &kp F5             &kp F6             &kp NUM_LOCK       &kp C_VOL_DN       &kp LEFT           &kp DOWN           &kp RIGHT          &kp PAGE_DOWN
+                &kp F12            &kp N1             &kp N2             &kp N3             &kp CAPSLOCK       &kp C_MUTE         &trans             &trans             &trans             &trans
+                                        &trans          &trans             &trans            &trans             &trans             &trans
             >;
         };
-        /* Match Hana's SET and MOUSE capabilities while preserving Chocofi's
-         * 5-column physical layout and existing BASE/LOWER/RAISE bindings.
-         * Existing thumb layer-taps 3 and 4 now point at real layers.
-         */
+
         set_layer {
-            display-name = "SET";
+            display-name = "Set";
             bindings = <
-                &bt_profile_shared 0 0  &bt_profile_shared 1 1  &bt_profile_shared 2 2  &bt_profile_shared 3 3  &bt_profile_shared 4 4   &bootloader  &base_view_tog_chocofi  &timeout_cycle_shared 1  &timeout_cycle_shared 0  &oled_tog_shared
-                &none                   &none                   &none                   &none                   &none                   &none        &none                   &none                    &none                    &none
-                &out OUT_TOG            &bt BT_CLR_ALL          &none                   &none                   &none                   &none        &none                   &none                    &none                    &tog_ls
-                                        &trans                  &trans                  &trans                  &trans                  &trans                  &trans
+                &bt BT_SEL 0        &bt BT_SEL 1        &bt BT_SEL 2        &bt BT_SEL 3        &bt_profile_shared 4 4  &bootloader  &base_view_tog_chocofi  &timeout_cycle_shared 1  &timeout_cycle_shared 0  &oled_tog_shared
+                &none                &none                &none                &none                &none                &none        &none                   &none                    &none                    &none
+                &out OUT_TOG         &bt BT_CLR_ALL      &none                &none                &none                &none        &none                   &none                    &none                    &tog_ls
+                                        &trans             &trans               &trans              &trans              &trans       &trans
             >;
         };
+
         mouse_layer {
             display-name = "MOUSE";
             bindings = <
-                &trans  &trans     &trans     &trans     &trans   &msc SCRL_LEFT  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN  &msc SCRL_RIGHT
-                &mkp LCLK  &mkp MCLK  &mkp RCLK  &trans  &trans   &trans          &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans
-                &trans  &trans     &trans     &trans     &trans   &trans          &trans          &trans          &trans          &trans
-                         &trans     &trans     &trans     &trans     &trans     &trans
+                &trans  &trans  &trans  &trans  &trans  &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT  &trans
+                &trans  &trans  &trans  &trans  &trans  &msc SCRL_DOWN  &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans         &trans         &trans          &trans           &trans
+                        &trans  &mkp MB4 &mkp MB5 &mkp RCLK &mkp LCLK &mkp MCLK
             >;
         };
+
         ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4
     };
 };
