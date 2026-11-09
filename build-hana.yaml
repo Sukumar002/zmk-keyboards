@@ -38,6 +38,15 @@ include:
     cmake-args: -DCONFIG_ZMK_STUDIO=y
     artifact-name: hana_dongle_128x32
 
+  # Isolation: retain the raw dashboard but omit the OLED adapter overlay.
+  # Hana's own 128x32 overlay supplies the SSD1306 node; this tests whether
+  # the adapter overlay is conflicting with the dashboard/central startup.
+  - board: nice_nano//zmk
+    shield: hana_central_dongle_128x32 dongle_display
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: hana_dongle_128x32_raw_no_adapter
+
   # Diagnostic: same 128x32 panel/driver path, with raw dashboard disabled.
   - board: nice_nano//zmk
     shield: hana_central_dongle_128x32_diag
