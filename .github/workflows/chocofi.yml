@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/chocofi-hana-parity
     paths:
       - "boards/shields/chocofi/**"
       - "boards/shields/common/**"
