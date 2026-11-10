@@ -9,10 +9,13 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Match Hana's responsive mod-tap timing and the Studio-exported settings. */
+/* Preserve the responsive Chocofi timings from the unified-dongle trial.
+ * A 240ms tapping term and 175ms quick-tap window; no prior-idle delay.
+ * The 80ms prior-idle gate made modifier activation feel sluggish.
+ */
 &mt {
     flavor = "balanced";
-    tapping-term-ms = <200>;
+    tapping-term-ms = <240>;
     quick-tap-ms = <175>;
     require-prior-idle-ms = <(-1)>;
     hold-trigger-key-positions = <
