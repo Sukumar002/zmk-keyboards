@@ -1,0 +1,1666 @@
+{
+  "format": "zmk-studio-backup",
+  "version": 1,
+  "exportedAt": "2026-10-20T17:24:20.873Z",
+  "device": {
+    "name": "chocofi.central",
+    "keyPositionCount": 40,
+    "maxLayerNameLength": 20
+  },
+  "keymap": {
+    "layers": [
+      {
+        "name": "Base",
+        "originalId": 0,
+        "bindings": [
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458772,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458778,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458760,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458773,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458775,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458780,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458776,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458764,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458770,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458771,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458977,
+            "param2": 458756,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458978,
+            "param2": 458774,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458979,
+            "param2": 458759,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458976,
+            "param2": 458761,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458762,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458763,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458980,
+            "param2": 458765,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458983,
+            "param2": 458766,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458978,
+            "param2": 458767,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458981,
+            "param2": 458803,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458781,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458779,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458758,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458777,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458757,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458769,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458768,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458806,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458807,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458808,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 40,
+            "behaviorName": "Layer-Tap",
+            "param1": 3,
+            "param2": 458793,
+            "param1IsLayerId": true,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 40,
+            "behaviorName": "Layer-Tap",
+            "param1": 1,
+            "param2": 458792,
+            "param1IsLayerId": true,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 40,
+            "behaviorName": "Layer-Tap",
+            "param1": 1,
+            "param2": 458795,
+            "param1IsLayerId": true,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 40,
+            "behaviorName": "Layer-Tap",
+            "param1": 2,
+            "param2": 458792,
+            "param1IsLayerId": true,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 41,
+            "behaviorName": "Mod-Tap",
+            "param1": 458978,
+            "param2": 458796,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 40,
+            "behaviorName": "Layer-Tap",
+            "param1": 3,
+            "param2": 458794,
+            "param1IsLayerId": true,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          }
+        ]
+      },
+      {
+        "name": "Num",
+        "originalId": 1,
+        "bindings": [
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458799,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458800,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458788,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458789,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458790,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458798,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458785,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458786,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458787,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 34013235,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458801,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458797,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458782,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458783,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458784,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458807,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458791,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          }
+        ]
+      },
+      {
+        "name": "Nav",
+        "originalId": 2,
+        "bindings": [
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458819,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458816,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458817,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458818,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458814,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458827,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458826,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458834,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458829,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458820,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458813,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458814,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458815,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458799,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458830,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458832,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458833,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458831,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458821,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458810,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458811,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 458812,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 11,
+            "behaviorName": "Key Press",
+            "param1": 34013233,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 42,
+            "behaviorName": "Transparent",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "originalId": 3,
+        "bindings": [
+          {
+            "behaviorId": 5,
+            "behaviorName": "Bluetooth",
+            "param1": 3,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 5,
+            "behaviorName": "Bluetooth",
+            "param1": 3,
+            "param2": 1,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 5,
+            "behaviorName": "Bluetooth",
+            "param1": 3,
+            "param2": 2,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 5,
+            "behaviorName": "Bluetooth",
+            "param1": 3,
+            "param2": 3,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          },
+          {
+            "behaviorId": 0,
+            "behaviorName": "",
+            "param1": 0,
+            "param2": 0,
+            "param1IsLayerId": false,
+            "param2IsLayerId": false
+          }
+        ]
+      }
+    ]
+  },
+  "combos": [
+    {
+      "originalIndex": 0,
+      "name": "",
+      "displayOrder": 0,
+      "keyPositions": [
+        30,
+        35
+      ],
+      "activeLayerIndices": null,
+      "binding": {
+        "behaviorId": 39,
+        "behaviorName": "Studio Unlock",
+        "param1": 0,
+        "param2": 0,
+        "param1IsLayerId": false,
+        "param2IsLayerId": false
+      },
+      "timeoutMs": 50,
+      "requirePriorIdleMs": -1,
+      "slowRelease": false
+    },
+    {
+      "originalIndex": 1,
+      "name": "Alt_Tab",
+      "displayOrder": 0,
+      "keyPositions": [
+        12,
+        13
+      ],
+      "activeLayerIndices": null,
+      "binding": {
+        "behaviorId": 41,
+        "behaviorName": "Mod-Tap",
+        "param1": 458978,
+        "param2": 458795,
+        "param1IsLayerId": false,
+        "param2IsLayerId": false
+      },
+      "timeoutMs": 50,
+      "requirePriorIdleMs": -1,
+      "slowRelease": false
+    },
+    {
+      "originalIndex": 2,
+      "name": "Grave_GUI",
+      "displayOrder": 0,
+      "keyPositions": [
+        11,
+        12
+      ],
+      "activeLayerIndices": null,
+      "binding": {
+        "behaviorId": 41,
+        "behaviorName": "Mod-Tap",
+        "param1": 458979,
+        "param2": 458805,
+        "param1IsLayerId": false,
+        "param2IsLayerId": false
+      },
+      "timeoutMs": 50,
+      "requirePriorIdleMs": -1,
+      "slowRelease": false
+    },
+    {
+      "originalIndex": 3,
+      "name": "Bksp_Alt",
+      "displayOrder": 0,
+      "keyPositions": [
+        16,
+        17
+      ],
+      "activeLayerIndices": null,
+      "binding": {
+        "behaviorId": 41,
+        "behaviorName": "Mod-Tap",
+        "param1": 458978,
+        "param2": 458794,
+        "param1IsLayerId": false,
+        "param2IsLayerId": false
+      },
+      "timeoutMs": 50,
+      "requirePriorIdleMs": -1,
+      "slowRelease": false
+    },
+    {
+      "originalIndex": 4,
+      "name": "Quote_Ctrl",
+      "displayOrder": 0,
+      "keyPositions": [
+        18,
+        19
+      ],
+      "activeLayerIndices": null,
+      "binding": {
+        "behaviorId": 41,
+        "behaviorName": "Mod-Tap",
+        "param1": 458976,
+        "param2": 458804,
+        "param1IsLayerId": false,
+        "param2IsLayerId": false
+      },
+      "timeoutMs": 50,
+      "requirePriorIdleMs": -1,
+      "slowRelease": false
+    },
+    {
+      "originalIndex": 5,
+      "name": "Del_Gui",
+      "displayOrder": 0,
+      "keyPositions": [
+        17,
+        18
+      ],
+      "activeLayerIndices": null,
+      "binding": {
+        "behaviorId": 41,
+        "behaviorName": "Mod-Tap",
+        "param1": 458983,
+        "param2": 458828,
+        "param1IsLayerId": false,
+        "param2IsLayerId": false
+      },
+      "timeoutMs": 50,
+      "requirePriorIdleMs": -1,
+      "slowRelease": false
+    }
+  ],
+  "customBehaviors": [
+    {
+      "originalId": 41,
+      "displayName": "Mod-Tap",
+      "kind": "hold-tap",
+      "config": [
+        {
+          "key": "tapping_term_ms",
+          "value": {
+            "intValue": 200
+          }
+        },
+        {
+          "key": "quick_tap_ms",
+          "value": {
+            "intValue": 175
+          }
+        },
+        {
+          "key": "require_prior_idle_ms",
+          "value": {
+            "intValue": -1
+          }
+        },
+        {
+          "key": "flavor",
+          "value": {
+            "enumValue": 1
+          }
+        },
+        {
+          "key": "hold_trigger_on_release",
+          "value": {
+            "boolValue": false
+          }
+        },
+        {
+          "key": "retro_tap",
+          "value": {
+            "boolValue": false
+          }
+        },
+        {
+          "key": "hold_trigger_key_positions",
+          "value": {
+            "positions": [
+              1000,
+              0,
+              0,
+              430534,
+              0,
+              0,
+              1000,
+              0,
+              0,
+              430534,
+              0,
+              0,
+              1000,
+              0,
+              0,
+              430534,
+              0,
+              0,
+              1000,
+              0,
+              0,
+              430534,
+              0,
+              0,
+              20,
+              30,
+              3,
+              0,
+              430231,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "originalId": 8,
+      "displayName": "Bluetooth Profile",
+      "kind": "hold-tap",
+      "config": [
+        {
+          "key": "tapping_term_ms",
+          "value": {
+            "intValue": 3000
+          }
+        },
+        {
+          "key": "quick_tap_ms",
+          "value": {
+            "intValue": -1
+          }
+        },
+        {
+          "key": "require_prior_idle_ms",
+          "value": {
+            "intValue": -1
+          }
+        },
+        {
+          "key": "flavor",
+          "value": {
+            "enumValue": 2
+          }
+        },
+        {
+          "key": "hold_trigger_on_release",
+          "value": {
+            "boolValue": false
+          }
+        },
+        {
+          "key": "retro_tap",
+          "value": {
+            "boolValue": false
+          }
+        },
+        {
+          "key": "hold_trigger_key_positions",
+          "value": {
+            "positions": [
+              200,
+              430534,
+              430534,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "originalId": 40,
+      "displayName": "Layer-Tap",
+      "kind": "hold-tap",
+      "config": [
+        {
+          "key": "tapping_term_ms",
+          "value": {
+            "intValue": 200
+          }
+        },
+        {
+          "key": "quick_tap_ms",
+          "value": {
+            "intValue": -1
+          }
+        },
+        {
+          "key": "require_prior_idle_ms",
+          "value": {
+            "intValue": -1
+          }
+        },
+        {
+          "key": "flavor",
+          "value": {
+            "enumValue": 2
+          }
+        },
+        {
+          "key": "hold_trigger_on_release",
+          "value": {
+            "boolValue": false
+          }
+        },
+        {
+          "key": "retro_tap",
+          "value": {
+            "boolValue": false
+          }
+        },
+        {
+          "key": "hold_trigger_key_positions",
+          "value": {
+            "positions": [
+              200,
+              430534,
+              430534,
+              175
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

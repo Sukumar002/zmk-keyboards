@@ -6,7 +6,7 @@
 #include <dt-bindings/zmk/layout_shift.h>
 
 / {
-    layout_shift_map_gui_alt_shared: layout_shift_map_gui_alt_shared {
+    layout_shift_map_gui_alt: layout_shift_map_gui_alt_shared {
         compatible = "zmk,layout-shift-map";
         mappings = <
             LGUI LALT LAYOUT_SHIFT_OPTIONAL_ALL
@@ -58,7 +58,7 @@
 };
 
 &tog_ls {
-    layout-maps = <&layout_shift_map_gui_alt_shared>;
+    layout-maps = <&layout_shift_map_gui_alt>;
 };
 
 &mt {

@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - multi-board-baseline
     paths:
       - "boards/shields/hana/**"
       - "boards/shields/common/**"

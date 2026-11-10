@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - multi-board-baseline
     paths:
       - "boards/shields/sofle/**"
       - "boards/shields/common/**"
