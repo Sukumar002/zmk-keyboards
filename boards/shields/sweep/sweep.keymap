@@ -8,7 +8,6 @@
 #include <dt-bindings/zmk/pointing.h>
 #include "../common/studio_features.dtsi"
 #include "../common/studio_runtime_layers.dtsi"
-#include "../common/studio_unlock_combo.dtsi"
 
 #define BASE  0
 #define NUM   1
