@@ -53,6 +53,18 @@
 #define HRMR(k1,k2,k3,k4) &mt RGUI k1  &mt RCTRL k2  &mt RALT k3  &mt RSHFT k4
 
 / {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_studio_unlock {
+            timeout-ms = <50>;
+            key-positions = <0 1>;
+            bindings = <&studio_unlock>;
+        };
+    };
+};
+
+/ {
     behaviors {
         base_view_tog: base_view_toggle {
             compatible = "zmk,behavior-base-view-toggle";
