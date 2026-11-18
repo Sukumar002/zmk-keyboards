@@ -53,6 +53,14 @@
 #define HRMR(k1,k2,k3,k4) &mt RGUI k1  &mt RCTRL k2  &mt RALT k3  &mt RSHFT k4
 
 / {
+    behaviors {
+        base_view_tog: base_view_toggle {
+            compatible = "zmk,behavior-base-view-toggle";
+            #binding-cells = <0>;
+            display-name = "BASE View Cycle";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -97,8 +105,8 @@
         set_layer {
             display-name = "Set";
             bindings = <
-                &bt_profile_shared 0 0 &bt_profile_shared 1 1 &bt_profile_shared 2 2 &bt_profile_shared 3 3 &bt_profile_shared 4 4 &out OUT_TOG &tog_ls &oled_tog_shared &base_view_tog_shared &timeout_cycle_shared 1
-                &timeout_cycle_shared 0 &bt BT_CLR_ALL &bootloader &sys_reset &trans &trans &trans &trans &oled_brightness_shared 0  &oled_brightness_shared 1
+                &bt_profile_shared 0 0 &bt_profile_shared 1 1 &bt_profile_shared 2 2 &bt_profile_shared 3 3 &bt_profile_shared 4 4 &out OUT_TOG &tog_ls &oled_tog_shared &base_view_tog &timeout_cycle_shared 1
+                &timeout_cycle_shared 0 &bt BT_CLR_ALL &bootloader &sys_reset &trans &trans &trans &trans &trans  &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans
             >;
