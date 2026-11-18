@@ -1,0 +1,18 @@
+file_format: "1"
+id: sweep
+name: Sweep
+type: shield
+url: https://github.com/davidphilipbarr/Sweep
+requires: [pro_micro]
+exposes: [i2c_oled]
+features:
+  - keys
+  - display
+  - studio
+siblings:
+  - sweep_central_left
+  - sweep_peripheral_left
+  - sweep_peripheral_right
+  - sweep_central_dongle
+  - sweep_central_dongle_128x32
+  - sweep_central_dongle_128x64

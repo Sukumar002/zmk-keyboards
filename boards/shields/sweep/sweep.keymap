@@ -1,0 +1,139 @@
+// Copyright (c) 2022 The ZMK Contributors
+// SPDX-License-Identifier: MIT
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
+#include "../common/studio_features.dtsi"
+#include "../common/studio_runtime_layers.dtsi"
+
+#define BASE  0
+#define NUM   1
+#define NAV   2
+#define SET   3
+#define MOUSE 4
+
+// Give the standard pointing behaviors readable names in ZMK Studio.
+&mmv {
+    display-name = "Mouse Move";
+};
+
+&msc {
+    display-name = "Mouse Scroll";
+};
+
+&mkp {
+    display-name = "Mouse Click";
+};
+
+// Keep Sweep's existing home-row mod timing and tap-preferred feel.
+&mt {
+    flavor = "tap-preferred";
+    tapping-term-ms = <220>;
+    quick-tap-ms = <150>;
+    require-prior-idle-ms = <100>;
+    runtime-editable;
+    runtime-default-active;
+    display-name = "Mod-Tap";
+};
+
+// Keep Sweep's existing layer-tap behavior while making it Studio-visible.
+&lt {
+    runtime-editable;
+    runtime-default-active;
+    display-name = "Layer-Tap";
+};
+
+// Sweep's direct-scan GPIO order is defined in sweep_matrix.dtsi.
+
+// Home row mods macro
+#define HRML(k1,k2,k3,k4) &mt LSHFT k1  &mt LALT k2  &mt LCTRL k3  &mt LGUI k4
+#define HRMR(k1,k2,k3,k4) &mt RGUI k1  &mt RCTRL k2  &mt RALT k3  &mt RSHFT k4
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_studio_unlock {
+            timeout-ms = <50>;
+            key-positions = <0 1>;
+            bindings = <&studio_unlock>;
+        };
+    };
+};
+
+/ {
+    behaviors {
+        base_view_tog: base_view_toggle {
+            compatible = "zmk,behavior-base-view-toggle";
+            #binding-cells = <0>;
+            display-name = "BASE View Cycle";
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        base_layer {
+            display-name = "Base";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  Q       │  W       │  E       │  R       │  T       │   │  Y       │  U       │  I       │  O       │  P       │
+            &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  A       │  S       │  D       │  F       │  G       │   │  H       │  J       │  K       │  L       │ ' "      │
+            HRML(A,        S,         D,         F)     &kp G          &kp H      HRMR(J,        K,         L,        SQT)
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
+            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                            &lt SET TAB   &lt NUM RET     &lt NAV SPACE  &lt MOUSE BSPC
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        num_layer {
+            display-name = "Num";
+            bindings = <
+                &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
+                &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10
+                &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS &kp ASTRK &kp LPAR &kp RPAR
+                &trans &trans &trans &trans
+            >;
+        };
+
+        nav_layer {
+            display-name = "Nav";
+            bindings = <
+                &kp INS &kp HOME &kp PG_DN &kp PG_UP &kp END &trans &kp HOME &kp PG_DN &kp PG_UP &kp END
+                &kp TAB &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &kp LEFT &kp DOWN &kp UP &kp RIGHT
+                &kp ESC &kp C_BRI_DN &kp C_BRI_UP &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &trans &trans &trans &trans
+                &trans &trans &trans &trans
+            >;
+        };
+
+        set_layer {
+            display-name = "Set";
+            bindings = <
+                &bt_profile_shared 0 0 &bt_profile_shared 1 1 &bt_profile_shared 2 2 &bt_profile_shared 3 3 &bt_profile_shared 4 4 &out OUT_TOG &tog_ls &oled_tog_shared &base_view_tog &timeout_cycle_shared 1
+                &timeout_cycle_shared 0 &bt BT_CLR_ALL &bootloader &sys_reset &trans &trans &trans &trans &trans  &trans
+                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans
+            >;
+        };
+
+        mouse_layer {
+            display-name = "Mouse";
+            bindings = <
+                &msc SCRL_LEFT &msc SCRL_UP &mmv MOVE_UP &msc SCRL_DOWN &msc SCRL_RIGHT &trans &trans &trans &trans &trans
+                &mkp LCLK &mkp MCLK &mkp RCLK &trans &trans &trans &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &trans
+                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans
+            >;
+        };
+
+        ZMK_STUDIO_RUNTIME_LAYER_SLOTS_4
+    };
+};
