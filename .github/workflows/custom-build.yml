@@ -13,6 +13,7 @@ on:
           - chocofi
           - sofle
           - corne
+          - sweep
       connectivity:
         description: "Connectivity"
         required: true
@@ -80,7 +81,7 @@ jobs:
           set -euo pipefail
 
           case "$BOARD" in
-            hana|chocofi|corne|sofle) ;;
+            hana|chocofi|corne|sofle|sweep) ;;
             *) echo "::error::Unsupported board: $BOARD"; exit 1 ;;
           esac
 
@@ -93,6 +94,13 @@ jobs:
             nice_nano|xiao_ble) ;;
             *) echo "::error::Unsupported dongle MCU: $DONGLE_MCU"; exit 1 ;;
           esac
+
+          if [[ "$BOARD" == "sweep" ]]; then
+            if [[ "$SPLIT_MCU" != "nice_nano" || "$DONGLE_MCU" != "nice_nano" ]]; then
+              echo "::error::Sweep currently supports nice_nano MCUs only."
+              exit 1
+            fi
+          fi
 
           if [[ "$CONNECTIVITY" == "ble" ]]; then
             matrix="build-console/generated/$BOARD-ble-split-$SPLIT_MCU.yaml"
