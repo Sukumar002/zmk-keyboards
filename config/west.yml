@@ -1,5 +1,5 @@
-# Sofle build manifest with the confirmed 128x64 OLED controller fix
-# and keyboard-specific shared display behavior.
+# Sofle build manifest with the confirmed 128x64 OLED controller fix,
+# shared display behavior, and Sofle-scoped split/output fixes.
 manifest:
   remotes:
     - name: zmkfirmware
@@ -11,7 +11,7 @@ manifest:
   projects:
     - name: zmk
       remote: sukumar
-      revision: 286e886983c074a91778d9eb3740bbae51bae9b4
+      revision: a30be122547a1079d341d3051a5bdebee265018a
       import: app/west.yml
 
     - name: zmk-dongle-display
