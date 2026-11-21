@@ -1,9 +1,11 @@
 #include "sofle_central_dongle.overlay"
 
 /*
- * Keep the same SSD1306 controller setup as the Sweep dongle that was
- * physically validated with this 128x64 panel. Reuse Sofle's existing node
- * so Zephyr does not merge duplicate ssd1306@3c definitions.
+ * Match the controller properties of the physically tested Sweep 128x64
+ * dongle exactly. Do not enable COM sequential mode or display inversion:
+ * neither is present in the working Sweep configuration.
+ *
+ * Reuse the existing SSD1306 node to avoid duplicate-address node merging.
  */
 &oled {
     width = <128>;
