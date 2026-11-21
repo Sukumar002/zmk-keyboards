@@ -9,11 +9,30 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
+/* Isolated diagnostic Mod-Tap.
+ * Deliberately NOT runtime-editable: NVS/Studio values cannot override these
+ * compiled defaults. This lets us test the intended 240/175/-1 configuration.
+ */
+ / {
+    behaviors {
+        mt_probe: mod_tap_probe {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <240>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <(-1)>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Mod-Tap (compiled test)";
+        };
+    };
+};
+
 /* Preserve the responsive Chocofi timings from the unified-dongle trial.
  * A 240ms tapping term and 175ms quick-tap window; no prior-idle delay.
  * The 80ms prior-idle gate made modifier activation feel sluggish.
  */
-&mt {
+&mt_probe {
     flavor = "balanced";
     tapping-term-ms = <240>;
     quick-tap-ms = <175>;
@@ -86,31 +105,31 @@
         combo_alt_tab {
             timeout-ms = <50>;
             key-positions = <12 13>;
-            bindings = <&mt LALT TAB>;
+            bindings = <&mt_probe LALT TAB>;
         };
 
         combo_grave_gui {
             timeout-ms = <50>;
             key-positions = <11 12>;
-            bindings = <&mt LGUI GRAVE>;
+            bindings = <&mt_probe LGUI GRAVE>;
         };
 
         combo_bksp_alt {
             timeout-ms = <50>;
             key-positions = <16 17>;
-            bindings = <&mt LALT BACKSPACE>;
+            bindings = <&mt_probe LALT BACKSPACE>;
         };
 
         combo_quote_ctrl {
             timeout-ms = <50>;
             key-positions = <18 19>;
-            bindings = <&mt LCTRL SQT>;
+            bindings = <&mt_probe LCTRL SQT>;
         };
 
         combo_del_gui {
             timeout-ms = <50>;
             key-positions = <17 18>;
-            bindings = <&mt RGUI DELETE>;
+            bindings = <&mt_probe RGUI DELETE>;
         };
 
         combo_mouse_layer {
@@ -135,9 +154,9 @@
             display-name = "Base";
             bindings = <
                 &kp Q              &kp W              &kp E              &kp R              &kp T              &kp Y              &kp U              &kp I              &kp O              &kp P
-                &mt LSHIFT A       &mt LGUI S         &mt LALT D         &mt LCTRL F        &kp G              &kp H              &mt RCTRL J        &mt LALT K         &mt LGUI L         &mt RSHIFT SEMI
-                &mt LCTRL Z        &kp X              &kp C              &kp V              &kp B              &kp N              &kp M              &kp COMMA          &kp DOT            &mt RCTRL FSLH
-                                        &mt LALT ESC    &mt LGUI ENTER    &lt 1 TAB         &lt 2 ENTER        &mt LGUI SPACE     &mt LALT BACKSPACE
+                &mt_probe LSHIFT A       &mt_probe LGUI S         &mt_probe LALT D         &mt_probe LCTRL F        &kp G              &kp H              &mt_probe RCTRL J        &mt_probe LALT K         &mt_probe LGUI L         &mt_probe RSHIFT SEMI
+                &mt_probe LCTRL Z        &kp X              &kp C              &kp V              &kp B              &kp N              &kp M              &kp COMMA          &kp DOT            &mt_probe RCTRL FSLH
+                                        &mt_probe LALT ESC    &mt_probe LGUI ENTER    &lt 1 TAB         &lt 2 ENTER        &mt_probe LGUI SPACE     &mt_probe LALT BACKSPACE
             >;
         };
 
@@ -145,7 +164,7 @@
             display-name = "Num";
             bindings = <
                 &kp N1             &kp N2             &kp N3             &kp N4             &kp N5             &kp N6             &kp N7             &kp N8             &kp N9             &kp N0
-                &mt LSHIFT N1      &kp N2             &kp N3             &kp N4             &kp N5             &kp N6             &kp N7             &kp N8             &kp N9             &mt RSHIFT N0
+                &mt_probe LSHIFT N1      &kp N2             &kp N3             &kp N4             &kp N5             &kp N6             &kp N7             &kp N8             &kp N9             &mt_probe RSHIFT N0
                 &kp F11            &kp F12            &kp BSLH           &kp LBKT           &kp RBKT           &kp EQUAL          &kp MINUS          &trans             &trans             &trans
                                         &trans          &trans             &trans            &trans             &trans             &kp COLON
             >;
