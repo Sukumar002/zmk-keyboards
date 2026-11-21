@@ -29,3 +29,6 @@
         zephyr,display = &oled;
     };
 };
+
+#include "sofle_battery.dtsi"
+#include "sofle_studio_output_alias.dtsi"
