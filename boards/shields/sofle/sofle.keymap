@@ -15,6 +15,12 @@
 #include <dt-bindings/zmk/ext_power.h>
 
 
+/ {
+    aliases {
+        zmk-studio-output-selection = &out;
+    };
+};
+
 #define BASE 0
 #define LOWER 1
 #define RAISE 2
