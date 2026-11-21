@@ -12,12 +12,7 @@
 };
 
 / {
-    vbatt: vbatt {
-        compatible = "zmk,battery-nrf-vddh";
-    };
-
     chosen {
-        zmk,battery = &vbatt;
         zephyr,display = &oled;
         zmk,kscan = &kscan0;
     };
