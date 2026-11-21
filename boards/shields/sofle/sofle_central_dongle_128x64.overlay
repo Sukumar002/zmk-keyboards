@@ -1,32 +1,23 @@
 #include "sofle_central_dongle.overlay"
 
-/* The included Sofle DTSI defines its normal 128x32 OLED at this same I2C
- * address. Disable it for this dongle variant so only the 128x64 node below
- * is instantiated on the bus. */
+/*
+ * Reuse the OLED node declared by sofle.dtsi.
+ *
+ * Zephyr merges child nodes with the same unit address on the same I2C bus.
+ * Declaring a second ssd1306@3c and disabling &oled disables the merged node,
+ * including the 128x64 display selected by this overlay.
+ */
 &oled {
-    status = "disabled";
+    width = <128>;
+    height = <64>;
+    multiplex-ratio = <63>;
+    com-sequential;
+    inversion-on;
+    status = "okay";
 };
 
 / {
     chosen {
-        zephyr,display = &oled_dongle;
-    };
-};
-
-&pro_micro_i2c {
-    status = "okay";
-
-    oled_dongle: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;
-        width = <128>;
-        height = <64>;
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <63>;
-        segment-remap;
-        com-invdir;
-        prechargep = <0x22>;
+        zephyr,display = &oled;
     };
 };
