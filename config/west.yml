@@ -1,4 +1,5 @@
-# Sofle build manifest with geometry-safe OLED widget containers.
+# Sofle build manifest with the confirmed 128x64 OLED controller fix
+# and keyboard-specific shared display behavior.
 manifest:
   remotes:
     - name: zmkfirmware
@@ -15,7 +16,7 @@ manifest:
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: 161da1bb40d9736f0f9260d07411d555236d5999
+      revision: 1e00caf68e059e9ec8c48c88adcd13ffcfcc9a10
 
   self:
     path: config
