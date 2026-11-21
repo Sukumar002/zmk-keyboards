@@ -1,0 +1,9 @@
+/ {
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
+    };
+
+    chosen {
+        zmk,battery = &vbatt;
+    };
+};
