@@ -1,18 +1,20 @@
 #include "sofle_central_dongle.overlay"
 
 /*
- * Reuse the OLED node declared by sofle.dtsi.
- *
- * Zephyr merges child nodes with the same unit address on the same I2C bus.
- * Declaring a second ssd1306@3c and disabling &oled disables the merged node,
- * including the 128x64 display selected by this overlay.
+ * Keep the same SSD1306 controller setup as the Sweep dongle that was
+ * physically validated with this 128x64 panel. Reuse Sofle's existing node
+ * so Zephyr does not merge duplicate ssd1306@3c definitions.
  */
 &oled {
     width = <128>;
     height = <64>;
+    segment-offset = <0>;
+    page-offset = <0>;
+    display-offset = <0>;
     multiplex-ratio = <63>;
-    com-sequential;
-    inversion-on;
+    segment-remap;
+    com-invdir;
+    prechargep = <0x22>;
     status = "okay";
 };
 
