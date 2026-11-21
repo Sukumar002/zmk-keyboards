@@ -1,4 +1,4 @@
-# Sofle manifest aligned to the Sweep-tested shared OLED renderer revision.
+# Sofle build manifest with geometry-safe OLED widget containers.
 manifest:
   remotes:
     - name: zmkfirmware
@@ -15,7 +15,7 @@ manifest:
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: cdff1111d2abed8f78d4ec5df977eb63bb59041f
+      revision: 161da1bb40d9736f0f9260d07411d555236d5999
 
   self:
     path: config
