@@ -36,4 +36,17 @@ config I2C
 config SSD1306
     default y
 endif
+# Preserve the existing display defaults for every Sofle target except the
+# isolated 128x64 dongle, which follows the physically tested Sweep defaults.
+if LVGL && !SHIELD_SOFLE_CENTRAL_DONGLE_128X64
+config LV_Z_VDB_SIZE
+    default 64
+config LV_DPI_DEF
+    default 148
+config LV_Z_BITS_PER_PIXEL
+    default 1
+choice LV_COLOR_DEPTH
+    default LV_COLOR_DEPTH_1
+endchoice
+endif
 endif
