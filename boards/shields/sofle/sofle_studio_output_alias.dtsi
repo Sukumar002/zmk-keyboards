@@ -1,0 +1,5 @@
+/ {
+    aliases {
+        zmk-studio-output-selection = &out;
+    };
+};
