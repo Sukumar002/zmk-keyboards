@@ -1,3 +1,4 @@
+# Chocofi-only validation matrix. Keep other shields out until this rollout is tested.
 ---
 include:
   - board: nice_nano//zmk
