@@ -112,7 +112,7 @@ For the first Chocofi integration:
 6. Port the same contracts to Hana, then Sweep and Sofle, without copying core/display implementation into their shields.
 7. Release each module independently and update keyboard integrations only by explicit pinned revision changes.
 
-Each release records: module version, source commit, firmware platform commit, Zephyr/ZMK manifest revisions, build matrix, and artifact names. A keyboard release is reproducible from its manifest alone.
+Use one consolidated firmware build workflow with independent board/build matrices and clearly isolated artifacts. Each release records: module version, source commit, firmware platform commit, Zephyr/ZMK manifest revisions, build matrix, and artifact names. A keyboard release is reproducible from its manifest alone.
 
 ## 7. First-build quality gates
 
