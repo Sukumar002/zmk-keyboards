@@ -14,6 +14,9 @@
  * The 80ms prior-idle gate made modifier activation feel sluggish.
  */
 &mt {
+    /* Keep Chocofi Mod-Tap on compiled defaults; leave Layer-Tap/Studio behavior unchanged. */
+    /delete-property/ runtime-editable;
+    /delete-property/ runtime-default-active;
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
