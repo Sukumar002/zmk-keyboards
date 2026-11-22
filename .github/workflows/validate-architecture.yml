@@ -1,0 +1,34 @@
+name: "Architecture Validation Build"
+
+on:
+  pull_request:
+    branches:
+      - architecture/validation-base
+    paths:
+      - "boards/shields/**"
+      - "boards/shields/common/**"
+      - "build-all.yaml"
+      - "build-hana.yaml"
+      - "build-chocofi.yaml"
+      - "build-sofle.yaml"
+      - "build-corne.yaml"
+      - ".github/workflows/build.yml"
+      - "config/**"
+      - "snippets/**"
+      - "src/**"
+      - "dts/**"
+      - "layout_shift/**"
+      - "zephyr/**"
+      - "CMakeLists.txt"
+      - "Kconfig"
+
+concurrency:
+  group: "zmk-validation-${{ github.event.pull_request.number }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: build-all.yaml
+      archive_name: zmk-keyboards-validation
