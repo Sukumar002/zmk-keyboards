@@ -9,11 +9,7 @@ on:
     paths:
       - "boards/shields/**"
       - "boards/shields/common/**"
-      - "build-all.yaml"
-      - "build-hana.yaml"
       - "build-chocofi.yaml"
-      - "build-sofle.yaml"
-      - "build-corne.yaml"
       - ".github/workflows/build.yml"
       - "config/**"
       - "snippets/**"
@@ -29,11 +25,7 @@ on:
     paths:
       - "boards/shields/**"
       - "boards/shields/common/**"
-      - "build-all.yaml"
-      - "build-hana.yaml"
       - "build-chocofi.yaml"
-      - "build-sofle.yaml"
-      - "build-corne.yaml"
       - "config/**"
       - "snippets/**"
       - "src/**"
@@ -52,5 +44,5 @@ jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
-      build_matrix_path: build-all.yaml
-      archive_name: zmk-keyboards-firmware
+      build_matrix_path: build-chocofi.yaml
+      archive_name: zmk-keyboards-chocofi
