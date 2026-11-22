@@ -18,8 +18,8 @@
         mt_probe: mod_tap_probe {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <120>;
             quick-tap-ms = <175>;
             require-prior-idle-ms = <(-1)>;
             bindings = <&kp>, <&kp>;
@@ -33,8 +33,8 @@
  * The 80ms prior-idle gate made modifier activation feel sluggish.
  */
 &mt_probe {
-    flavor = "balanced";
-    tapping-term-ms = <200>;
+    flavor = "hold-preferred";
+    tapping-term-ms = <120>;
     quick-tap-ms = <175>;
     require-prior-idle-ms = <(-1)>;
     hold-trigger-key-positions = <
