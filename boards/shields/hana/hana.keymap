@@ -6,6 +6,7 @@
 #include <layout_shift_kp_override.dtsi>
 #include <dt-bindings/zmk/layout_shift.h>
 #include "../common/studio_runtime_layers.dtsi"
+#include "../common/personal_hold_tap.dtsi"
 
 #define BASE       0
 #define NUM        1
@@ -37,9 +38,6 @@
 // Keep the 200 ms tapping term, but avoid hold-preferred's aggressive modifier activation.
 &mt {
     flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <175>;
-    require-prior-idle-ms = <-1>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -50,7 +48,6 @@
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
     >;
-    /* Firmware-owned personal typing profile; Studio must not override it. */
     display-name = "Mod-Tap";
 };
 
@@ -68,7 +65,6 @@
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
     >;
-    /* Firmware-owned personal typing profile; Studio must not override it. */
     display-name = "Layer-Tap";
 };
 
