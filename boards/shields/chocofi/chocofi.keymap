@@ -34,7 +34,7 @@
 &mt_probe {
     /delete-property/ runtime-editable;
     /delete-property/ runtime-default-active;
-    flavor = "balanced";
+    flavor = "hold-preferred";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
     require-prior-idle-ms = <(-1)>;
