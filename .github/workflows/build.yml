@@ -1,18 +1,15 @@
-name: "Build ZMK Firmware"
+name: "Build Hana Firmware"
 
 on:
-  pull_request:
+  push:
     branches:
-      - architecture/validation-base
+      - main
+      - multi-board-baseline
     paths:
-      - "boards/shields/**"
+      - "boards/shields/hana/**"
       - "boards/shields/common/**"
-      - "build-all.yaml"
       - "build-hana.yaml"
-      - "build-chocofi.yaml"
-      - "build-sofle.yaml"
-      - "build-corne.yaml"
-      - ".github/workflows/build.yml"
+      - ".github/workflows/hana.yml"
       - "config/**"
       - "snippets/**"
       - "src/**"
@@ -21,14 +18,31 @@ on:
       - "zephyr/**"
       - "CMakeLists.txt"
       - "Kconfig"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "boards/shields/hana/**"
+      - "boards/shields/common/**"
+      - "build-hana.yaml"
+      - ".github/workflows/hana.yml"
+      - "config/**"
+      - "snippets/**"
+      - "src/**"
+      - "dts/**"
+      - "layout_shift/**"
+      - "zephyr/**"
+      - "CMakeLists.txt"
+      - "Kconfig"
+  workflow_dispatch:
 
 concurrency:
-  group: "zmk-validation-${{ github.event.pull_request.number }}"
+  group: "hana-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
-      build_matrix_path: build-all.yaml
-      archive_name: zmk-keyboards-validation
+      build_matrix_path: build-hana.yaml
+      archive_name: hana-firmware
