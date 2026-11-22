@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - multi-board-baseline
+      - architecture/implementation-clean
     paths:
       - "boards/shields/**"
       - "boards/shields/common/**"
@@ -13,6 +14,7 @@ on:
       - "build-chocofi.yaml"
       - "build-sofle.yaml"
       - "build-corne.yaml"
+      - ".github/workflows/build.yml"
       - "config/**"
       - "snippets/**"
       - "src/**"
