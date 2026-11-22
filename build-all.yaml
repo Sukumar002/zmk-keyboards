@@ -1,4 +1,5 @@
 ---
+# Consolidated firmware matrix used for architecture validation and standard builds.
 include:
     - board: xiao_ble//zmk
       shield: settings_reset
