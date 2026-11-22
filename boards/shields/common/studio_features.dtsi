@@ -65,13 +65,15 @@
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
-    runtime-editable;
-    runtime-default-active;
+    require-prior-idle-ms = <-1>;
+    /* Firmware-owned personal typing profile; Studio must not override it. */
     display-name = "Mod-Tap";
 };
 
 &lt {
-    runtime-editable;
-    runtime-default-active;
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <-1>;
+    /* Keep Layer-Tap timing aligned with the personal typing profile. */
     display-name = "Layer-Tap";
 };
