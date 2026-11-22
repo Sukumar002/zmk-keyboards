@@ -155,3 +155,9 @@ These are global personal defaults, not per-board tuning suggestions. The shared
 Studio runtime editing of Mod-Tap/Layer-Tap timing is disabled so these known-good firmware values remain authoritative. Custom non-typing hold-tap behaviors (for example, a deliberately long Bluetooth profile selector) retain their explicitly designed timing and are not rewritten as typing behaviors.
 
 For QMK-based builds, preserve the equivalent personal tapping/quick-tap behavior using the corresponding QMK configuration; do not mechanically translate ZMK's `require-prior-idle-ms` property into an unrelated QMK option.
+
+## 10. Physical side identity transport
+
+The firmware platform now exposes a dedicated encrypted split-service GATT read characteristic for physical side identity. Its one-byte values are 0=unknown, 1=LEFT, and 2=RIGHT. The peripheral build must set `CONFIG_ZMK_SPLIT_BLE_PERIPHERAL_SIDE`; the central reports identity through a typed event and read-only API. BLE source indexes remain transport-local and are never used as side identity.
+
+Chocofi, Hana, and Sofle peripheral build configurations explicitly set LEFT/RIGHT values. A peripheral with missing or invalid identity is excluded from side-specific battery presentation; no connection-order fallback is permitted. The consuming dongle core must reject duplicate simultaneous side claims and handle disconnect/reconnect state transitions.
