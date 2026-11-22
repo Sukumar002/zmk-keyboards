@@ -51,6 +51,12 @@
     display-name = "Mod-Tap (compiled test)";
 };
 
+/* Chocofi-only: prevent Studio/NVS overrides of the stock &mt behavior too. */
+&mt {
+    /delete-property/ runtime-editable;
+    /delete-property/ runtime-default-active;
+};
+
 &lt {
     /* Keep Hana's Layer-Tap defaults; only share the unrestricted trigger mask. */
     hold-trigger-key-positions = <
