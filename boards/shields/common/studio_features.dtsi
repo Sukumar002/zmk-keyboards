@@ -4,6 +4,7 @@
  */
 #include <layout_shift_kp_override.dtsi>
 #include <dt-bindings/zmk/layout_shift.h>
+#include "personal_hold_tap.dtsi"
 
 / {
     layout_shift_map_gui_alt_shared: layout_shift_map_gui_alt_shared {
@@ -61,19 +62,3 @@
     layout-maps = <&layout_shift_map_gui_alt_shared>;
 };
 
-&mt {
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <175>;
-    require-prior-idle-ms = <-1>;
-    /* Firmware-owned personal typing profile; Studio must not override it. */
-    display-name = "Mod-Tap";
-};
-
-&lt {
-    tapping-term-ms = <200>;
-    quick-tap-ms = <175>;
-    require-prior-idle-ms = <-1>;
-    /* Keep Layer-Tap timing aligned with the personal typing profile. */
-    display-name = "Layer-Tap";
-};
