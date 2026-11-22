@@ -11,7 +11,7 @@
 
 /* Isolated diagnostic Mod-Tap.
  * Deliberately NOT runtime-editable: NVS/Studio values cannot override these
- * compiled defaults. This lets us test the intended 240/175/-1 configuration.
+ * compiled defaults. This lets us test the intended 200/175/-1 configuration.
  */
  / {
     behaviors {
@@ -19,7 +19,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
-            tapping-term-ms = <240>;
+            tapping-term-ms = <200>;
             quick-tap-ms = <175>;
             require-prior-idle-ms = <(-1)>;
             bindings = <&kp>, <&kp>;
@@ -29,12 +29,12 @@
 };
 
 /* Preserve the responsive Chocofi timings from the unified-dongle trial.
- * A 240ms tapping term and 175ms quick-tap window; no prior-idle delay.
+ * A 200ms tapping term and 175ms quick-tap window; no prior-idle delay.
  * The 80ms prior-idle gate made modifier activation feel sluggish.
  */
 &mt_probe {
     flavor = "balanced";
-    tapping-term-ms = <240>;
+    tapping-term-ms = <200>;
     quick-tap-ms = <175>;
     require-prior-idle-ms = <(-1)>;
     hold-trigger-key-positions = <
@@ -47,9 +47,7 @@
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
     >;
-    runtime-editable;
-    runtime-default-active;
-    display-name = "Mod-Tap";
+    display-name = "Mod-Tap (compiled test)";
 };
 
 &lt {
