@@ -140,3 +140,18 @@ Hardware-only assertions are explicitly marked as pending until tested. CI must 
 - [ ] Remove moving upstream dependencies from the display module's own west manifest; the consuming keyboard manifest owns the firmware revision.
 - [ ] Add a dedicated Chocofi architecture/integration branch and pin all module revisions.
 - [ ] Establish CI compile gates and publish the first test artifacts without changing protected default branches.
+
+## 9. Personal hold-tap defaults
+
+All ZMK keyboard builds intended for this user use one firmware-owned typing profile:
+
+- `tapping-term-ms = <200>`
+- `quick-tap-ms = <175>`
+- `require-prior-idle-ms = <-1>`
+- Mod-Tap flavor: `balanced`
+
+These are global personal defaults, not per-board tuning suggestions. The shared source is `boards/shields/common/personal_hold_tap.dtsi`; every supported keyboard keymap must include it directly or through the shared feature include. Board-local definitions must not silently override these values.
+
+Studio runtime editing of Mod-Tap/Layer-Tap timing is disabled so these known-good firmware values remain authoritative. Custom non-typing hold-tap behaviors (for example, a deliberately long Bluetooth profile selector) retain their explicitly designed timing and are not rewritten as typing behaviors.
+
+For QMK-based builds, preserve the equivalent personal tapping/quick-tap behavior using the corresponding QMK configuration; do not mechanically translate ZMK's `require-prior-idle-ms` property into an unrelated QMK option.
