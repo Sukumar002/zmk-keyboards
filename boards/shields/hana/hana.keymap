@@ -39,6 +39,7 @@
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
+    require-prior-idle-ms = <-1>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -49,12 +50,14 @@
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
     >;
-    runtime-editable;
-    runtime-default-active;
+    /* Firmware-owned personal typing profile; Studio must not override it. */
     display-name = "Mod-Tap";
 };
 
 &lt {
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <-1>;
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
@@ -65,8 +68,7 @@
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
     >;
-    runtime-editable;
-    runtime-default-active;
+    /* Firmware-owned personal typing profile; Studio must not override it. */
     display-name = "Layer-Tap";
 };
 
