@@ -1,4 +1,4 @@
-name: "Build Hana Firmware"
+name: "Build ZMK Firmware"
 
 on:
   push:
@@ -6,10 +6,13 @@ on:
       - main
       - multi-board-baseline
     paths:
-      - "boards/shields/hana/**"
+      - "boards/shields/**"
       - "boards/shields/common/**"
+      - "build-all.yaml"
       - "build-hana.yaml"
-      - ".github/workflows/hana.yml"
+      - "build-chocofi.yaml"
+      - "build-sofle.yaml"
+      - "build-corne.yaml"
       - "config/**"
       - "snippets/**"
       - "src/**"
@@ -22,10 +25,13 @@ on:
     branches:
       - main
     paths:
-      - "boards/shields/hana/**"
+      - "boards/shields/**"
       - "boards/shields/common/**"
+      - "build-all.yaml"
       - "build-hana.yaml"
-      - ".github/workflows/hana.yml"
+      - "build-chocofi.yaml"
+      - "build-sofle.yaml"
+      - "build-corne.yaml"
       - "config/**"
       - "snippets/**"
       - "src/**"
@@ -37,12 +43,12 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: "hana-${{ github.ref }}"
+  group: "zmk-firmware-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
-      build_matrix_path: build-hana.yaml
-      archive_name: hana-firmware
+      build_matrix_path: build-all.yaml
+      archive_name: zmk-keyboards-firmware
