@@ -6,6 +6,7 @@ on:
       - main
       - feature/chocofi-hana-parity
       - test/chocofi-modtap-compiled-defaults
+      - test/chocofi-battery-only
     paths:
       - "boards/shields/chocofi/**"
       - "boards/shields/common/**"
