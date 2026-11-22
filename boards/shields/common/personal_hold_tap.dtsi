@@ -1,0 +1,18 @@
+/*
+ * Personal hold-tap timing defaults for all boards in this firmware family.
+ * Keep these values firmware-owned: Studio runtime edits must not override them.
+ *
+ * 200 ms tapping term, 175 ms quick-tap term, no prior-idle requirement.
+ */
+&mt {
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <-1>;
+};
+
+&lt {
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <-1>;
+};
