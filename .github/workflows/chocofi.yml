@@ -6,6 +6,7 @@ on:
       - main
       - feature/chocofi-hana-parity
       - test/chocofi-modtap-compiled-defaults
+      - release/chocofi-final
     paths:
       - "boards/shields/chocofi/**"
       - "boards/shields/common/**"
