@@ -23,6 +23,7 @@ on:
   pull_request:
     branches:
       - main
+      - architecture/implementation-clean
       - architecture/validation-base
     paths:
       - "boards/shields/**"
