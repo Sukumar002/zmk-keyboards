@@ -1,18 +1,22 @@
 /*
- * Personal hold-tap timing defaults for all boards in this firmware family.
- * Keep these values firmware-owned: Studio runtime edits must not override them.
+ * Authoritative hold-tap timing for the keyboard family.
  *
- * 200 ms tapping term, 175 ms quick-tap term, no prior-idle requirement.
+ * Use ZMK's built-in &mt instance with the shared timing and decision policy.
+ * Layer-Tap uses hold-preferred so a following key-down can trigger the hold
+ * immediately; keep timing values aligned with Mod-Tap.
+ *
+ * 200 ms tapping term, 175 ms quick-tap term, prior-idle disabled.
  */
+
 &mt {
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
     require-prior-idle-ms = <(-1)>;
-    display-name = "Mod-Tap";
 };
 
 &lt {
+    flavor = "hold-preferred";
     tapping-term-ms = <200>;
     quick-tap-ms = <175>;
     require-prior-idle-ms = <(-1)>;

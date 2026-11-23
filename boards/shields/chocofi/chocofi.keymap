@@ -7,33 +7,7 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Hold-tap timing is inherited from common/personal_hold_tap.dtsi.
- * Keep only the Chocofi trigger-position behavior board-specific. */
-&mt {
-    hold-trigger-key-positions = <
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-    >;
-};
-
-&lt {
-    hold-trigger-key-positions = <
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-    >;
-};
+/* Mod-Tap uses ZMK's built-in &mt; shared policy is in personal_hold_tap.dtsi. */
 
 / {
     behaviors {
@@ -50,6 +24,18 @@
             timeout-ms = <50>;
             key-positions = <0 1>;
             bindings = <&studio_unlock>;
+        };
+
+        combo_mouse_layer {
+            timeout-ms = <50>;
+            key-positions = <12 13 14>;
+            bindings = <&lt 4 ESC>;
+        };
+
+        combo_set_layer {
+            timeout-ms = <50>;
+            key-positions = <32 33>;
+            bindings = <&lt 3 CAPSLOCK>;
         };
     };
 
