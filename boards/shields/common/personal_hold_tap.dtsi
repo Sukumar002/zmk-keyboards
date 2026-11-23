@@ -1,15 +1,25 @@
 /*
- * Personal hold-tap timing defaults for all boards in this firmware family.
- * Keep these values firmware-owned: Studio runtime edits must not override them.
+ * Authoritative hold-tap timing for the keyboard family.
  *
- * 200 ms tapping term, 175 ms quick-tap term, no prior-idle requirement.
+ * Chocofi mod-taps use the Run #101 dedicated mt_probe instance.
+ * Keep all timing values here; do not override them in board keymaps.
+ *
+ * 200 ms tapping term, 175 ms quick-tap term, prior-idle disabled.
  */
-&mt {
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <175>;
-    require-prior-idle-ms = <(-1)>;
-    display-name = "Mod-Tap";
+
+/ {
+    behaviors {
+        mt_probe: mod_tap_probe {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <(-1)>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Mod-Tap";
+        };
+    };
 };
 
 &lt {
