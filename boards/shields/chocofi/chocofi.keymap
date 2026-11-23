@@ -7,19 +7,7 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Mod-tap timing and decision policy are centralized in personal_hold_tap.dtsi. */
-&lt {
-    hold-trigger-key-positions = <
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-    >;
-};
+/* Mod-Tap uses ZMK's built-in &mt; shared policy is in personal_hold_tap.dtsi. */
 
 / {
     behaviors {
