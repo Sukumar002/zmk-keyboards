@@ -29,7 +29,7 @@ declare -A targets=()
 count=0
 
 while IFS=$'\t' read -r source target || [[ -n "${source:-}" ]]; do
-  [[ -z "${source//[[:space:]]/}" || "$source" == \\#* ]] && continue
+  [[ -z "${source//[[:space:]]/}" || "$source" == \#* ]] && continue
   [[ -n "${target:-}" ]] || { echo "Invalid manifest row for $source" >&2; exit 1; }
   [[ -z "${targets[$target]+x}" ]] || { echo "Duplicate output filename: $target" >&2; exit 1; }
   targets[$target]=1
@@ -42,7 +42,7 @@ while IFS=$'\t' read -r source target || [[ -n "${source:-}" ]]; do
 
   cp "${matches[0]}" "$output/$target"
   echo "Packaged: $source.uf2 -> $target"
-  ((count += 1))
+  count=$((count + 1))
 done < "$manifest"
 
 (( count > 0 )) || { echo "Manifest produced no firmware files" >&2; exit 1; }
