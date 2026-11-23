@@ -51,7 +51,6 @@
             display-name = "Studio Unlock";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
-            slow-release;
             key-positions = <0 1>;
             bindings = <&studio_unlock>;
         };
@@ -60,7 +59,6 @@
             display-name = "SET Layer";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
-            slow-release = <0>;
             key-positions = <32 33>;
             bindings = <&lt 3 ESC>;
         };
@@ -69,7 +67,6 @@
             display-name = "Backspace";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
-            slow-release = <0>;
             key-positions = <16 17>;
             bindings = <&mt LALT BSPC>;
         };
@@ -78,7 +75,6 @@
             display-name = "Delete";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
-            slow-release = <0>;
             key-positions = <17 18>;
             bindings = <&mt LGUI DEL>;
         };
@@ -87,7 +83,6 @@
             display-name = "Apos";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
-            slow-release = <0>;
             key-positions = <16 18>;
             bindings = <&mt RCTRL APOS>;
         };
@@ -96,7 +91,6 @@
             display-name = "TAB";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
-            slow-release = <0>;
             key-positions = <12 13>;
             bindings = <&mt LALT TAB>;
         };
@@ -105,7 +99,6 @@
             display-name = "Grave";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
-            slow-release = <0>;
             key-positions = <11 12>;
             bindings = <&mt LGUI GRAVE>;
         };
