@@ -7,20 +7,7 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Timing is centralized in common/personal_hold_tap.dtsi. */
-&mt_probe {
-    hold-trigger-key-positions = <
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-    >;
-};
-
+/* Mod-tap timing and decision policy are centralized in personal_hold_tap.dtsi. */
 &lt {
     hold-trigger-key-positions = <
         0xffffffff 0xffffffff 0xffffffff 0xffffffff
