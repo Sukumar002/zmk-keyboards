@@ -1,0 +1,19 @@
+/*
+ * Shared hold-tap timing defaults for all boards.
+ * Firmware-owned: do not expose timing edits through ZMK Studio.
+ * 200 ms tapping term, 175 ms quick-tap term, no prior-idle requirement.
+ */
+&mt {
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <(-1)>;
+    display-name = "Mod-Tap";
+};
+
+&lt {
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <(-1)>;
+    display-name = "Layer-Tap";
+};
