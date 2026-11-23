@@ -1,10 +1,10 @@
 /*
  * Authoritative hold-tap timing for the keyboard family.
  *
- * Chocofi mod-taps use hold-preferred so a following key-down activates the modifier immediately.
+ * Chocofi mod-taps use balanced, the user's validated behavior.
  * Keep all timing values here; do not override them in board keymaps.
  *
- * 200 ms tapping term, 175 ms quick-tap term, prior-idle disabled. Hold decisions occur on the next key-down.
+ * 200 ms tapping term, 175 ms quick-tap term, prior-idle disabled.
  */
 
 / {
@@ -12,7 +12,7 @@
         mt_probe: mod_tap_probe {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
+            flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
             require-prior-idle-ms = <(-1)>;
