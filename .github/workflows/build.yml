@@ -23,6 +23,7 @@ on:
   pull_request:
     branches:
       - main
+      - architecture/validation-base
     paths:
       - "boards/shields/**"
       - "boards/shields/common/**"
