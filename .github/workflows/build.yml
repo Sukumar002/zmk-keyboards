@@ -7,6 +7,7 @@ on:
       - multi-board-baseline
       - architecture/implementation-clean
       - fix/chocofi-keymap-studio-oled
+      - fix/chocofi-hardware-validation
     paths:
       - "boards/shields/**"
       - "boards/shields/common/**"
