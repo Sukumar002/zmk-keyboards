@@ -15,11 +15,13 @@ include:
   # Shared right peripheral: same firmware is used in BLE and dongle modes.
   - board: nice_nano//zmk
     shield: chocofi_peripheral_right
+    cmake-args: -DCONFIG_ZMK_SPLIT_BLE_PERIPHERAL_SIDE=2
     artifact-name: chocofi_right_peripheral
 
   # Dongle mode: both physical halves are peripherals.
   - board: nice_nano//zmk
     shield: chocofi_peripheral_left
+    cmake-args: -DCONFIG_ZMK_SPLIT_BLE_PERIPHERAL_SIDE=1
     artifact-name: chocofi_dongle_left_peripheral
 
   - board: nice_nano//zmk
