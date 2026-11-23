@@ -11,7 +11,9 @@ on:
       - "boards/shields/**"
       - "boards/shields/common/**"
       - "build-chocofi.yaml"
-      - ".github/workflows/build.yml"\n      - ".github/firmware/**"\n      - ".github/scripts/**"
+      - ".github/workflows/build.yml"
+      - ".github/firmware/**"
+      - ".github/scripts/**"
       - "config/**"
       - "snippets/**"
       - "src/**"
@@ -48,4 +50,34 @@ jobs:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       build_matrix_path: build-chocofi.yaml
-      archive_name: zmk-keyboards-chocofi
+      archive_name: zmk-keyboards-chocofi-raw
+
+  package:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out packaging files
+        uses: actions/checkout@v4
+
+      - name: Download raw firmware outputs
+        uses: actions/download-artifact@v4
+        with:
+          name: zmk-keyboards-chocofi-raw
+          path: raw
+
+      - name: Apply standard firmware filenames
+        run: |
+          bash .github/scripts/package-firmware.sh \
+            --input raw \
+            --output dist \
+            --manifest .github/firmware/chocofi-artifacts.tsv
+
+      - name: Upload standardized firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: zmk-keyboards-chocofi
+          path: dist/*.uf2
+          if-no-files-found: error
+          compression-level: 0
