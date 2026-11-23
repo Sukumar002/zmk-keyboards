@@ -51,6 +51,18 @@
             key-positions = <0 1>;
             bindings = <&studio_unlock>;
         };
+
+        combo_mouse_layer {
+            timeout-ms = <50>;
+            key-positions = <12 13 14>;
+            bindings = <&lt 4 ESC>;
+        };
+
+        combo_set_layer {
+            timeout-ms = <50>;
+            key-positions = <32 33>;
+            bindings = <&lt 3 CAPSLOCK>;
+        };
     };
 
     keymap {
