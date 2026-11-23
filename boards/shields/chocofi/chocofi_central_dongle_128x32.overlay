@@ -3,6 +3,10 @@
 &pro_micro_i2c {
     status = "okay";
     oled_dongle: ssd1306@3c {
+        /* Match the known-good Hana 128x32 dongle panel configuration.
+         * Remove the Chocofi half-screen node flags inherited at this I2C address. */
+        /delete-property/ inversion-on;
+        /delete-property/ com-sequential;
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
