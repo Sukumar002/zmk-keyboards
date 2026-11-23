@@ -46,10 +46,68 @@
 
     combos {
         compatible = "zmk,combos";
+
         combo_studio_unlock {
+            display-name = "Studio Unlock";
             timeout-ms = <50>;
+            require-prior-idle-ms = <(-1)>;
+            slow-release;
             key-positions = <0 1>;
             bindings = <&studio_unlock>;
+        };
+
+        combo_set_layer {
+            display-name = "SET Layer";
+            timeout-ms = <50>;
+            require-prior-idle-ms = <(-1)>;
+            slow-release = <0>;
+            key-positions = <32 33>;
+            bindings = <&lt 3 ESC>;
+        };
+
+        combo_backspace {
+            display-name = "Backspace";
+            timeout-ms = <50>;
+            require-prior-idle-ms = <(-1)>;
+            slow-release = <0>;
+            key-positions = <16 17>;
+            bindings = <&mt LALT BSPC>;
+        };
+
+        combo_delete {
+            display-name = "Delete";
+            timeout-ms = <50>;
+            require-prior-idle-ms = <(-1)>;
+            slow-release = <0>;
+            key-positions = <17 18>;
+            bindings = <&mt LGUI DEL>;
+        };
+
+        combo_apos {
+            display-name = "Apos";
+            timeout-ms = <50>;
+            require-prior-idle-ms = <(-1)>;
+            slow-release = <0>;
+            key-positions = <16 18>;
+            bindings = <&mt RCTRL APOS>;
+        };
+
+        combo_tab {
+            display-name = "TAB";
+            timeout-ms = <50>;
+            require-prior-idle-ms = <(-1)>;
+            slow-release = <0>;
+            key-positions = <12 13>;
+            bindings = <&mt LALT TAB>;
+        };
+
+        combo_grave {
+            display-name = "Grave";
+            timeout-ms = <50>;
+            require-prior-idle-ms = <(-1)>;
+            slow-release = <0>;
+            key-positions = <11 12>;
+            bindings = <&mt LGUI GRAVE>;
         };
     };
 
