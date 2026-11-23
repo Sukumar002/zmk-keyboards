@@ -48,7 +48,6 @@
         compatible = "zmk,combos";
 
         combo_studio_unlock {
-            display-name = "Studio Unlock";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
             key-positions = <0 1>;
@@ -56,7 +55,6 @@
         };
 
         combo_set_layer {
-            display-name = "SET Layer";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
             key-positions = <32 33>;
@@ -64,7 +62,6 @@
         };
 
         combo_backspace {
-            display-name = "Backspace";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
             key-positions = <16 17>;
@@ -72,7 +69,6 @@
         };
 
         combo_delete {
-            display-name = "Delete";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
             key-positions = <17 18>;
@@ -80,7 +76,6 @@
         };
 
         combo_apos {
-            display-name = "Apos";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
             key-positions = <16 18>;
@@ -88,7 +83,6 @@
         };
 
         combo_tab {
-            display-name = "TAB";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
             key-positions = <12 13>;
@@ -96,7 +90,6 @@
         };
 
         combo_grave {
-            display-name = "Grave";
             timeout-ms = <50>;
             require-prior-idle-ms = <(-1)>;
             key-positions = <11 12>;
