@@ -11,7 +11,7 @@ on:
       - "boards/shields/**"
       - "boards/shields/common/**"
       - "build-chocofi.yaml"
-      - ".github/workflows/build.yml"
+      - ".github/workflows/build.yml"\n      - ".github/firmware/**"\n      - ".github/scripts/**"
       - "config/**"
       - "snippets/**"
       - "src/**"
