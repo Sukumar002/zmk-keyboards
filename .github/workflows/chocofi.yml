@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - multi-board-baseline
+      - fix/chocofi-mvp-hardware-repair
     paths:
       - "boards/shields/chocofi/**"
       - "boards/shields/common/**"
@@ -21,6 +22,7 @@ on:
   pull_request:
     branches:
       - main
+      - architecture/validation-base
     paths:
       - "boards/shields/chocofi/**"
       - "boards/shields/common/**"
