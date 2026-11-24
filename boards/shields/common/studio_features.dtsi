@@ -1,13 +1,20 @@
 /*
- * Shared Hana-derived Studio/runtime feature layer.
- * Board-specific keymaps remain independent; this only exposes common behaviors.
+ * Shared Studio/runtime feature layer.
+ * Board-specific keymaps remain independent.
+ *
+ * Public devicetree contract:
+ *   layout_shift_map_gui_alt
+ *
+ * Keep this label stable for firmware modules. The node name may retain an
+ * implementation-specific suffix such as "_shared"; consumers must use the
+ * public label, never the node name.
  */
 #include <layout_shift_kp_override.dtsi>
 #include <dt-bindings/zmk/layout_shift.h>
 #include "personal_hold_tap.dtsi"
 
 / {
-    layout_shift_map_gui_alt_shared: layout_shift_map_gui_alt_shared {
+    layout_shift_map_gui_alt: layout_shift_map_gui_alt_shared {
         compatible = "zmk,layout-shift-map";
         mappings = <
             LGUI LALT LAYOUT_SHIFT_OPTIONAL_ALL
@@ -33,6 +40,6 @@
 };
 
 &tog_ls {
-    layout-maps = <&layout_shift_map_gui_alt_shared>;
+    layout-maps = <&layout_shift_map_gui_alt>;
 };
 
