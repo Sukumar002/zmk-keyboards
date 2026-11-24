@@ -7,33 +7,10 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Hold-tap timing is inherited from common/personal_hold_tap.dtsi.
- * Keep only the Chocofi trigger-position behavior board-specific. */
-&mt {
-    hold-trigger-key-positions = <
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-    >;
-};
-
-&lt {
-    hold-trigger-key-positions = <
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-        0xffffffff 0xffffffff 0xffffffff 0xffffffff
-    >;
-};
+/* Hold-tap timing and decision behavior are inherited from
+ * common/personal_hold_tap.dtsi. No positional hold filter is configured:
+ * an all-0xffffffff list is not a wildcard in ZMK's hold-tap implementation.
+ */
 
 / {
     behaviors {
