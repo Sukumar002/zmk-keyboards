@@ -8,6 +8,7 @@ on:
       - architecture/implementation-clean
       - fix/chocofi-keymap-studio-oled
       - fix/chocofi-layout-shift-timing-366
+      - fix/chocofi-studio-rpc-recovery
     paths:
       - "boards/shields/**"
       - "boards/shields/common/**"
