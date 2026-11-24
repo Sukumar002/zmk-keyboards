@@ -7,6 +7,7 @@
 #include <string.h>
 #include <dt-bindings/zmk/modifiers.h>
 #include <dt-bindings/zmk/keys.h>
+#include <zmk/events/layout_shift_state_changed.h>
 #include "layout_shift_map.h"
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
@@ -87,6 +88,9 @@ bool layout_shift_map_update(const struct device *dev, bool active) {
     }
 
     data->active = active;
+    raise_zmk_layout_shift_state_changed((struct zmk_layout_shift_state_changed){
+        .active = active,
+    });
 #if IS_ENABLED(CONFIG_LAYOUT_SHIFT_PERSISTENT_STATE)
     data->dirty = true;
 #endif
