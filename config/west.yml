@@ -14,7 +14,7 @@ manifest:
 
     - name: zmk-dongle-display
       remote: sukumar
-      revision: e2a1092a3944c731bbf86bb824b8b77d78624b9d
+      revision: 46c06cd7ee395140de97fb9acea0104be901a036
 
   self:
     path: config
