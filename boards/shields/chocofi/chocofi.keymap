@@ -7,7 +7,33 @@
 #include "../common/studio_runtime_layers.dtsi"
 #include <dt-bindings/zmk/keys.h>
 
-/* Hold-tap timing and trigger policy are inherited from the shared defaults. */
+/* Hold-tap timing is inherited from common/personal_hold_tap.dtsi.
+ * Keep only the Chocofi trigger-position behavior board-specific. */
+&mt {
+    hold-trigger-key-positions = <
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+    >;
+};
+
+&lt {
+    hold-trigger-key-positions = <
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+        0xffffffff 0xffffffff 0xffffffff 0xffffffff
+    >;
+};
 
 / {
     behaviors {
